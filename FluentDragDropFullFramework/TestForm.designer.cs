@@ -90,7 +90,7 @@
 			// 
 			this.pic4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pic4.Image = ((System.Drawing.Image)(resources.GetObject("pic4.Image")));
-			this.pic4.Location = new System.Drawing.Point(919, 66);
+			this.pic4.Location = new System.Drawing.Point(1547, 270);
 			this.pic4.Name = "pic4";
 			this.pic4.Size = new System.Drawing.Size(270, 270);
 			this.pic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -113,7 +113,7 @@
 			// pic8
 			// 
 			this.pic8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pic8.Location = new System.Drawing.Point(919, 354);
+			this.pic8.Location = new System.Drawing.Point(1869, 270);
 			this.pic8.Name = "pic8";
 			this.pic8.Size = new System.Drawing.Size(270, 270);
 			this.pic8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -203,7 +203,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1480, 636);
+			this.ClientSize = new System.Drawing.Size(2401, 1141);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
