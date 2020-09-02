@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FluentDragDropFullFramework
+namespace FluentDragDrop
 {
 	/// <summary>
 	/// Provides the ability to create 32-bit alpha drag images

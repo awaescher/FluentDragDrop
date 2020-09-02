@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using FluentDragDrop;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace FluentDragDropFullFramework
@@ -29,7 +31,7 @@ namespace FluentDragDropFullFramework
 			var pic = sender as PictureBox;
 
 			// Preview: From Control
-			// Drag: At Cursor
+			// Drag: Behind Cursor
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
@@ -42,12 +44,12 @@ namespace FluentDragDropFullFramework
 		{
 			var pic = sender as PictureBox;
 
-			// Image: From Control
-			// Drag: Behind Cursor
+			// Image: Custom
+			// Drag: Like Windows Explorer
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
-				.WithPreview((Bitmap)pic.Image).LikeWindowsExplorer()
+				.WithPreview(Grayscale((Bitmap)pic.Image)).LikeWindowsExplorer()
 				.To(All, (p, data) => p.Image = data)
 				.Copy();
 		}
@@ -56,14 +58,38 @@ namespace FluentDragDropFullFramework
 		{
 			var pic = sender as PictureBox;
 
-			// Image: Custom
-			// Drag: Direct Grab
+			// Image: From Control (Watermarked)
+			// Drag: Relative To Cursor
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview(Watermark).RelativeToCursor()
 				.To(All, (p, data) => p.Image = data)
 				.Copy();
+		}
+
+		private Bitmap Grayscale(Bitmap image)
+		{
+			var result = new Bitmap(image.Width, image.Height);
+
+			using (var graphics = Graphics.FromImage(result))
+			{
+				var colorMatrix = new ColorMatrix(new float[][]
+				{
+					new float[] {.3f, .3f, .3f, 0, 0},
+					new float[] {.59f, .59f, .59f, 0, 0},
+					new float[] {.11f, .11f, .11f, 0, 0},
+					new float[] {0, 0, 0, 1, 0},
+					new float[] {0, 0, 0, 0, 1}
+				});
+
+				using (var attributes = new ImageAttributes())
+				{
+					attributes.SetColorMatrix(colorMatrix);
+					graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+				}
+			}
+			return result;
 		}
 
 		private Bitmap Watermark(Bitmap image)
@@ -78,7 +104,7 @@ namespace FluentDragDropFullFramework
 						format.LineAlignment = StringAlignment.Far;
 
 						var bounds = new Rectangle(Point.Empty, image.Size);
-						graphics.DrawString("Drag & Drop", font, Brushes.White, bounds, format);
+						graphics.DrawString("Drag & Drop", font, Brushes.Goldenrod, bounds, format);
 					}
 				}
 			}

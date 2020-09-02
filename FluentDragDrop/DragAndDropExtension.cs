@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace FluentDragDropFullFramework
+namespace FluentDragDrop
 {
 	public static class DragAndDropExtension
 	{

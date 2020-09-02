@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDropFullFramework", "FluentDragDropFullFramework\FluentDragDropFullFramework.csproj", "{1A23DB16-2097-4BB1-8A62-0EF614539B0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDropNetCore", "FluentDragDropNetCore\FluentDragDropNetCore.csproj", "{04BB6316-B668-44F6-A67F-28453520D12D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDrop", "FluentDragDrop\FluentDragDrop.csproj", "{E1C8F65D-84CC-474E-A7FE-C0891C15456B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1A23DB16-2097-4BB1-8A62-0EF614539B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A23DB16-2097-4BB1-8A62-0EF614539B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A23DB16-2097-4BB1-8A62-0EF614539B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BB6316-B668-44F6-A67F-28453520D12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BB6316-B668-44F6-A67F-28453520D12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BB6316-B668-44F6-A67F-28453520D12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BB6316-B668-44F6-A67F-28453520D12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C8F65D-84CC-474E-A7FE-C0891C15456B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C8F65D-84CC-474E-A7FE-C0891C15456B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C8F65D-84CC-474E-A7FE-C0891C15456B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C8F65D-84CC-474E-A7FE-C0891C15456B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

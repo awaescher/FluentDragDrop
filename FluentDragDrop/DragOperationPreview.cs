@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FluentDragDropFullFramework
+namespace FluentDragDrop
 {
 	public class DragOperationPreview<T>
 	{

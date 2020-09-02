@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FluentDragDropFullFramework
+namespace FluentDragDrop
 {
 	public class DragOperation<T>
 	{
