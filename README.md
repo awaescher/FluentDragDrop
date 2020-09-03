@@ -16,4 +16,23 @@ private void pic1_MouseDown(object sender, MouseEventArgs e)
 ```
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and more.
 
-![Screenshot](doc/dragdrop.gif)
+![Screenshot](doc/4.gif)
+
+```
+private void pic1_MouseDown(object sender, MouseEventArgs e)
+{
+    pic1.StartDragAndDrop()
+        .WithData(pic1.Image)
+        .WithPreview(img => Watermark(img)).RelativeToCursor()
+        .To(pic2, (target, data) => target.Image = data)
+        .Copy();
+}
+```
+
+Other presets:
+
+![Screenshot](doc/1.gif)
+
+![Screenshot](doc/2.gif)
+
+![Screenshot](doc/3.gif)
