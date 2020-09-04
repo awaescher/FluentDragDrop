@@ -18,17 +18,6 @@ It's all in there: Putting data to the drag&drop operation, attaching a custom p
 
 ![Screenshot](doc/4.gif)
 
-```
-private void pic1_MouseDown(object sender, MouseEventArgs e)
-{
-    pic1.StartDragAndDrop()
-        .WithData(pic1.Image)
-        .WithPreview(img => Watermark(img)).RelativeToCursor()
-        .To(pic2, (target, data) => target.Image = data)
-        .Copy();
-}
-```
-
 Other presets:
 
 ![Screenshot](doc/1.gif)
