@@ -17,12 +17,12 @@ namespace FluentDragDropFullFramework
 			var pic = sender as PictureBox;
 
 			// Preview: -
-			// Drag: -
+			// Drag style: -
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithoutPreview()
-				.To(All, (p, data) => p.Image = data)
+				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -31,12 +31,12 @@ namespace FluentDragDropFullFramework
 			var pic = sender as PictureBox;
 
 			// Preview: From Control
-			// Drag: Behind Cursor
+			// Drag style: Behind Cursor
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview().BehindCursor()
-				.To(All, (p, data) => p.Image = data)
+				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -45,12 +45,12 @@ namespace FluentDragDropFullFramework
 			var pic = sender as PictureBox;
 
 			// Image: Custom
-			// Drag: Like Windows Explorer
+			// Drag style: Like Windows Explorer
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview(Grayscale((Bitmap)pic.Image)).LikeWindowsExplorer()
-				.To(All, (p, data) => p.Image = data)
+				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -59,12 +59,12 @@ namespace FluentDragDropFullFramework
 			var pic = sender as PictureBox;
 
 			// Image: From Control (Watermarked)
-			// Drag: Relative To Cursor
+			// Drag style: Relative To Cursor
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
-				.WithPreview(Watermark).RelativeToCursor()
-				.To(All, (p, data) => p.Image = data)
+				.WithPreview(img => new UpdatablePreview(img)).RelativeToCursor()
+				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -86,7 +86,7 @@ namespace FluentDragDropFullFramework
 				using (var attributes = new ImageAttributes())
 				{
 					attributes.SetColorMatrix(colorMatrix);
-					graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+					graphics.DrawImage(image, new Rectangle(0, 0, result.Width, result.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
 				}
 			}
 			return result;
@@ -104,7 +104,7 @@ namespace FluentDragDropFullFramework
 						format.LineAlignment = StringAlignment.Far;
 
 						var bounds = new Rectangle(Point.Empty, image.Size);
-						graphics.DrawString("Drag & Drop", font, Brushes.Goldenrod, bounds, format);
+						graphics.DrawString("Dragging ...", font, Brushes.White, bounds, format);
 					}
 				}
 			}
@@ -113,6 +113,5 @@ namespace FluentDragDropFullFramework
 		}
 
 		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
-
 	}
 }
