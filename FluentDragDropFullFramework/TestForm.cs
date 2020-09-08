@@ -63,7 +63,7 @@ namespace FluentDragDropFullFramework
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
-				.WithPreview(img => new UpdatablePreview(img)).RelativeToCursor()
+				.WithPreview(img => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
 				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}

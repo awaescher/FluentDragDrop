@@ -7,24 +7,44 @@ namespace FluentDragDrop
 {
 	class UpdatablePreview : IPreview
 	{
-		public event EventHandler Updated;
+		public event EventHandler<Preview> Updated;
 
-		public Bitmap _original;
-
-		private Bitmap _current;
+		public Bitmap _originalImage;
 		private Timer _timer;
+		private Preview _preview;
+		private readonly Point _mouseStartPosition;
 
-		public UpdatablePreview(Bitmap original)
+		public UpdatablePreview(Bitmap original, Point mouseStartPosition)
 		{
-			_original = original ?? throw new ArgumentNullException(nameof(original));
-			_current = original;
+			_originalImage = original ?? throw new ArgumentNullException(nameof(original));
+			_mouseStartPosition = mouseStartPosition;
+
+			UpdatePreview(null);
+		}
+
+		public Preview Get() => _preview;
+
+		public void Start()
+		{
+			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(20), TimeSpan.FromMilliseconds(20));
+		}
+
+		public void Stop()
+		{
+			_timer?.Dispose();
+			_timer = null;
 		}
 
 		private void UpdatePreview(object state)
 		{
-			_current = _original;
+			var previewImage = new Bitmap(_originalImage);
 
-			using (var graphics = Graphics.FromImage(_current))
+			var currentMousePosition = System.Windows.Forms.Control.MousePosition;
+			var distanceX = Math.Abs(currentMousePosition.X - _mouseStartPosition.X);
+			var distanceY = Math.Abs(currentMousePosition.Y - _mouseStartPosition.Y);
+			var distance = Math.Round(Math.Sqrt(Math.Pow(distanceX, 2) + Math.Pow(distanceY, 2)));
+
+			using (var graphics = Graphics.FromImage(previewImage))
 			{
 				using (var font = new Font("Tahoma", 11))
 				{
@@ -33,26 +53,17 @@ namespace FluentDragDrop
 						format.Alignment = StringAlignment.Center;
 						format.LineAlignment = StringAlignment.Far;
 
-						var bounds = new Rectangle(Point.Empty, _original.Size);
-						graphics.DrawString(DateTime.Now.ToString(), font, Brushes.White, bounds, format);
+						var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height - 40);
+						graphics.DrawString($"Distance: {distance}px", font, Brushes.White, bounds, format);
 					}
 				}
 			}
 
-			Updated?.Invoke(this, EventArgs.Empty);
-		}
+			// at 750 distance, we want it to be transparent
+			var opacity = (750 - distance) / 750;
+			_preview = new Preview(previewImage, opacity);
 
-		public Bitmap Get() => _current;
-
-		public void Start()
-		{
-			_timer = new Timer(UpdatePreview, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
-		}
-
-		public void Stop()
-		{
-			_timer?.Dispose();
-			_timer = null;
+			Updated?.Invoke(this, _preview);
 		}
 	}
 }

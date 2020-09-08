@@ -8,7 +8,7 @@ namespace FluentDragDrop
 {
 	public class DragOperation<T>
 	{
-		private ImageListDrag _dragger;
+		private PreviewFormController _previewController;
 
 		private Dictionary<object, DragHandler<T>> _targets = new Dictionary<object, DragHandler<T>>();
 
@@ -141,7 +141,7 @@ namespace FluentDragDrop
 
 		internal Size CalculatePreviewSize()
 		{
-			return Preview?.Get()?.Size ?? SourceControl?.Size ?? Size.Empty;
+			return Preview?.Get()?.Bitmap?.Size ?? SourceControl?.Size ?? Size.Empty;
 		}
 
 		public void Copy() => Start(DragDropEffects.Copy);
@@ -152,7 +152,7 @@ namespace FluentDragDrop
 
 		public void Start(DragDropEffects allowedEffects)
 		{
-			_dragger = new ImageListDrag();
+			_previewController = new PreviewFormController();
 
 			if (!_customPreview)
 				Preview = new BitmapPreview(GetControlPreviewBitmap());
@@ -161,25 +161,43 @@ namespace FluentDragDrop
 
 			preview.Start();
 
-			_dragger.StartDrag(preview, _cursorOffset.X, _cursorOffset.Y);
+			void feedbackHandler(object _, GiveFeedbackEventArgs __)
+			{
+				_previewController.Move();
+			}
 
-			void feedbackHandler(object _, GiveFeedbackEventArgs __) => _dragger?.DragDrop();
+			void updatePreview(object _, Preview updatedPreview)
+			{
+				if (SourceControl.InvokeRequired)
+					SourceControl.BeginInvoke((Action)(() => _previewController.Update(updatedPreview)));
+				else
+					_previewController.Update(updatedPreview);
+
+			}
 
 			try
 			{
 				SourceControl.GiveFeedback += feedbackHandler;
+
+				preview.Updated += updatePreview;
+
+				_previewController.Start(preview.Get(), _cursorOffset);
 
 				var data = Data == null ? (object)new NullPlaceholder() : Data;
 				SourceControl.DoDragDrop(data, allowedEffects);
 			}
 			finally
 			{
+				preview.Updated -= updatePreview;
+
+				_previewController.Stop();
+				preview.Stop();
+
+				CleanUp();
+
 				SourceControl.GiveFeedback -= feedbackHandler;
 
-				_dragger.CompleteDrag();
 
-				preview.Stop();
-				CleanUp();
 			}
 		}
 
