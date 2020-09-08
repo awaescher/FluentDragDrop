@@ -39,6 +39,16 @@ namespace FluentDragDrop
 		[DllImport("comctl32")]
 		private static extern Int32 ImageList_DragMove(Int32 x, Int32 y);
 
+		[DllImport("comctl32")]
+		private static extern bool ImageList_SetOverlayImage(IntPtr hImageList, int iImage, int iOverlay);
+
+		[DllImport("comctl32")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static extern bool ImageList_DragShowNolock([MarshalAs(UnmanagedType.Bool)] bool fShow);
+
+		[DllImport("comctl32")]
+		static extern bool ImageList_DrawEx(IntPtr himl, int i, IntPtr hdcDst, int x, int y, int dx, int dy, int rgbBk, int rgbFg, int fStyle);
+
 		/// <summary>
 		/// 	The Window handle which we're dragging over.
 		/// 	</summary>
@@ -102,6 +112,17 @@ namespace FluentDragDrop
 
 		/// <summary>
 		/// 	Starts a dragging operation which will use
+		/// 	an ImageList to create a drag image and defaults
+		/// 	the position of the image to the cursor's drag point
+		/// 	</summary>
+		/// 	<param name="preview">The preview used for dragging</param>
+		public void StartDrag(IPreview preview)
+		{
+			StartDrag(preview, 0, 0);
+		}
+
+		/// <summary>
+		/// 	Starts a dragging operation which will use
 		/// 	an ImageList to create a drag image and allows
 		/// 	the offset of the Image from the drag position
 		/// 	to be specified.
@@ -119,6 +140,33 @@ namespace FluentDragDrop
 		{
 			SetDragImage(dragImage);
 			StartDrag(0, xOffset, yOffset);
+		}
+
+		/// <summary>
+		/// 	Starts a dragging operation which will use
+		/// 	an ImageList to create a drag image and allows
+		/// 	the offset of the Image from the drag position
+		/// 	to be specified.
+		/// 	</summary>
+		/// 	<param name="preview">The preview used for dragging</param>
+		/// 	<param name="xOffset">The horizontal offset of the drag image
+		/// 	from the drag position.  Negative values move the image
+		/// 	to the right of the cursor, positive values move it
+		/// 	to the left.</param>
+		/// 	<param name="yOffset">>The vertical offset of the drag image
+		/// 	from the drag position. Negative values move the image
+		/// 	below the cursor, positive values move it above.</param>
+		/// 	<remarks></remarks>
+		public void StartDrag(IPreview preview, Int32 xOffset, Int32 yOffset)
+		{
+			throw new NotSupportedException("Drag&Drop with updating previews is not supported yet");
+
+			StartDrag(preview.Get(), xOffset, yOffset);
+
+			preview.Updated += (_, __) =>
+			{
+				// ... TODO update and remove handler
+			};
 		}
 
 		/// <summary>
@@ -151,10 +199,10 @@ namespace FluentDragDrop
 		/// 	<remarks></remarks>
 		public void StartDrag(Int32 imageIndex, Int32 xOffset, Int32 yOffset)
 		{
-			Int32 res = 0;
 			CompleteDrag();
-			res = ImageList_BeginDrag(Imagelist.Handle, imageIndex, xOffset, yOffset);
-			if ((res != 0))
+			int res = ImageList_BeginDrag(_imageList.Handle, imageIndex, xOffset, yOffset);
+			
+			if (res != 0)
 			{
 				_inDrag = true;
 				_startDrag = true;
@@ -169,16 +217,17 @@ namespace FluentDragDrop
 		{
 			Point dst = new Point();
 
-			if ((_inDrag))
+			if (_inDrag)
 			{
 				dst = Cursor.Position;
-				if ((Owner != null))
-					// Position relative to owner:
+
+				// Position relative to owner:
+				if (Owner != null)
 					dst = Owner.PointToClient(dst);
 
-				if ((_startDrag))
+				if (_startDrag)
 				{
-					_HWndLast = Owner == null ? IntPtr.Zero : Owner.Handle;
+					_HWndLast = Owner?.Handle ?? IntPtr.Zero;
 					ImageList_DragEnter(_HWndLast, dst.X, dst.Y);
 					_startDrag = false;
 				}
@@ -193,7 +242,7 @@ namespace FluentDragDrop
 		/// 	<remarks></remarks>
 		public void CompleteDrag()
 		{
-			if ((_inDrag))
+			if (_inDrag)
 			{
 				ImageList_EndDrag();
 				ImageList_DragLeave(_HWndLast);
@@ -212,9 +261,9 @@ namespace FluentDragDrop
 		/// 	<remarks></remarks>
 		public void HideDragImage(bool state)
 		{
-			if ((_inDrag))
+			if (_inDrag)
 			{
-				if ((state))
+				if (state)
 				{
 					ImageList_DragLeave(_HWndLast);
 					_startDrag = true;
@@ -233,13 +282,13 @@ namespace FluentDragDrop
 		{
 
 			// Clear images in image list:
-			Imagelist.Images.Clear();
+			_imageList.Images.Clear();
 
 			// ImageList is buggy, need to ensure we do this:
-			IntPtr ilsHandle = Imagelist.Handle;
+			IntPtr ilsHandle = _imageList.Handle;
 
 			// Create the bitmap to hold the drag image:
-			using (Bitmap bitmap = new Bitmap(Imagelist.ImageSize.Width, Imagelist.ImageSize.Height))
+			using (Bitmap bitmap = new Bitmap(_imageList.ImageSize.Width, _imageList.ImageSize.Height))
 			{
 				// Get a graphics object from it:
 				using (Graphics gfx = Graphics.FromImage(bitmap))
@@ -247,7 +296,7 @@ namespace FluentDragDrop
 					drawAction(gfx, bitmap);
 
 					// Add the image to the ImageList:
-					Imagelist.Images.Add(bitmap, Color.Fuchsia);
+					_imageList.Images.Add(bitmap, Color.Fuchsia);
 				}
 			}
 		}
@@ -270,14 +319,15 @@ namespace FluentDragDrop
 		/// 	<remarks></remarks>
 		public void SetDragImage(Bitmap bitmap, Color transparentColor)
 		{
-			Imagelist = new ImageList();
-			Imagelist.ImageSize = bitmap.Size;
+			_imageList = new ImageList();
+			_imageList.ImageSize = bitmap.Size;
+			_imageList.ColorDepth = ColorDepth.Depth32Bit;
 
 			// ImageList is buggy, need to ensure we do this:
-			IntPtr ilsHandle = Imagelist.Handle;
+			IntPtr ilsHandle = _imageList.Handle;
 
 			// Add the image to the ImageList:
-			Imagelist.Images.Add(bitmap, transparentColor);
+			_imageList.Images.Add(bitmap, transparentColor);
 		}
 
 		/// <summary>
@@ -286,7 +336,7 @@ namespace FluentDragDrop
 		/// 	<value></value>
 		/// 	<returns></returns>
 		/// 	<remarks></remarks>
-		public System.Windows.Forms.ImageList Imagelist { get; set; } = null/* TODO Change to default(_) if this is not a reference type */;
+		public System.Windows.Forms.ImageList _imageList { get; set; }
 
 		/// <summary>
 		/// 	Gets/sets the Owning control or form for this object.
@@ -294,7 +344,7 @@ namespace FluentDragDrop
 		/// 	<value></value>
 		/// 	<returns></returns>
 		/// 	<remarks></remarks>
-		public Control Owner { get; set; } = null /* TODO Change to default(_) if this is not a reference type */;
+		public Control Owner { get; set; }
 
 		/// <summary>
 		/// 	Gets the default instance

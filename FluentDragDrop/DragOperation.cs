@@ -77,7 +77,7 @@ namespace FluentDragDrop
 
 		public DragOperation<T> WithoutPreview()
 		{
-			PreviewImage = null;
+			Preview = null;
 			_customPreview = true;
 
 			return this;
@@ -85,7 +85,7 @@ namespace FluentDragDrop
 
 		public DragOperationPreview<T> WithPreview(Bitmap image)
 		{
-			PreviewImage = image;
+			Preview = new BitmapPreview(image);
 			_customPreview = true;
 
 			return new DragOperationPreview<T>(this);
@@ -93,7 +93,23 @@ namespace FluentDragDrop
 
 		public DragOperationPreview<T> WithPreview(Func<Bitmap, Bitmap> previewMutator)
 		{
-			PreviewImage = previewMutator(GetControlPreview());
+			Preview = new BitmapPreview(previewMutator(GetControlPreviewBitmap()));
+			_customPreview = true;
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview(IPreview preview)
+		{
+			Preview = preview;
+			_customPreview = true;
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview(Func<Bitmap, IPreview> previewMutator)
+		{
+			Preview = previewMutator(GetControlPreviewBitmap());
 			_customPreview = true;
 
 			return new DragOperationPreview<T>(this);
@@ -115,7 +131,7 @@ namespace FluentDragDrop
 			return this;
 		}
 
-		private Bitmap GetControlPreview()
+		private Bitmap GetControlPreviewBitmap()
 		{
 			var preview = new Bitmap(SourceControl.Width, SourceControl.Height);
 			SourceControl.DrawToBitmap(preview, new Rectangle(Point.Empty, SourceControl.Size));
@@ -125,7 +141,7 @@ namespace FluentDragDrop
 
 		internal Size CalculatePreviewSize()
 		{
-			return PreviewImage?.Size ?? SourceControl?.Size ?? Size.Empty;
+			return Preview?.Get()?.Size ?? SourceControl?.Size ?? Size.Empty;
 		}
 
 		public void Copy() => Start(DragDropEffects.Copy);
@@ -139,9 +155,13 @@ namespace FluentDragDrop
 			_dragger = new ImageListDrag();
 
 			if (!_customPreview)
-				PreviewImage = GetControlPreview();
+				Preview = new BitmapPreview(GetControlPreviewBitmap());
 
-			_dragger.StartDrag(PreviewImage ?? new Bitmap(1, 1), _cursorOffset.X, _cursorOffset.Y);
+			var preview = Preview ?? new BitmapPreview(new Bitmap(1, 1));
+
+			preview.Start();
+
+			_dragger.StartDrag(preview, _cursorOffset.X, _cursorOffset.Y);
 
 			void feedbackHandler(object _, GiveFeedbackEventArgs __) => _dragger?.DragDrop();
 
@@ -158,6 +178,7 @@ namespace FluentDragDrop
 
 				_dragger.CompleteDrag();
 
+				preview.Stop();
 				CleanUp();
 			}
 		}
@@ -179,7 +200,7 @@ namespace FluentDragDrop
 
 		public T Data { get; }
 
-		public Bitmap PreviewImage { get; private set; }
+		public IPreview Preview { get; private set; }
 	}
 
 	public struct NullPlaceholder { }

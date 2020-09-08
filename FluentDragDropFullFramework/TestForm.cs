@@ -63,7 +63,7 @@ namespace FluentDragDropFullFramework
 
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
-				.WithPreview(Watermark).RelativeToCursor()
+				.WithPreview(img => new UpdatablePreview(img)).RelativeToCursor()
 				.To(All, (target, data) => target.Image = data)
 				.Copy();
 		}
@@ -86,7 +86,7 @@ namespace FluentDragDropFullFramework
 				using (var attributes = new ImageAttributes())
 				{
 					attributes.SetColorMatrix(colorMatrix);
-					graphics.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+					graphics.DrawImage(image, new Rectangle(0, 0, result.Width, result.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
 				}
 			}
 			return result;
@@ -113,6 +113,5 @@ namespace FluentDragDropFullFramework
 		}
 
 		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
-
 	}
 }
