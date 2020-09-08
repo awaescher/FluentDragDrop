@@ -9,7 +9,16 @@ namespace FluentDragDrop
 		[ThreadStatic]
 		private static PreviewForm _previewForm;
 
-		internal static PreviewForm PreviewForm => _previewForm ??= new PreviewForm();
+		internal static PreviewForm PreviewForm
+		{
+			get
+			{ 
+				if (_previewForm == null)
+					_previewForm = new PreviewForm();
+
+				return _previewForm;
+			}
+		}
 
 		public PreviewFormController()
 		{

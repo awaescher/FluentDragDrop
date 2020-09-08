@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>FluentDragDropFullFramework</RootNamespace>
     <AssemblyName>FluentDragDropFullFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\FluentDragDropNetCore\UpdatablePreview.cs">
+      <Link>UpdatablePreview.cs</Link>
+    </Compile>
     <Compile Include="..\FluentDragDrop\DragAndDropExtension.cs">
       <Link>DragAndDropExtension.cs</Link>
     </Compile>
@@ -61,6 +65,22 @@
     <Compile Include="..\FluentDragDrop\DragOperationPreview.cs">
       <Link>DragOperationPreview.cs</Link>
     </Compile>
+    <Compile Include="..\FluentDragDrop\Preview\BitmapPreview.cs">
+      <Link>Preview\BitmapPreview.cs</Link>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\Preview\IPreview.cs">
+      <Link>Preview\IPreview.cs</Link>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\Preview\Preview.cs">
+      <Link>Preview\Preview.cs</Link>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\Preview\PreviewForm.cs">
+      <Link>Preview\PreviewForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\Preview\PreviewFormController.cs">
+      <Link>Preview\PreviewFormController.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestForm.cs">
@@ -69,6 +89,10 @@
     <Compile Include="TestForm.designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="..\FluentDragDrop\Preview\PreviewForm.resx">
+      <Link>Preview\PreviewForm.resx</Link>
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -77,6 +101,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
