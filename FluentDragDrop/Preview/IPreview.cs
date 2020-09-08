@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Drawing;
 
 namespace FluentDragDrop
 {
 	public interface IPreview
 	{
-		event EventHandler Updated;
+		event EventHandler<Preview> Updated;
 
 		void Start();
 
 		void Stop();
 
-		Bitmap Get();
+		Preview Get();
 	}
 }

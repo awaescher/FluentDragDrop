@@ -7,16 +7,19 @@ namespace FluentDragDrop
 {
 	internal class BitmapPreview : IPreview
 	{
-		public event EventHandler Updated;
+		public event EventHandler<Preview> Updated;
 
-		private readonly Bitmap _preview;
+		private readonly Preview _preview;
 
-		public BitmapPreview(Bitmap preview)
+		public BitmapPreview(Bitmap bitmap)
 		{
-			_preview = preview ?? throw new ArgumentNullException(nameof(preview));
+			if (bitmap == null)
+				throw new ArgumentNullException(nameof(bitmap));
+
+			_preview = new Preview(bitmap);
 		}
 
-		public Bitmap Get() => _preview;
+		public Preview Get() => _preview;
 
 
 		public void Start()
