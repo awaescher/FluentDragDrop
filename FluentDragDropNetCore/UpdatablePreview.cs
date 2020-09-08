@@ -26,7 +26,7 @@ namespace FluentDragDrop
 
 		public void Start()
 		{
-			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100));
+			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(20), TimeSpan.FromMilliseconds(20));
 		}
 
 		public void Stop()
@@ -53,7 +53,7 @@ namespace FluentDragDrop
 						format.Alignment = StringAlignment.Center;
 						format.LineAlignment = StringAlignment.Far;
 
-						var bounds = new Rectangle(Point.Empty, _originalImage.Size);
+						var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height - 40);
 						graphics.DrawString($"Distance: {distance}px", font, Brushes.White, bounds, format);
 					}
 				}

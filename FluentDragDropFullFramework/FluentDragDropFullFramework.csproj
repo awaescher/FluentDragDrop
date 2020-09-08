@@ -61,9 +61,6 @@
     <Compile Include="..\FluentDragDrop\DragOperationPreview.cs">
       <Link>DragOperationPreview.cs</Link>
     </Compile>
-    <Compile Include="..\FluentDragDrop\ImageListDrag.cs">
-      <Link>ImageListDrag.cs</Link>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestForm.cs">
