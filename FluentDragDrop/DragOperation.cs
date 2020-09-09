@@ -172,7 +172,6 @@ namespace FluentDragDrop
 					SourceControl.BeginInvoke((Action)(() => _previewController.Update(updatedPreview)));
 				else
 					_previewController.Update(updatedPreview);
-
 			}
 
 			try

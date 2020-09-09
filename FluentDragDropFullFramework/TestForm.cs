@@ -1,6 +1,9 @@
 ﻿using FluentDragDrop;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FluentDragDropFullFramework
@@ -113,5 +116,71 @@ namespace FluentDragDropFullFramework
 		}
 
 		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
+
+		private void CountryList_MouseDown(object sender, MouseEventArgs e)
+		{
+			var list = sender as ListView;
+
+			if (list.SelectedItems.Count == 0)
+				return;
+
+			var selectedItems = list.SelectedItems.OfType<ListViewItem>().ToArray();
+
+			list.StartDragAndDrop()
+				.WithData(selectedItems)
+				.WithPreview(RenderPreview(selectedItems)).BehindCursor()
+				.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems)
+				.Move();
+		}
+
+		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
+		{
+			var newItems = draggedItems.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
+			targetListView.Items.AddRange(newItems);
+
+			var sourceListView = draggedItems[0].ListView;
+
+			foreach (var item in draggedItems)
+				sourceListView.Items.Remove(item);
+		}
+
+		private Bitmap RenderPreview(ListViewItem[] items)
+		{
+			var itemHeight = 22;
+			var image = new Bitmap(120, itemHeight * items.Length);
+			var bounds = new Rectangle(Point.Empty, image.Size);
+			var borderBounds = new Rectangle(Point.Empty, image.Size);
+			borderBounds.Width--;
+			borderBounds.Height--;
+
+			using (var graphics = Graphics.FromImage(image))
+			{
+				graphics.Clear(Color.White);
+				graphics.DrawRectangle(Pens.Black, borderBounds);
+
+				using (var format = new StringFormat())
+				{
+					format.Alignment = StringAlignment.Near;
+					format.LineAlignment = StringAlignment.Center;
+					format.FormatFlags = StringFormatFlags.NoWrap;
+					format.Trimming = StringTrimming.EllipsisCharacter;
+
+					for (int i = 0; i < items.Length; i++)
+					{
+						var itemY = itemHeight * i;
+
+						var itemImage = imlSmall.Images[items[i].ImageIndex];
+						var imagePadding = (itemHeight - itemImage.Height) / 2;
+						graphics.DrawImage(itemImage, new Point(imagePadding, itemY + imagePadding));
+
+						var textX = itemImage.Width + imagePadding;
+						var textBounds = new Rectangle(textX, itemY, image.Width - textX, itemHeight);
+						graphics.DrawString(items[i].Text, listLeft.Font, Brushes.Black, textBounds, format);
+					}
+				}
+			}
+
+			return image;
+		}
 	}
 }
