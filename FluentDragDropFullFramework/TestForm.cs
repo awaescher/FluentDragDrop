@@ -148,7 +148,6 @@ namespace FluentDragDropFullFramework
 		{
 			var itemHeight = 22;
 			var image = new Bitmap(120, itemHeight * items.Length);
-			var bounds = new Rectangle(Point.Empty, image.Size);
 			var borderBounds = new Rectangle(Point.Empty, image.Size);
 			borderBounds.Width--;
 			borderBounds.Height--;
@@ -181,6 +180,54 @@ namespace FluentDragDropFullFramework
 			}
 
 			return image;
+		}
+
+		private void linkCompatibilityBrowser_MouseDown(object sender, MouseEventArgs e)
+		{
+			linkCompatibilityBrowser.StartDragAndDrop()
+				.WithData("https://twitter.com/waescher")
+				.Link();
+		}
+
+		private void listCompatibilityFluent_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (listCompatibilityFluent.SelectedItems.Count == 0)
+				return;
+
+			var selectedItems = listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray();
+
+			listCompatibilityFluent.StartDragAndDrop()
+				.WithData(selectedItems)
+				.WithPreview(RenderPreview(selectedItems)).BehindCursor()
+				//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
+				.Copy();
+		}
+
+		private void listCompatibilityTraditional_MouseDown(object sender, MouseEventArgs e)
+		{
+			listCompatibilityTraditional.BeginInvoke((Action)(() =>
+			{
+				if (listCompatibilityTraditional.SelectedItems.Count == 0)
+					return;
+
+				var newItems = listCompatibilityTraditional.SelectedItems.OfType<ListViewItem>().ToArray();
+				listCompatibilityTraditional.DoDragDrop(newItems, DragDropEffects.Copy | DragDropEffects.Move);
+			}));
+		}
+
+		private void listCompatibilityTarget_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Copy;
+		}
+
+		private void listCompatibilityTarget_DragDrop(object sender, DragEventArgs e)
+		{
+			var items = e.Data.GetData(typeof(ListViewItem[])) as ListViewItem[];
+			if (items != null)
+			{
+				var newItems = items.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
+				listCompatibilityTarget.Items.AddRange(newItems);
+			}
 		}
 	}
 }

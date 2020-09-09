@@ -152,6 +152,12 @@ namespace FluentDragDrop
 
 		public void Start(DragDropEffects allowedEffects)
 		{
+			Action action = () => StartInternal(allowedEffects);
+			SourceControl.BeginInvoke(action);
+		}
+
+		private void StartInternal(DragDropEffects allowedEffects)
+		{
 			_previewController = new PreviewFormController();
 
 			if (!_customPreview)
