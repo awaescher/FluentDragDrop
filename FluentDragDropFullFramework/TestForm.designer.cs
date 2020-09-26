@@ -72,7 +72,7 @@
 			this.pic5 = new System.Windows.Forms.PictureBox();
 			this.pic1 = new System.Windows.Forms.PictureBox();
 			this.label4 = new System.Windows.Forms.Label();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.pnlNoDrop = new System.Windows.Forms.Panel();
 			this.label5 = new System.Windows.Forms.Label();
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPagePreviewModes = new System.Windows.Forms.TabPage();
@@ -81,16 +81,23 @@
 			this.imlSmall = new System.Windows.Forms.ImageList(this.components);
 			this.listLeft = new System.Windows.Forms.ListView();
 			this.tabPageNoDropAreas = new System.Windows.Forms.TabPage();
+			this.pic9 = new System.Windows.Forms.PictureBox();
+			this.pic10 = new System.Windows.Forms.PictureBox();
 			this.tabPageCompatibility = new System.Windows.Forms.TabPage();
-			this.linkCompatibilityBrowser = new System.Windows.Forms.LinkLabel();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.listCompatibilityFluent = new System.Windows.Forms.ListView();
-			this.listCompatibilityTraditional = new System.Windows.Forms.ListView();
-			this.listCompatibilityTarget = new System.Windows.Forms.ListView();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
+			this.listCompatibilityFluent = new System.Windows.Forms.ListView();
+			this.label9 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.listCompatibilityTarget = new System.Windows.Forms.ListView();
+			this.listCompatibilityTraditional = new System.Windows.Forms.ListView();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.linkCompatibilityBrowser = new System.Windows.Forms.LinkLabel();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pic7)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic2)).BeginInit();
@@ -99,11 +106,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.pic8)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic5)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic1)).BeginInit();
-			this.panel1.SuspendLayout();
+			this.pnlNoDrop.SuspendLayout();
 			this.tabControl.SuspendLayout();
 			this.tabPagePreviewModes.SuspendLayout();
 			this.tabPageRealWorld.SuspendLayout();
 			this.tabPageNoDropAreas.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pic9)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pic10)).BeginInit();
 			this.tabPageCompatibility.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -235,15 +244,14 @@
 			this.label4.Text = "Preview: None\r\nDrag style: (n/a)";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// panel1
+			// pnlNoDrop
 			// 
-			this.panel1.BackColor = System.Drawing.Color.Maroon;
-			this.panel1.Controls.Add(this.label5);
-			this.panel1.Location = new System.Drawing.Point(162, 51);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(200, 558);
-			this.panel1.TabIndex = 12;
-			this.panel1.Visible = false;
+			this.pnlNoDrop.BackColor = System.Drawing.Color.Maroon;
+			this.pnlNoDrop.Controls.Add(this.label5);
+			this.pnlNoDrop.Location = new System.Drawing.Point(331, 29);
+			this.pnlNoDrop.Name = "pnlNoDrop";
+			this.pnlNoDrop.Size = new System.Drawing.Size(218, 270);
+			this.pnlNoDrop.TabIndex = 12;
 			// 
 			// label5
 			// 
@@ -251,7 +259,7 @@
 			this.label5.ForeColor = System.Drawing.Color.LightSalmon;
 			this.label5.Location = new System.Drawing.Point(0, 0);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(200, 558);
+			this.label5.Size = new System.Drawing.Size(218, 270);
 			this.label5.TabIndex = 0;
 			this.label5.Text = "AllowDrop = false";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -267,7 +275,7 @@
 			this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 1;
-			this.tabControl.Size = new System.Drawing.Size(918, 1203);
+			this.tabControl.Size = new System.Drawing.Size(904, 1203);
 			this.tabControl.TabIndex = 13;
 			// 
 			// tabPagePreviewModes
@@ -288,7 +296,7 @@
 			this.tabPagePreviewModes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabPagePreviewModes.Name = "tabPagePreviewModes";
 			this.tabPagePreviewModes.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.tabPagePreviewModes.Size = new System.Drawing.Size(910, 1170);
+			this.tabPagePreviewModes.Size = new System.Drawing.Size(896, 1170);
 			this.tabPagePreviewModes.TabIndex = 1;
 			this.tabPagePreviewModes.Text = "Preview Modes";
 			this.tabPagePreviewModes.UseVisualStyleBackColor = true;
@@ -301,7 +309,7 @@
 			this.tabPageRealWorld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabPageRealWorld.Name = "tabPageRealWorld";
 			this.tabPageRealWorld.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.tabPageRealWorld.Size = new System.Drawing.Size(910, 1170);
+			this.tabPageRealWorld.Size = new System.Drawing.Size(896, 1170);
 			this.tabPageRealWorld.TabIndex = 0;
 			this.tabPageRealWorld.Text = "Real World Examples";
 			this.tabPageRealWorld.UseVisualStyleBackColor = true;
@@ -374,18 +382,47 @@
 			// 
 			// tabPageNoDropAreas
 			// 
-			this.tabPageNoDropAreas.Controls.Add(this.panel1);
+			this.tabPageNoDropAreas.Controls.Add(this.label13);
+			this.tabPageNoDropAreas.Controls.Add(this.label11);
+			this.tabPageNoDropAreas.Controls.Add(this.label12);
+			this.tabPageNoDropAreas.Controls.Add(this.pic9);
+			this.tabPageNoDropAreas.Controls.Add(this.pic10);
+			this.tabPageNoDropAreas.Controls.Add(this.pnlNoDrop);
 			this.tabPageNoDropAreas.Location = new System.Drawing.Point(4, 29);
 			this.tabPageNoDropAreas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabPageNoDropAreas.Name = "tabPageNoDropAreas";
 			this.tabPageNoDropAreas.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.tabPageNoDropAreas.Size = new System.Drawing.Size(910, 1170);
+			this.tabPageNoDropAreas.Size = new System.Drawing.Size(896, 1170);
 			this.tabPageNoDropAreas.TabIndex = 2;
 			this.tabPageNoDropAreas.Text = "No Drop Areas";
 			this.tabPageNoDropAreas.UseVisualStyleBackColor = true;
 			// 
+			// pic9
+			// 
+			this.pic9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pic9.Image = ((System.Drawing.Image)(resources.GetObject("pic9.Image")));
+			this.pic9.Location = new System.Drawing.Point(28, 29);
+			this.pic9.Name = "pic9";
+			this.pic9.Size = new System.Drawing.Size(270, 270);
+			this.pic9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pic9.TabIndex = 14;
+			this.pic9.TabStop = false;
+			this.pic9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic9_MouseDown);
+			// 
+			// pic10
+			// 
+			this.pic10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pic10.Location = new System.Drawing.Point(584, 29);
+			this.pic10.Name = "pic10";
+			this.pic10.Size = new System.Drawing.Size(270, 270);
+			this.pic10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pic10.TabIndex = 13;
+			this.pic10.TabStop = false;
+			// 
 			// tabPageCompatibility
 			// 
+			this.tabPageCompatibility.Controls.Add(this.label15);
+			this.tabPageCompatibility.Controls.Add(this.label14);
 			this.tabPageCompatibility.Controls.Add(this.label10);
 			this.tabPageCompatibility.Controls.Add(this.listCompatibilityFluent);
 			this.tabPageCompatibility.Controls.Add(this.label9);
@@ -399,41 +436,19 @@
 			this.tabPageCompatibility.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabPageCompatibility.Name = "tabPageCompatibility";
 			this.tabPageCompatibility.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.tabPageCompatibility.Size = new System.Drawing.Size(910, 1170);
+			this.tabPageCompatibility.Size = new System.Drawing.Size(896, 1170);
 			this.tabPageCompatibility.TabIndex = 3;
 			this.tabPageCompatibility.Text = "Compatibility";
 			this.tabPageCompatibility.UseVisualStyleBackColor = true;
 			// 
-			// linkCompatibilityBrowser
+			// label10
 			// 
-			this.linkCompatibilityBrowser.AutoSize = true;
-			this.linkCompatibilityBrowser.Location = new System.Drawing.Point(61, 750);
-			this.linkCompatibilityBrowser.Name = "linkCompatibilityBrowser";
-			this.linkCompatibilityBrowser.Size = new System.Drawing.Size(266, 20);
-			this.linkCompatibilityBrowser.TabIndex = 3;
-			this.linkCompatibilityBrowser.TabStop = true;
-			this.linkCompatibilityBrowser.Text = "Drag me to the tabs of your browser.";
-			this.linkCompatibilityBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.linkCompatibilityBrowser_MouseDown);
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(50, 45);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(231, 29);
-			this.label6.TabIndex = 4;
-			this.label6.Text = "Control compatibility";
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label7.Location = new System.Drawing.Point(55, 699);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(272, 29);
-			this.label7.TabIndex = 5;
-			this.label7.Text = "Application compatibility";
+			this.label10.Location = new System.Drawing.Point(477, 207);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(389, 71);
+			this.label10.TabIndex = 11;
+			this.label10.Text = "Drag items here.\r\nThis is a ListView implementing traditional Drag&&Drop events l" +
+    "ike DragEnter and DragDrop.";
 			// 
 			// listCompatibilityFluent
 			// 
@@ -446,15 +461,48 @@
             listViewItem19,
             listViewItem20,
             listViewItem21});
-			this.listCompatibilityFluent.Location = new System.Drawing.Point(55, 364);
+			this.listCompatibilityFluent.Location = new System.Drawing.Point(55, 487);
 			this.listCompatibilityFluent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityFluent.Name = "listCompatibilityFluent";
-			this.listCompatibilityFluent.Size = new System.Drawing.Size(294, 176);
+			this.listCompatibilityFluent.Size = new System.Drawing.Size(385, 185);
 			this.listCompatibilityFluent.SmallImageList = this.imlSmall;
 			this.listCompatibilityFluent.TabIndex = 7;
 			this.listCompatibilityFluent.UseCompatibleStateImageBehavior = false;
 			this.listCompatibilityFluent.View = System.Windows.Forms.View.List;
 			this.listCompatibilityFluent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listCompatibilityFluent_MouseDown);
+			// 
+			// label9
+			// 
+			this.label9.Location = new System.Drawing.Point(51, 452);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(389, 30);
+			this.label9.TabIndex = 10;
+			this.label9.Text = "This is a ListBox with Fluent Drag&&Drop.";
+			// 
+			// label8
+			// 
+			this.label8.Location = new System.Drawing.Point(51, 224);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(389, 55);
+			this.label8.TabIndex = 9;
+			this.label8.Text = "This is a ListBox with traditional Drag&Drop as it was made since the beginning o" +
+    "f .NET Framework.";
+			// 
+			// listCompatibilityTarget
+			// 
+			this.listCompatibilityTarget.Activation = System.Windows.Forms.ItemActivation.OneClick;
+			this.listCompatibilityTarget.AllowDrop = true;
+			this.listCompatibilityTarget.HideSelection = false;
+			this.listCompatibilityTarget.Location = new System.Drawing.Point(476, 283);
+			this.listCompatibilityTarget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.listCompatibilityTarget.Name = "listCompatibilityTarget";
+			this.listCompatibilityTarget.Size = new System.Drawing.Size(385, 389);
+			this.listCompatibilityTarget.SmallImageList = this.imlSmall;
+			this.listCompatibilityTarget.TabIndex = 8;
+			this.listCompatibilityTarget.UseCompatibleStateImageBehavior = false;
+			this.listCompatibilityTarget.View = System.Windows.Forms.View.List;
+			this.listCompatibilityTarget.DragDrop += new System.Windows.Forms.DragEventHandler(this.listCompatibilityTarget_DragDrop);
+			this.listCompatibilityTarget.DragEnter += new System.Windows.Forms.DragEventHandler(this.listCompatibilityTarget_DragEnter);
 			// 
 			// listCompatibilityTraditional
 			// 
@@ -471,65 +519,98 @@
             listViewItem28,
             listViewItem29,
             listViewItem30});
-			this.listCompatibilityTraditional.Location = new System.Drawing.Point(55, 158);
+			this.listCompatibilityTraditional.Location = new System.Drawing.Point(55, 283);
 			this.listCompatibilityTraditional.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityTraditional.Name = "listCompatibilityTraditional";
-			this.listCompatibilityTraditional.Size = new System.Drawing.Size(385, 122);
+			this.listCompatibilityTraditional.Size = new System.Drawing.Size(385, 137);
 			this.listCompatibilityTraditional.SmallImageList = this.imlSmall;
 			this.listCompatibilityTraditional.TabIndex = 6;
 			this.listCompatibilityTraditional.UseCompatibleStateImageBehavior = false;
 			this.listCompatibilityTraditional.View = System.Windows.Forms.View.List;
 			this.listCompatibilityTraditional.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listCompatibilityTraditional_MouseDown);
 			// 
-			// listCompatibilityTarget
+			// label7
 			// 
-			this.listCompatibilityTarget.Activation = System.Windows.Forms.ItemActivation.OneClick;
-			this.listCompatibilityTarget.AllowDrop = true;
-			this.listCompatibilityTarget.HideSelection = false;
-			this.listCompatibilityTarget.Location = new System.Drawing.Point(506, 183);
-			this.listCompatibilityTarget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.listCompatibilityTarget.Name = "listCompatibilityTarget";
-			this.listCompatibilityTarget.Size = new System.Drawing.Size(385, 357);
-			this.listCompatibilityTarget.SmallImageList = this.imlSmall;
-			this.listCompatibilityTarget.TabIndex = 8;
-			this.listCompatibilityTarget.UseCompatibleStateImageBehavior = false;
-			this.listCompatibilityTarget.View = System.Windows.Forms.View.List;
-			this.listCompatibilityTarget.DragDrop += new System.Windows.Forms.DragEventHandler(this.listCompatibilityTarget_DragDrop);
-			this.listCompatibilityTarget.DragEnter += new System.Windows.Forms.DragEventHandler(this.listCompatibilityTarget_DragEnter);
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label7.Location = new System.Drawing.Point(50, 757);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(272, 29);
+			this.label7.TabIndex = 5;
+			this.label7.Text = "Application compatibility";
 			// 
-			// label8
+			// label6
 			// 
-			this.label8.Location = new System.Drawing.Point(51, 88);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(389, 65);
-			this.label8.TabIndex = 9;
-			this.label8.Text = "This is a ListBox with traditional Drag&Drop as it was made since the beginning o" +
-    "f .NET Framework.";
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(50, 45);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(231, 29);
+			this.label6.TabIndex = 4;
+			this.label6.Text = "Control compatibility";
 			// 
-			// label9
+			// linkCompatibilityBrowser
 			// 
-			this.label9.Location = new System.Drawing.Point(56, 316);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(389, 43);
-			this.label9.TabIndex = 10;
-			this.label9.Text = "This is a ListBox with Fluent Drag&&Drop.";
+			this.linkCompatibilityBrowser.AutoSize = true;
+			this.linkCompatibilityBrowser.Location = new System.Drawing.Point(51, 871);
+			this.linkCompatibilityBrowser.Name = "linkCompatibilityBrowser";
+			this.linkCompatibilityBrowser.Size = new System.Drawing.Size(266, 20);
+			this.linkCompatibilityBrowser.TabIndex = 3;
+			this.linkCompatibilityBrowser.TabStop = true;
+			this.linkCompatibilityBrowser.Text = "Drag me to the tabs of your browser.";
+			this.linkCompatibilityBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.linkCompatibilityBrowser_MouseDown);
 			// 
-			// label10
+			// label11
 			// 
-			this.label10.Location = new System.Drawing.Point(502, 88);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(389, 89);
-			this.label10.TabIndex = 11;
-			this.label10.Text = "Drag items here.\r\nThis is a ListView implementing traditional Drag&&Drop events l" +
-    "ike DragEnter and DragDrop like it was made since the beginning of the .NET Fram" +
-    "ework";
+			this.label11.Location = new System.Drawing.Point(24, 401);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(830, 65);
+			this.label11.TabIndex = 16;
+			this.label11.Text = resources.GetString("label11.Text");
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.Location = new System.Drawing.Point(23, 363);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(486, 29);
+			this.label12.TabIndex = 15;
+			this.label12.Text = "Hovering over controls with AllowDrop=false";
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label13.ForeColor = System.Drawing.Color.Maroon;
+			this.label13.Location = new System.Drawing.Point(23, 334);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(178, 29);
+			this.label13.TabIndex = 17;
+			this.label13.Text = "IN PROGRESS";
+			// 
+			// label14
+			// 
+			this.label14.Location = new System.Drawing.Point(51, 83);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(815, 65);
+			this.label14.TabIndex = 17;
+			this.label14.Text = resources.GetString("label14.Text");
+			// 
+			// label15
+			// 
+			this.label15.Location = new System.Drawing.Point(51, 795);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(815, 65);
+			this.label15.TabIndex = 18;
+			this.label15.Text = resources.GetString("label15.Text");
 			// 
 			// TestForm
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(918, 1203);
+			this.ClientSize = new System.Drawing.Size(904, 1203);
 			this.Controls.Add(this.tabControl);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "TestForm";
@@ -543,11 +624,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.pic8)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic1)).EndInit();
-			this.panel1.ResumeLayout(false);
+			this.pnlNoDrop.ResumeLayout(false);
 			this.tabControl.ResumeLayout(false);
 			this.tabPagePreviewModes.ResumeLayout(false);
 			this.tabPageRealWorld.ResumeLayout(false);
 			this.tabPageNoDropAreas.ResumeLayout(false);
+			this.tabPageNoDropAreas.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pic9)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pic10)).EndInit();
 			this.tabPageCompatibility.ResumeLayout(false);
 			this.tabPageCompatibility.PerformLayout();
 			this.ResumeLayout(false);
@@ -568,7 +652,7 @@
 		private System.Windows.Forms.PictureBox pic5;
 		private System.Windows.Forms.PictureBox pic1;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel pnlNoDrop;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPagePreviewModes;
@@ -587,6 +671,13 @@
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.PictureBox pic9;
+		private System.Windows.Forms.PictureBox pic10;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label14;
 	}
 }
 

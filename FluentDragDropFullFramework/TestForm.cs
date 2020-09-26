@@ -115,8 +115,6 @@ namespace FluentDragDropFullFramework
 			return image;
 		}
 
-		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
-
 		private void CountryList_MouseDown(object sender, MouseEventArgs e)
 		{
 			var list = sender as ListView;
@@ -229,5 +227,15 @@ namespace FluentDragDropFullFramework
 				listCompatibilityTarget.Items.AddRange(newItems);
 			}
 		}
+
+		private void pic9_MouseDown(object sender, MouseEventArgs e)
+		{
+			pic9.StartDragAndDrop()
+				.WithData(pic9.Image)
+				.To(pic10, (target, data) => target.Image = data)
+				.Copy();
+		}
+
+		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
 	}
 }
