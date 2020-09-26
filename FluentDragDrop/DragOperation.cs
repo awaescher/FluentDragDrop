@@ -181,7 +181,7 @@ namespace FluentDragDrop
 			{
 				preview.Updated += updatePreview;
 
-				hookId = NativeMethods.HookMouseMove(mousePosition => _previewController.Move(mousePosition));
+				hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
 
 				_previewController.Start(preview.Get(), _cursorOffset);
 

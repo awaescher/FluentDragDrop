@@ -12,13 +12,13 @@ namespace FluentDragDrop
 		private const int WH_MOUSE_LL = 14;
 
 		private static IntPtr _hookID = IntPtr.Zero;
-		private static Action<Point> _mouseMoveHandler;
+		private static Action _mouseMoveHandler;
 
 		// wee need to keep the variable to prevent the GarbageCollector to remove the HookCallback
 		// https://social.msdn.microsoft.com/Forums/vstudio/en-US/68fdc3dc-8d77-48c4-875c-5312baa56aee/how-to-fix-callbackoncollecteddelegate-exception?forum=netfxbcl
 		private static LowLevelMouseProc _proc = HookCallback; 
 
-		internal static IntPtr HookMouseMove(Action<Point> mouseMoveHandler)
+		internal static IntPtr HookMouseMove(Action mouseMoveHandler)
 		{
 			_mouseMoveHandler = mouseMoveHandler;
 
@@ -40,8 +40,7 @@ namespace FluentDragDrop
 		{
 			if (nCode >= 0 && MouseMessages.WM_MOUSEMOVE == (MouseMessages)wParam)
 			{
-				var	hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
-				_mouseMoveHandler?.Invoke(new Point(hookStruct.pt.x, hookStruct.pt.y));
+				_mouseMoveHandler?.Invoke();
 			}
 			return CallNextHookEx(_hookID, nCode, wParam, lParam);
 		}
