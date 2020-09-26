@@ -27,6 +27,9 @@ namespace FluentDragDrop
 
 		public void Start(Preview preview, Point cursorOffset)
 		{
+			if (preview is null)
+				return;
+
 			CursorOffset = cursorOffset;
 
 			var mousePosition = Control.MousePosition;
@@ -44,6 +47,9 @@ namespace FluentDragDrop
 
 		internal void Update(Preview preview)
 		{
+			if (preview is null)
+				return;
+
 			PreviewForm.Update(preview);
 		}
 

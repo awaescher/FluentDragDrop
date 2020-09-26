@@ -163,9 +163,7 @@ namespace FluentDragDrop
 			if (!_customPreview)
 				Preview = new BitmapPreview(GetControlPreviewBitmap());
 
-			var preview = Preview ?? new BitmapPreview(new Bitmap(1, 1));
-
-			preview.Start();
+			Preview?.Start();
 
 			void updatePreview(object _, Preview updatedPreview)
 			{
@@ -179,11 +177,12 @@ namespace FluentDragDrop
 
 			try
 			{
-				preview.Updated += updatePreview;
+				if (Preview is object)
+					Preview.Updated += updatePreview;
 
 				hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
 
-				_previewController.Start(preview.Get(), _cursorOffset);
+				_previewController.Start(Preview?.Get(), _cursorOffset);
 
 				var data = Data == null ? (object)new NullPlaceholder() : Data;
 				SourceControl.DoDragDrop(data, allowedEffects);
@@ -192,10 +191,11 @@ namespace FluentDragDrop
 			{
 				NativeMethods.RemoveHook(hookId);
 
-				preview.Updated -= updatePreview;
+				if (Preview is object)
+					Preview.Updated -= updatePreview;
 
 				_previewController.Stop();
-				preview.Stop();
+				Preview?.Stop();
 
 				CleanUp();
 			}
