@@ -99,16 +99,19 @@ namespace FluentDragDropFullFramework
 		{
 			var list = sender as ListView;
 
-			if (list.SelectedItems.Count == 0)
-				return;
+			list.BeginInvoke((Action)(() =>
+			{
+				if (list.SelectedItems.Count == 0)
+					return;
 
-			var selectedItems = list.SelectedItems.OfType<ListViewItem>().ToArray();
+				var selectedItems = list.SelectedItems.OfType<ListViewItem>().ToArray();
 
-			list.StartDragAndDrop()
-				.WithData(selectedItems)
-				.WithPreview(RenderPreview(selectedItems)).BehindCursor()
-				.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems)
-				.Move();
+				list.StartDragAndDrop()
+					.WithData(selectedItems)
+					.WithPreview(RenderPreview(selectedItems)).BehindCursor()
+					.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems)
+					.Move();
+			}));
 		}
 
 		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
@@ -169,16 +172,21 @@ namespace FluentDragDropFullFramework
 
 		private void listCompatibilityFluent_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (listCompatibilityFluent.SelectedItems.Count == 0)
-				return;
+			listCompatibilityFluent.BeginInvoke((Action)(() =>
+			{
 
-			var selectedItems = listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray();
+				if (listCompatibilityFluent.SelectedItems.Count == 0)
+					return;
 
-			listCompatibilityFluent.StartDragAndDrop()
-				.WithData(selectedItems)
-				.WithPreview(RenderPreview(selectedItems)).BehindCursor()
-				//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
-				.Copy();
+				var selectedItems = listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray();
+
+
+				listCompatibilityFluent.StartDragAndDrop()
+					.WithData(selectedItems)
+					.WithPreview(RenderPreview(selectedItems)).BehindCursor()
+					//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
+					.Copy();
+			}));
 		}
 
 		private void listCompatibilityTraditional_MouseDown(object sender, MouseEventArgs e)

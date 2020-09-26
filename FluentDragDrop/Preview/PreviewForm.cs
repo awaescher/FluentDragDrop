@@ -35,6 +35,7 @@ namespace FluentDragDrop
 			MinimumSize = Size.Empty;
 			Size = Size.Empty;
 			StartPosition = FormStartPosition.Manual;
+			ShowInTaskbar = false;
 			Location = new Point(-9999, -9999);
 			Enabled = false;
 			TabStop = false;
