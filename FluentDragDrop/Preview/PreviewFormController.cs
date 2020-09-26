@@ -56,9 +56,8 @@ namespace FluentDragDrop
 			PreviewForm.Stop();
 		}
 
-		public void Move()
+		public void Move(Point mousePosition)
 		{
-			var mousePosition = Control.MousePosition;
 			var position = new Point(mousePosition.X - CursorOffset.X, mousePosition.Y - CursorOffset.Y);
 
 			if (!IsDragging)

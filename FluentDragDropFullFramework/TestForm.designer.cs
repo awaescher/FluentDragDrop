@@ -30,36 +30,36 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestForm));
-			System.Windows.Forms.ListViewItem listViewItem31 = new System.Windows.Forms.ListViewItem("Germany", 9);
-			System.Windows.Forms.ListViewItem listViewItem32 = new System.Windows.Forms.ListViewItem("Ireland", 10);
-			System.Windows.Forms.ListViewItem listViewItem33 = new System.Windows.Forms.ListViewItem("Scotland", 11);
-			System.Windows.Forms.ListViewItem listViewItem34 = new System.Windows.Forms.ListViewItem("Spain", 12);
-			System.Windows.Forms.ListViewItem listViewItem35 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
-			System.Windows.Forms.ListViewItem listViewItem36 = new System.Windows.Forms.ListViewItem("United States of America", 14);
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Argentina", 0);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Australia", 1);
-			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Austria", 2);
-			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Belgium", 3);
-			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Brazil", 4);
-			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Canada", 5);
-			System.Windows.Forms.ListViewItem listViewItem37 = new System.Windows.Forms.ListViewItem("Denmark", 6);
-			System.Windows.Forms.ListViewItem listViewItem38 = new System.Windows.Forms.ListViewItem("England", 7);
-			System.Windows.Forms.ListViewItem listViewItem39 = new System.Windows.Forms.ListViewItem("France", 8);
-			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Germany", 9);
-			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Ireland", 10);
-			System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Scotland", 11);
-			System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Spain", 12);
-			System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
-			System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("United States of America", 14);
-			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Argentina", 0);
-			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Australia", 1);
-			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Austria", 2);
-			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Belgium", 3);
-			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Brazil", 4);
-			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Canada", 5);
-			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Denmark", 6);
-			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("England", 7);
-			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("France", 8);
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Germany", 9);
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Ireland", 10);
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Scotland", 11);
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Spain", 12);
+			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
+			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("United States of America", 14);
+			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Argentina", 0);
+			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Australia", 1);
+			System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Austria", 2);
+			System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Belgium", 3);
+			System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Brazil", 4);
+			System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Canada", 5);
+			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Denmark", 6);
+			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("England", 7);
+			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("France", 8);
+			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Germany", 9);
+			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Ireland", 10);
+			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Scotland", 11);
+			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Spain", 12);
+			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
+			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("United States of America", 14);
+			System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Argentina", 0);
+			System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("Australia", 1);
+			System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Austria", 2);
+			System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem("Belgium", 3);
+			System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem("Brazil", 4);
+			System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem("Canada", 5);
+			System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem("Denmark", 6);
+			System.Windows.Forms.ListViewItem listViewItem29 = new System.Windows.Forms.ListViewItem("England", 7);
+			System.Windows.Forms.ListViewItem listViewItem30 = new System.Windows.Forms.ListViewItem("France", 8);
 			this.pic7 = new System.Windows.Forms.PictureBox();
 			this.pic6 = new System.Windows.Forms.PictureBox();
 			this.pic2 = new System.Windows.Forms.PictureBox();
@@ -81,9 +81,13 @@
 			this.imlSmall = new System.Windows.Forms.ImageList(this.components);
 			this.listLeft = new System.Windows.Forms.ListView();
 			this.tabPageNoDropAreas = new System.Windows.Forms.TabPage();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
 			this.pic9 = new System.Windows.Forms.PictureBox();
 			this.pic10 = new System.Windows.Forms.PictureBox();
 			this.tabPageCompatibility = new System.Windows.Forms.TabPage();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
 			this.listCompatibilityFluent = new System.Windows.Forms.ListView();
 			this.label9 = new System.Windows.Forms.Label();
@@ -93,11 +97,6 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.linkCompatibilityBrowser = new System.Windows.Forms.LinkLabel();
-			this.label11 = new System.Windows.Forms.Label();
-			this.label12 = new System.Windows.Forms.Label();
-			this.label13 = new System.Windows.Forms.Label();
-			this.label14 = new System.Windows.Forms.Label();
-			this.label15 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pic7)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic6)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pic2)).BeginInit();
@@ -319,12 +318,12 @@
 			this.listRight.Activation = System.Windows.Forms.ItemActivation.OneClick;
 			this.listRight.HideSelection = false;
 			this.listRight.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem31,
-            listViewItem32,
-            listViewItem33,
-            listViewItem34,
-            listViewItem35,
-            listViewItem36});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
 			this.listRight.Location = new System.Drawing.Point(534, 34);
 			this.listRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listRight.Name = "listRight";
@@ -361,15 +360,15 @@
 			this.listLeft.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.listLeft.HideSelection = false;
 			this.listLeft.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem37,
-            listViewItem38,
-            listViewItem39});
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15});
 			this.listLeft.Location = new System.Drawing.Point(40, 34);
 			this.listLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listLeft.Name = "listLeft";
@@ -382,7 +381,6 @@
 			// 
 			// tabPageNoDropAreas
 			// 
-			this.tabPageNoDropAreas.Controls.Add(this.label13);
 			this.tabPageNoDropAreas.Controls.Add(this.label11);
 			this.tabPageNoDropAreas.Controls.Add(this.label12);
 			this.tabPageNoDropAreas.Controls.Add(this.pic9);
@@ -396,6 +394,24 @@
 			this.tabPageNoDropAreas.TabIndex = 2;
 			this.tabPageNoDropAreas.Text = "No Drop Areas";
 			this.tabPageNoDropAreas.UseVisualStyleBackColor = true;
+			// 
+			// label11
+			// 
+			this.label11.Location = new System.Drawing.Point(24, 392);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(830, 65);
+			this.label11.TabIndex = 16;
+			this.label11.Text = resources.GetString("label11.Text");
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.Location = new System.Drawing.Point(23, 354);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(486, 29);
+			this.label12.TabIndex = 15;
+			this.label12.Text = "Hovering over controls with AllowDrop=false";
 			// 
 			// pic9
 			// 
@@ -441,6 +457,22 @@
 			this.tabPageCompatibility.Text = "Compatibility";
 			this.tabPageCompatibility.UseVisualStyleBackColor = true;
 			// 
+			// label15
+			// 
+			this.label15.Location = new System.Drawing.Point(51, 795);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(815, 65);
+			this.label15.TabIndex = 18;
+			this.label15.Text = resources.GetString("label15.Text");
+			// 
+			// label14
+			// 
+			this.label14.Location = new System.Drawing.Point(51, 83);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(815, 65);
+			this.label14.TabIndex = 17;
+			this.label14.Text = resources.GetString("label14.Text");
+			// 
 			// label10
 			// 
 			this.label10.Location = new System.Drawing.Point(477, 207);
@@ -455,12 +487,12 @@
 			this.listCompatibilityFluent.Activation = System.Windows.Forms.ItemActivation.OneClick;
 			this.listCompatibilityFluent.HideSelection = false;
 			this.listCompatibilityFluent.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12});
+            listViewItem16,
+            listViewItem17,
+            listViewItem18,
+            listViewItem19,
+            listViewItem20,
+            listViewItem21});
 			this.listCompatibilityFluent.Location = new System.Drawing.Point(55, 487);
 			this.listCompatibilityFluent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityFluent.Name = "listCompatibilityFluent";
@@ -510,15 +542,15 @@
 			this.listCompatibilityTraditional.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.listCompatibilityTraditional.HideSelection = false;
 			this.listCompatibilityTraditional.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16,
-            listViewItem17,
-            listViewItem18,
-            listViewItem19,
-            listViewItem20,
-            listViewItem21});
+            listViewItem22,
+            listViewItem23,
+            listViewItem24,
+            listViewItem25,
+            listViewItem26,
+            listViewItem27,
+            listViewItem28,
+            listViewItem29,
+            listViewItem30});
 			this.listCompatibilityTraditional.Location = new System.Drawing.Point(55, 283);
 			this.listCompatibilityTraditional.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityTraditional.Name = "listCompatibilityTraditional";
@@ -559,51 +591,6 @@
 			this.linkCompatibilityBrowser.TabStop = true;
 			this.linkCompatibilityBrowser.Text = "Drag me to the tabs of your browser.";
 			this.linkCompatibilityBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.linkCompatibilityBrowser_MouseDown);
-			// 
-			// label11
-			// 
-			this.label11.Location = new System.Drawing.Point(24, 401);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(830, 65);
-			this.label11.TabIndex = 16;
-			this.label11.Text = resources.GetString("label11.Text");
-			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label12.Location = new System.Drawing.Point(23, 363);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(486, 29);
-			this.label12.TabIndex = 15;
-			this.label12.Text = "Hovering over controls with AllowDrop=false";
-			// 
-			// label13
-			// 
-			this.label13.AutoSize = true;
-			this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label13.ForeColor = System.Drawing.Color.Maroon;
-			this.label13.Location = new System.Drawing.Point(23, 334);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(178, 29);
-			this.label13.TabIndex = 17;
-			this.label13.Text = "IN PROGRESS";
-			// 
-			// label14
-			// 
-			this.label14.Location = new System.Drawing.Point(51, 83);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(815, 65);
-			this.label14.TabIndex = 17;
-			this.label14.Text = resources.GetString("label14.Text");
-			// 
-			// label15
-			// 
-			this.label15.Location = new System.Drawing.Point(51, 795);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(815, 65);
-			this.label15.TabIndex = 18;
-			this.label15.Text = resources.GetString("label15.Text");
 			// 
 			// TestForm
 			// 
@@ -675,7 +662,6 @@
 		private System.Windows.Forms.PictureBox pic10;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Label label14;
 	}

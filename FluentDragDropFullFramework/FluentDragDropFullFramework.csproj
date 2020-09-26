@@ -65,6 +65,9 @@
     <Compile Include="..\FluentDragDrop\DragOperationPreview.cs">
       <Link>DragOperationPreview.cs</Link>
     </Compile>
+    <Compile Include="..\FluentDragDrop\NativeMethods.cs">
+      <Link>NativeMethods.cs</Link>
+    </Compile>
     <Compile Include="..\FluentDragDrop\Preview\BitmapPreview.cs">
       <Link>Preview\BitmapPreview.cs</Link>
     </Compile>

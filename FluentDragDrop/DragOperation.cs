@@ -167,11 +167,6 @@ namespace FluentDragDrop
 
 			preview.Start();
 
-			void feedbackHandler(object _, GiveFeedbackEventArgs __)
-			{
-				_previewController.Move();
-			}
-
 			void updatePreview(object _, Preview updatedPreview)
 			{
 				if (SourceControl.InvokeRequired)
@@ -180,11 +175,13 @@ namespace FluentDragDrop
 					_previewController.Update(updatedPreview);
 			}
 
+			var hookId = IntPtr.Zero;
+
 			try
 			{
-				SourceControl.GiveFeedback += feedbackHandler;
-
 				preview.Updated += updatePreview;
+
+				hookId = NativeMethods.HookMouseMove(mousePosition => _previewController.Move(mousePosition));
 
 				_previewController.Start(preview.Get(), _cursorOffset);
 
@@ -193,16 +190,14 @@ namespace FluentDragDrop
 			}
 			finally
 			{
+				NativeMethods.RemoveHook(hookId);
+
 				preview.Updated -= updatePreview;
 
 				_previewController.Stop();
 				preview.Stop();
 
 				CleanUp();
-
-				SourceControl.GiveFeedback -= feedbackHandler;
-
-
 			}
 		}
 

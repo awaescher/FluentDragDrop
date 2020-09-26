@@ -59,8 +59,8 @@ namespace FluentDragDrop
 				}
 			}
 
-			// at 750 distance, we want it to be transparent
-			var opacity = (750 - distance) / 750;
+			// at 900 distance, we want it to be transparent
+			var opacity = (900 - distance) / 900;
 			_preview = new Preview(previewImage, opacity);
 
 			Updated?.Invoke(this, _preview);
