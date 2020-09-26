@@ -25,7 +25,7 @@ namespace FluentDragDropFullFramework
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithoutPreview()
-				.To(All, (target, data) => target.Image = data)
+				.To(PreviewBoxes, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -39,7 +39,7 @@ namespace FluentDragDropFullFramework
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview().BehindCursor()
-				.To(All, (target, data) => target.Image = data)
+				.To(PreviewBoxes, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -53,7 +53,7 @@ namespace FluentDragDropFullFramework
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview(Grayscale((Bitmap)pic.Image)).LikeWindowsExplorer()
-				.To(All, (target, data) => target.Image = data)
+				.To(PreviewBoxes, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -67,7 +67,7 @@ namespace FluentDragDropFullFramework
 			pic.StartDragAndDrop()
 				.WithData(pic.Image)
 				.WithPreview(img => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
-				.To(All, (target, data) => target.Image = data)
+				.To(PreviewBoxes, (target, data) => target.Image = data)
 				.Copy();
 		}
 
@@ -93,26 +93,6 @@ namespace FluentDragDropFullFramework
 				}
 			}
 			return result;
-		}
-
-		private Bitmap Watermark(Bitmap image)
-		{
-			using (var graphics = Graphics.FromImage(image))
-			{
-				using (var font = new Font(Font.FontFamily, 18f))
-				{
-					using (var format = new StringFormat())
-					{
-						format.Alignment = StringAlignment.Center;
-						format.LineAlignment = StringAlignment.Far;
-
-						var bounds = new Rectangle(Point.Empty, image.Size);
-						graphics.DrawString("Dragging ...", font, Brushes.White, bounds, format);
-					}
-				}
-			}
-
-			return image;
 		}
 
 		private void CountryList_MouseDown(object sender, MouseEventArgs e)
@@ -236,6 +216,6 @@ namespace FluentDragDropFullFramework
 				.Copy();
 		}
 
-		private PictureBox[] All => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
+		private PictureBox[] PreviewBoxes => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
 	}
 }

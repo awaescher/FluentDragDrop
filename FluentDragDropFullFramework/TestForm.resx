@@ -1437,10 +1437,6 @@
         YgAG/wIABv8CABD/YAAg/2AAIP9gABD/Cw==
 </value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Most Drag&amp;&amp;Drop implementations in WinForms using preview images struggle with controls that have AllowDrop set to false.
-While dragging the preview image over such controls, it gets hidden, begins to stutter or even freezes at the same place while the mouse is moved.</value>
-  </data>
   <data name="pic9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERET
@@ -1627,12 +1623,16 @@ While dragging the preview image over such controls, it gets hidden, begins to s
         afQ1K67P/9k=
 </value>
   </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>The compatibility does not stop with standard WinForms controls but supports Drag&amp;&amp;Drop operations with other applications as well, like the Windows Explorer or any modern web browser. 
-Try it out ...</value>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Most Drag&amp;&amp;Drop implementations in WinForms using preview images struggle with controls that have AllowDrop set to false.
+While dragging the preview image over such controls, it gets hidden, begins to stutter or even freezes at the same place while the mouse is moved.</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>Fluent Drag&amp;&amp;Drop provides an easier and richer experience but uses the same API to implement Drag&amp;&amp;Drop operations as every standard WinForms control.
 This makes Fluent Drag&amp;&amp;Drop compatible with existing implementations.</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>The compatibility does not stop with standard WinForms controls but supports Drag&amp;&amp;Drop operations with other applications as well, like the Windows Explorer or any modern web browser. 
+Try it out ...</value>
   </data>
 </root>
