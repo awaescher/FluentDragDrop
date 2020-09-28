@@ -1,3 +1,4 @@
+#addin "Cake.FileHelpers"
 #addin "Cake.Git"
 #tool "nuget:?package=GitVersion.CommandLine&version=5.1.3"
 
@@ -58,14 +59,6 @@ Task("Build")
 	.IsDependentOn("Version")
     .Does(() =>
 {
-    	var sln = "FluentDragDrop.sln";
-
-    // NuGetRestore(sln);
-    // MSBuild(sln, c =>
-    // {
-    //     c.Configuration = args.Configuration;
-    // });
-
 		var settings = new DotNetCoreBuildSettings {
 			Configuration = args.Configuration,
 			OutputDirectory = args.OutputDirectory		 
@@ -81,14 +74,34 @@ Task("Build")
 		DotNetCoreBuild("FluentDragDrop\\FluentDragDrop.csproj", settings);
 });
 
+
+Task("BuildFullFramework")
+	.IsDependentOn("Clean")
+	.IsDependentOn("Version")
+    .Does(() =>
+{
+	
+		ReplaceRegexInFiles("./FluentDragDrop-net45/**/AssemblyInfo.*", "(?<=AssemblyBuildDate\\(\")([0-9\\-\\:T]+)(?=\"\\))", DateTime.Now.ToString("s"));
+		ReplaceRegexInFiles("./FluentDragDrop-net45/**/*.csproj", "(?<=<ReleaseVersion>).*?(?=</ReleaseVersion>)", versionInfo.AssemblySemVer);
+		ReplaceRegexInFiles("./FluentDragDrop-net45/**/*.csproj", "(?<=<Version>).*?(?=</Version>)", versionInfo.AssemblySemVer);
+
+	 	// Use MSBuild
+
+		MSBuild("FluentDragDrop-net45\\FluentDragDrop-net45.csproj", settings =>
+			settings.SetConfiguration(args.Configuration)
+					.SetPlatformTarget(PlatformTarget.MSIL)
+					.UseToolVersion(MSBuildToolVersion.VS2019));
+});
+
 Task("Pack")
 	.IsDependentOn("Build")
+	.IsDependentOn("BuildFullFramework")
 	.Does(() =>
 {
     if(!DirectoryExists(buildDirectory.FullPath))
         CreateDirectory(buildDirectory.FullPath);
 
-    var nuspecFiles = GetFiles("**/*.nuspec");
+    var nuspecFiles = GetFiles("**/FluentDragDrop*.nuspec");
     foreach(var nuspec in nuspecFiles)
     {
         var wd = MakeAbsolute(nuspec).GetDirectory();

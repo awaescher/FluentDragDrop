@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>FluentDragDrop-net45</id>
+        <authors>Andreas Wäscher</authors>
+        <version>$version$</version>
+        <owners>Andreas Wäscher</owners>
+        <projectUrl>https://github.com/awaescher/FluentDragDrop</projectUrl>
+        <repository url="https://github.com/awaescher/FluentDragDrop" />
+        <license type="file">LICENSE</license>
+        <icon>images\FluentDragDrop.png</icon>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <developmentDependency>false</developmentDependency>
+<summary>
+Fluent, declarative and visually appealing Drag and Drop for WinForms.
+This package targets the full framework. Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer) if possible.
+</summary>
+<description>
+Fluent, declarative and visually appealing Drag and Drop for WinForms.
+This package targets the full framework. Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer) if possible.
+
+The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0. Thank you for your awesome work, mates!
+</description>
+    <tags>Fluent Drag Drop Windows Forms UI</tags>
+    </metadata>
+    <files>
+        <file src=".\FluentDragDrop-net45\bin\Release\FluentDragDrop-net45.dll" target="lib\net45" />
+        <file src=".\FluentDragDrop-net45\bin\Release\FluentDragDrop-net45.pdb" target="lib\net45" />
+
+        <!--Icon-->
+        <file src="doc\FluentDragDrop.png" target="images\" />
+
+        <!--License-->
+        <file src="LICENSE" target="LICENSE" />
+    </files>
+</package>
