@@ -6,7 +6,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FluentDragDropFullFramework
+namespace TestAppProjectReference
 {
 	public partial class TestForm : Form
 	{

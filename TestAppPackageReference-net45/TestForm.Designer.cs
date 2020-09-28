@@ -1,4 +1,4 @@
-﻿namespace TestApp
+﻿namespace TestAppPackageReference
 {
 	partial class TestForm
 	{

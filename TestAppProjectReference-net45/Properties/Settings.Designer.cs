@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FluentDragDropFullFramework.Properties {
+namespace TestAppProjectReference.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

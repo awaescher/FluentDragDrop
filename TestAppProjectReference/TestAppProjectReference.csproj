@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\FluentDragDropFullFramework\TestForm.cs" Link="TestForm.cs" />
-    <Compile Include="..\FluentDragDropFullFramework\TestForm.designer.cs" Link="TestForm.designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="..\FluentDragDropFullFramework\TestForm.resx" Link="TestForm.resx" />
+    <Compile Include="..\TestAppProjectReference-net45\TestForm.cs" Link="TestForm.cs" />
+    <Compile Include="..\TestAppProjectReference-net45\TestForm.designer.cs" Link="TestForm.designer.cs" />
+    <Compile Include="..\TestAppProjectReference-net45\UpdatablePreview.cs" Link="UpdatablePreview.cs" />
   </ItemGroup>
 
   <ItemGroup>

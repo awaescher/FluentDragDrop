@@ -1,4 +1,4 @@
-﻿namespace FluentDragDropFullFramework
+﻿namespace TestAppProjectReference
 {
 	partial class TestForm
 	{

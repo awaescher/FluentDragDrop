@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 
-namespace FluentDragDrop
+namespace TestAppProjectReference
 {
 	class UpdatablePreview : IPreview
 	{
