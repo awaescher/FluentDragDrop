@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentDragDrop-net45, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentDragDrop-net45.0.2.0\lib\net45\FluentDragDrop-net45.dll</HintPath>
+      <HintPath>..\packages\FluentDragDrop-net45.0.2.1\lib\net45\FluentDragDrop-net45.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

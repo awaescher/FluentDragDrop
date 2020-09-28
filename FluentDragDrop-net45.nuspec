@@ -12,8 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <developmentDependency>false</developmentDependency>
 <summary>
-Fluent, declarative and visually appealing Drag and Drop for WinForms.
-Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer) if possible.
+Fluent, declarative and visually appealing Drag and Drop for WinForms. Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer).
 </summary>
 <description>
 Drag and Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls.
@@ -21,7 +20,7 @@ Passing data is kind of special and you don't get preview images while dragging 
 
 This package brings rich Drag and Drop experience to your app, just by adding a few simple lines of code.
 
-Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer) if possible.
+Use package FluentDragDrop for .NET Core 3.1 and .NET 5 (or newer).
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0. Thank you for your awesome work, mates!
 </description>
