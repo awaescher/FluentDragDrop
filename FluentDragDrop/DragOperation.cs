@@ -38,7 +38,7 @@ namespace FluentDragDrop
 
 		public DragOperation<T> To<TControl>(TControl target, Action<TControl, T> dragDrop) where TControl : Control
 		{
-			var handler = DragHandler<T>.Default;
+			var handler = DragHandler<T>.CreateDefault();
 			handler.DragDrop = (value, _) => dragDrop?.Invoke(target, value);
 
 			return To(target, handler);
@@ -57,8 +57,6 @@ namespace FluentDragDrop
 
 			return this;
 		}
-
-
 
 		public DragOperation<T> WithoutPreview()
 		{
@@ -140,7 +138,7 @@ namespace FluentDragDrop
 
 		private void Start(DragDropEffects allowedEffects)
 		{
-			StopTracking();
+			StopTrackingForDeferredStartOnMouseMove();
 
 			var canProceed = ConditionEvaluator.Invoke();
 			if (!canProceed)
@@ -220,7 +218,7 @@ namespace FluentDragDrop
 			if (_targets.TryGetValue(sender, out var handler))
 				handler.DragDrop?.Invoke(Data, e);
 		}
-
+		
 		private void Target_DragLeave(object sender, EventArgs e)
 		{
 			if (_targets.TryGetValue(sender, out var handler))
@@ -229,10 +227,16 @@ namespace FluentDragDrop
 
 		private void SourceControl_MouseUp(object sender, MouseEventArgs e)
 		{
-			StopTracking();
+			StopTrackingForDeferredStartOnMouseMove();
+
+			// I hunted this bug quite a long time: if the deferred drag operation is used,
+			// the events are still attached in To() to a given control. So even if we do 
+			// not start the drag-drop operation (with a click for example), we have to clean
+			// up the event handlers or otherwise we'll have multiple handlers with old data
+			CleanUp();
 		}
 
-		private void StopTracking()
+		private void StopTrackingForDeferredStartOnMouseMove()
 		{
 			_initialPosition = Point.Empty;
 			SourceControl.MouseMove -= SourceControl_MouseMove;
