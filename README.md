@@ -1,6 +1,7 @@
 # Fluent Drag&Drop
 
-Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events to handle and properties to set on at least two controls. Passing data is ... interesting ... and you don't get preview images while dragging things aroud.
+Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls.
+Passing data is kind of special and you don't get preview images while dragging things aroud.
 
 Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 
@@ -21,10 +22,7 @@ It's all in there: Putting data to the drag&drop operation, attaching a custom p
 
 ![Screenshot](doc/4.gif)
 
-Other presets:
-
-![Screenshot](doc/1.gif)
-
-![Screenshot](doc/2.gif)
-
-![Screenshot](doc/3.gif)
+### Bonus
+ - FluentDragDrop will smoothly move the preview, even over controls which do not allow dropping (this is rare)
+ - Previews can be updated while dragging
+ - There are no events to handle or mouse coordinates to track
