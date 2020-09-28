@@ -4,9 +4,9 @@ namespace FluentDragDrop
 {
 	public static class DragAndDropExtension
 	{
-		public static DragDefinition StartDragAndDrop(this Control control)
+		public static DragInitializer InitializeDragAndDrop(this Control control)
 		{
-			return new DragDefinition(control);
+			return new DragInitializer(control);
 		}
 	}
 }

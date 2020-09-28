@@ -3,18 +3,16 @@ using System.Windows.Forms;
 
 namespace FluentDragDrop
 {
-	public class DragDefinition
+	public abstract class DragDefinition
 	{
-		public DragDefinition(Control control)
+		public DragDefinition(Control control, DragDropEffects allowedEffects)
 		{
-			this.Control = control ?? throw new ArgumentNullException(nameof(control));
+			Control = control ?? throw new ArgumentNullException(nameof(control));
+			AllowedEffects = allowedEffects;
 		}
 
-		public DragOperation<T> WithData<T>(T data)
-		{
-			return new DragOperation<T>(Control, data);
-		}
+		internal Control Control { get; }
 
-		private Control Control { get; }
+		internal DragDropEffects AllowedEffects { get; }
 	}
 }

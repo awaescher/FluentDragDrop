@@ -12,13 +12,20 @@ namespace FluentDragDrop
 
 		private Dictionary<object, DragHandler<T>> _targets = new Dictionary<object, DragHandler<T>>();
 
-		private bool _customPreview = false;
-
 		private Point _cursorOffset = Point.Empty;
-		public DragOperation(Control control, T data)
+		private Point _initialPosition = Point.Empty;
+
+		public DragOperation(DragDefinition definition, Func<T> dataEvaluator, Func<bool> conditionEvaluator)
 		{
-			SourceControl = control ?? throw new ArgumentNullException(nameof(control));
-			Data = data;
+			Definition = definition ?? throw new ArgumentNullException(nameof(definition));
+			DataEvaluator = dataEvaluator ?? throw new ArgumentNullException(nameof(dataEvaluator));
+			ConditionEvaluator = conditionEvaluator ?? throw new ArgumentNullException(nameof(conditionEvaluator));
+
+			SourceControl = Definition.Control;
+
+			WithPreview();
+
+			StartOrTrackMouseToStart();
 		}
 
 		public DragOperation<T> To<TControl>(IEnumerable<TControl> targets, Action<TControl, T> dragDrop) where TControl : Control
@@ -51,6 +58,151 @@ namespace FluentDragDrop
 			return this;
 		}
 
+
+
+		public DragOperation<T> WithoutPreview()
+		{
+			PreviewEvaluator = null;
+
+			return this;
+		}
+
+		public DragOperationPreview<T> WithPreview(Bitmap image)
+		{
+			PreviewEvaluator = () => new BitmapPreview(image);
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview(Func<Bitmap, Bitmap> previewMutator)
+		{
+			PreviewEvaluator = () => new BitmapPreview(previewMutator(GetControlPreviewBitmap()));
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview(IPreview preview)
+		{
+			PreviewEvaluator = () => preview;
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview(Func<Bitmap, IPreview> previewMutator)
+		{
+			PreviewEvaluator = () => previewMutator(GetControlPreviewBitmap());
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		public DragOperationPreview<T> WithPreview()
+		{
+			PreviewEvaluator = () => new BitmapPreview(GetControlPreviewBitmap());
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		internal DragOperation<T> WithCursorOffset(int x, int y)
+		{
+			_cursorOffset.X = -1 * x;
+			_cursorOffset.Y = -1 * y;
+
+			return this;
+		}
+
+		private Bitmap GetControlPreviewBitmap()
+		{
+			var preview = new Bitmap(SourceControl.Width, SourceControl.Height);
+			SourceControl.DrawToBitmap(preview, new Rectangle(Point.Empty, SourceControl.Size));
+
+			return preview;
+		}
+
+		internal Size CalculatePreviewSize()
+		{
+			return PreviewEvaluator?.Invoke()?.Get()?.Bitmap?.Size ?? SourceControl?.Size ?? Size.Empty;
+		}
+
+		private void StartOrTrackMouseToStart()
+		{
+			if (Definition is ImmediateDragDefinition)
+			{
+				// enqueue in UI thread to make sure the whole fluent setup has been executed before.
+				SourceControl.BeginInvoke((Action)(() => Start(Definition.AllowedEffects)));
+			}
+			else
+			{
+				_initialPosition = Control.MousePosition;
+				SourceControl.MouseMove += SourceControl_MouseMove;
+				SourceControl.MouseUp += SourceControl_MouseUp; // TODO only mouse up might be too soft. Esc? MouseLeave?
+			}
+		}
+
+		private void Start(DragDropEffects allowedEffects)
+		{
+			StopTracking();
+
+			var canProceed = ConditionEvaluator.Invoke();
+			if (!canProceed)
+				return;
+
+			Data = DataEvaluator.Invoke();
+
+			_previewController = new PreviewFormController();
+
+			var preview = PreviewEvaluator?.Invoke();
+
+			preview?.Start();
+
+			void updatePreview(object _, Preview updatedPreview)
+			{
+				if (SourceControl.InvokeRequired)
+					SourceControl.BeginInvoke((Action)(() => _previewController.Update(updatedPreview)));
+				else
+					_previewController.Update(updatedPreview);
+			}
+
+			var hookId = IntPtr.Zero;
+
+			try
+			{
+				if (preview is object)
+					preview.Updated += updatePreview;
+
+				hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
+
+				_previewController.Start(preview?.Get(), _cursorOffset);
+
+				var data = Data == null ? (object)new NullPlaceholder() : Data;
+				SourceControl.DoDragDrop(data, allowedEffects);
+			}
+			finally
+			{
+				NativeMethods.RemoveHook(hookId);
+
+				if (preview is object)
+					preview.Updated -= updatePreview;
+
+				_previewController.Stop();
+				preview?.Stop();
+
+				CleanUp();
+			}
+		}
+
+		private void CleanUp()
+		{
+			foreach (var target in _targets.Keys.OfType<Control>().ToArray())
+			{
+				target.DragEnter -= Target_DragEnter;
+				target.DragOver -= Target_DragOver;
+				target.DragDrop -= Target_DragDrop;
+				target.DragLeave -= Target_DragLeave;
+			}
+
+			_targets.Clear();
+		}
+
 		private void Target_DragEnter(object sender, DragEventArgs e)
 		{
 			if (_targets.TryGetValue(sender, out var handler))
@@ -75,150 +227,41 @@ namespace FluentDragDrop
 				handler.DragLeave?.Invoke(Data);
 		}
 
-		public DragOperation<T> WithoutPreview()
+		private void SourceControl_MouseUp(object sender, MouseEventArgs e)
 		{
-			Preview = null;
-			_customPreview = true;
-
-			return this;
+			StopTracking();
 		}
 
-		public DragOperationPreview<T> WithPreview(Bitmap image)
+		private void StopTracking()
 		{
-			Preview = new BitmapPreview(image);
-			_customPreview = true;
-
-			return new DragOperationPreview<T>(this);
+			_initialPosition = Point.Empty;
+			SourceControl.MouseMove -= SourceControl_MouseMove;
+			SourceControl.MouseUp -= SourceControl_MouseUp;
 		}
 
-		public DragOperationPreview<T> WithPreview(Func<Bitmap, Bitmap> previewMutator)
+		private void SourceControl_MouseMove(object sender, MouseEventArgs e)
 		{
-			Preview = new BitmapPreview(previewMutator(GetControlPreviewBitmap()));
-			_customPreview = true;
+			const int DISTANCE = 3;
 
-			return new DragOperationPreview<T>(this);
-		}
+			var currentPosition = Control.MousePosition;
+			var deltaX = Math.Abs(currentPosition.X - _initialPosition.X);
+			var deltaY = Math.Abs(currentPosition.Y - _initialPosition.Y);
 
-		public DragOperationPreview<T> WithPreview(IPreview preview)
-		{
-			Preview = preview;
-			_customPreview = true;
-
-			return new DragOperationPreview<T>(this);
-		}
-
-		public DragOperationPreview<T> WithPreview(Func<Bitmap, IPreview> previewMutator)
-		{
-			Preview = previewMutator(GetControlPreviewBitmap());
-			_customPreview = true;
-
-			return new DragOperationPreview<T>(this);
-		}
-
-		public DragOperationPreview<T> WithPreview()
-		{
-			// reset the custom flag to paint the preview on drag start
-			_customPreview = false;
-
-			return new DragOperationPreview<T>(this);
-		}
-
-		internal DragOperation<T> WithCursorOffset(int x, int y)
-		{
-			_cursorOffset.X = -1 * x;
-			_cursorOffset.Y = -1 * y;
-
-			return this;
-		}
-
-		private Bitmap GetControlPreviewBitmap()
-		{
-			var preview = new Bitmap(SourceControl.Width, SourceControl.Height);
-			SourceControl.DrawToBitmap(preview, new Rectangle(Point.Empty, SourceControl.Size));
-
-			return preview;
-		}
-
-		internal Size CalculatePreviewSize()
-		{
-			return Preview?.Get()?.Bitmap?.Size ?? SourceControl?.Size ?? Size.Empty;
-		}
-
-		public void Copy() => Start(DragDropEffects.Copy);
-
-		public void Link() => Start(DragDropEffects.Link);
-
-		public void Move() => Start(DragDropEffects.Move);
-
-		public void Start(DragDropEffects allowedEffects)
-		{
-			Action action = () => StartInternal(allowedEffects);
-			SourceControl.BeginInvoke(action);
-		}
-
-		private void StartInternal(DragDropEffects allowedEffects)
-		{
-			_previewController = new PreviewFormController();
-
-			if (!_customPreview)
-				Preview = new BitmapPreview(GetControlPreviewBitmap());
-
-			Preview?.Start();
-
-			void updatePreview(object _, Preview updatedPreview)
-			{
-				if (SourceControl.InvokeRequired)
-					SourceControl.BeginInvoke((Action)(() => _previewController.Update(updatedPreview)));
-				else
-					_previewController.Update(updatedPreview);
-			}
-
-			var hookId = IntPtr.Zero;
-
-			try
-			{
-				if (Preview is object)
-					Preview.Updated += updatePreview;
-
-				hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
-
-				_previewController.Start(Preview?.Get(), _cursorOffset);
-
-				var data = Data == null ? (object)new NullPlaceholder() : Data;
-				SourceControl.DoDragDrop(data, allowedEffects);
-			}
-			finally
-			{
-				NativeMethods.RemoveHook(hookId);
-
-				if (Preview is object)
-					Preview.Updated -= updatePreview;
-
-				_previewController.Stop();
-				Preview?.Stop();
-
-				CleanUp();
-			}
-		}
-
-		private void CleanUp()
-		{
-			foreach (var target in _targets.Keys.OfType<Control>().ToArray())
-			{
-				target.DragEnter -= Target_DragEnter;
-				target.DragOver -= Target_DragOver;
-				target.DragDrop -= Target_DragDrop;
-				target.DragLeave -= Target_DragLeave;
-			}
-
-			_targets.Clear();
+			if (deltaX > DISTANCE || deltaY > DISTANCE)
+				Start(Definition.AllowedEffects);
 		}
 
 		public Control SourceControl { get; }
 
-		public T Data { get; }
+		public T Data { get; private set; }
 
-		public IPreview Preview { get; private set; }
+		public DragDefinition Definition { get; }
+
+		public Func<T> DataEvaluator { get; }
+
+		public Func<bool> ConditionEvaluator { get; }
+
+		public Func<IPreview> PreviewEvaluator { get; private set; }
 	}
 
 	public struct NullPlaceholder { }

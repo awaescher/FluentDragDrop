@@ -22,11 +22,13 @@ namespace FluentDragDropFullFramework
 			// Preview: -
 			// Drag style: -
 
-			pic.StartDragAndDrop()
+			pic.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(pic.Image)
 				.WithoutPreview()
-				.To(PreviewBoxes, (target, data) => target.Image = data)
-				.Copy();
+				.To(PreviewBoxes, (target, data) => target.Image = data);
+
 		}
 
 		private void pic2_MouseDown(object sender, MouseEventArgs e)
@@ -36,11 +38,12 @@ namespace FluentDragDropFullFramework
 			// Preview: From Control
 			// Drag style: Behind Cursor
 
-			pic.StartDragAndDrop()
+			pic.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(pic.Image)
 				.WithPreview().BehindCursor()
-				.To(PreviewBoxes, (target, data) => target.Image = data)
-				.Copy();
+				.To(PreviewBoxes, (target, data) => target.Image = data);
 		}
 
 		private void pic3_MouseDown(object sender, MouseEventArgs e)
@@ -50,11 +53,12 @@ namespace FluentDragDropFullFramework
 			// Image: Custom
 			// Drag style: Like Windows Explorer
 
-			pic.StartDragAndDrop()
+			pic.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(pic.Image)
 				.WithPreview(Grayscale((Bitmap)pic.Image)).LikeWindowsExplorer()
-				.To(PreviewBoxes, (target, data) => target.Image = data)
-				.Copy();
+				.To(PreviewBoxes, (target, data) => target.Image = data);
 		}
 
 		private void pic4_MouseDown(object sender, MouseEventArgs e)
@@ -64,11 +68,12 @@ namespace FluentDragDropFullFramework
 			// Image: From Control (Watermarked)
 			// Drag style: Relative To Cursor
 
-			pic.StartDragAndDrop()
+			pic.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(pic.Image)
 				.WithPreview(img => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
-				.To(PreviewBoxes, (target, data) => target.Image = data)
-				.Copy();
+				.To(PreviewBoxes, (target, data) => target.Image = data);
 		}
 
 		private Bitmap Grayscale(Bitmap image)
@@ -99,19 +104,13 @@ namespace FluentDragDropFullFramework
 		{
 			var list = sender as ListView;
 
-			list.BeginInvoke((Action)(() =>
-			{
-				if (list.SelectedItems.Count == 0)
-					return;
-
-				var selectedItems = list.SelectedItems.OfType<ListViewItem>().ToArray();
-
-				list.StartDragAndDrop()
-					.WithData(selectedItems)
-					.WithPreview(RenderPreview(selectedItems)).BehindCursor()
-					.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems)
-					.Move();
-			}));
+			list.InitializeDragAndDrop()
+				.Move()
+				.OnMouseMove()
+				.If(() => list.SelectedItems.OfType<ListViewItem>().Any())
+				.WithData(() => list.SelectedItems.OfType<ListViewItem>().ToArray())
+				.WithPreview(_ => RenderPreview(list.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor()
+				.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems);
 		}
 
 		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
@@ -165,40 +164,30 @@ namespace FluentDragDropFullFramework
 
 		private void linkCompatibilityBrowser_MouseDown(object sender, MouseEventArgs e)
 		{
-			linkCompatibilityBrowser.StartDragAndDrop()
-				.WithData("https://twitter.com/waescher")
-				.Link();
+			linkCompatibilityBrowser.InitializeDragAndDrop()
+				.Link()
+				.Immediately()
+				.WithData("https://twitter.com/waescher");
 		}
 
 		private void listCompatibilityFluent_MouseDown(object sender, MouseEventArgs e)
 		{
-			listCompatibilityFluent.BeginInvoke((Action)(() =>
-			{
-
-				if (listCompatibilityFluent.SelectedItems.Count == 0)
-					return;
-
-				var selectedItems = listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray();
-
-
-				listCompatibilityFluent.StartDragAndDrop()
-					.WithData(selectedItems)
-					.WithPreview(RenderPreview(selectedItems)).BehindCursor()
-					//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
-					.Copy();
-			}));
+			listCompatibilityFluent.InitializeDragAndDrop()
+				.Copy()
+				.OnMouseMove()
+				.If(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray().Any())
+				.WithData(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())
+				.WithPreview(_ => RenderPreview(listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor();
+				//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
 		}
 
 		private void listCompatibilityTraditional_MouseDown(object sender, MouseEventArgs e)
 		{
-			listCompatibilityTraditional.BeginInvoke((Action)(() =>
-			{
-				if (listCompatibilityTraditional.SelectedItems.Count == 0)
-					return;
+			if (listCompatibilityTraditional.SelectedItems.Count == 0)
+				return;
 
-				var newItems = listCompatibilityTraditional.SelectedItems.OfType<ListViewItem>().ToArray();
-				listCompatibilityTraditional.DoDragDrop(newItems, DragDropEffects.Copy | DragDropEffects.Move);
-			}));
+			var newItems = listCompatibilityTraditional.SelectedItems.OfType<ListViewItem>().ToArray();
+			listCompatibilityTraditional.DoDragDrop(newItems, DragDropEffects.Copy | DragDropEffects.Move);
 		}
 
 		private void listCompatibilityTarget_DragEnter(object sender, DragEventArgs e)
@@ -218,10 +207,11 @@ namespace FluentDragDropFullFramework
 
 		private void pic9_MouseDown(object sender, MouseEventArgs e)
 		{
-			pic9.StartDragAndDrop()
+			pic9.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(pic9.Image)
-				.To(pic10, (target, data) => target.Image = data)
-				.Copy();
+				.To(pic10, (target, data) => target.Image = data);
 		}
 
 		private PictureBox[] PreviewBoxes => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };

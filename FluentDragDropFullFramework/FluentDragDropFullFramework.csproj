@@ -50,20 +50,32 @@
     <Compile Include="..\FluentDragDropNetCore\UpdatablePreview.cs">
       <Link>UpdatablePreview.cs</Link>
     </Compile>
+    <Compile Include="..\FluentDragDrop\DelayedDragDefinition.cs">
+      <Link>DelayedDragDefinition.cs</Link>
+    </Compile>
     <Compile Include="..\FluentDragDrop\DragAndDropExtension.cs">
       <Link>DragAndDropExtension.cs</Link>
     </Compile>
     <Compile Include="..\FluentDragDrop\DragDefinition.cs">
       <Link>DragDefinition.cs</Link>
     </Compile>
+    <Compile Include="..\FluentDragDrop\DragDefinitionFactory.cs">
+      <Link>DragDefinitionFactory.cs</Link>
+    </Compile>
     <Compile Include="..\FluentDragDrop\DragHandler.cs">
       <Link>DragHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\DragInitializer.cs">
+      <Link>DragInitializer.cs</Link>
     </Compile>
     <Compile Include="..\FluentDragDrop\DragOperation.cs">
       <Link>DragOperation.cs</Link>
     </Compile>
     <Compile Include="..\FluentDragDrop\DragOperationPreview.cs">
       <Link>DragOperationPreview.cs</Link>
+    </Compile>
+    <Compile Include="..\FluentDragDrop\ImmediateDragDefinition.cs">
+      <Link>ImmediateDragDefinition.cs</Link>
     </Compile>
     <Compile Include="..\FluentDragDrop\NativeMethods.cs">
       <Link>NativeMethods.cs</Link>
