@@ -10,6 +10,8 @@ namespace FluentDragDropFullFramework
 {
 	public partial class TestForm : Form
 	{
+		private bool _listCompatibilityTraditionalMouseDown;
+
 		public TestForm()
 		{
 			InitializeComponent();
@@ -76,6 +78,98 @@ namespace FluentDragDropFullFramework
 				.To(PreviewBoxes, (target, data) => target.Image = data);
 		}
 
+		private void CountryList_MouseDown(object sender, MouseEventArgs e)
+		{
+			var source = sender as ListView;
+			var target = source.Equals(listLeft) ? listRight : listLeft;
+
+			source.InitializeDragAndDrop()
+				.Move()
+				.OnMouseMove()
+				.If(() => source.SelectedItems.OfType<ListViewItem>().ToArray().Any())
+				.WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
+				.WithPreview(_ => RenderPreview(source.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor()
+				.To(target, MoveItems);
+		}
+
+		private void linkCompatibilityBrowser_MouseDown(object sender, MouseEventArgs e)
+		{
+			linkCompatibilityBrowser.InitializeDragAndDrop()
+				.Link()
+				.Immediately()
+				.WithData("https://twitter.com/waescher");
+		}
+
+		private void listCompatibilityFluent_MouseDown(object sender, MouseEventArgs e)
+		{
+			listCompatibilityFluent.InitializeDragAndDrop()
+				.Copy()
+				.OnMouseMove()
+				.If(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray().Any())
+				.WithData(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())
+				.WithPreview(_ => RenderPreview(listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor();
+				//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
+		}
+
+		private void listCompatibilityTraditional_MouseDown(object sender, MouseEventArgs e)
+		{
+			_listCompatibilityTraditionalMouseDown = true;
+		}
+
+		private void listCompatibilityTraditional_MouseUp(object sender, MouseEventArgs e)
+		{
+			_listCompatibilityTraditionalMouseDown = false;
+		}
+
+		private void listCompatibilityTraditional_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (!_listCompatibilityTraditionalMouseDown)
+				return;
+
+			_listCompatibilityTraditionalMouseDown = false;
+
+			if (listCompatibilityTraditional.SelectedItems.Count == 0)
+				return;
+
+			var newItems = listCompatibilityTraditional.SelectedItems.OfType<ListViewItem>().ToArray();
+			listCompatibilityTraditional.DoDragDrop(newItems, DragDropEffects.Copy | DragDropEffects.Move);
+		}
+
+		private void listCompatibilityTarget_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Copy;
+		}
+
+		private void listCompatibilityTarget_DragDrop(object sender, DragEventArgs e)
+		{
+			var items = e.Data.GetData(typeof(ListViewItem[])) as ListViewItem[];
+			if (items != null)
+			{
+				var newItems = items.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
+				listCompatibilityTarget.Items.AddRange(newItems);
+			}
+		}
+
+		private void pic9_MouseDown(object sender, MouseEventArgs e)
+		{
+			pic9.InitializeDragAndDrop()
+				.Copy()
+				.OnMouseMove()
+				.WithData(() => pic9.Image)
+				.To(pic10, (target, data) => target.Image = data);
+		}
+
+		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
+		{
+			var newItems = draggedItems.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
+			targetListView.Items.AddRange(newItems);
+
+			var sourceListView = draggedItems[0].ListView;
+
+			foreach (var item in draggedItems)
+				sourceListView.Items.Remove(item);
+		}
+
 		private Bitmap Grayscale(Bitmap image)
 		{
 			var result = new Bitmap(image.Width, image.Height);
@@ -100,33 +194,9 @@ namespace FluentDragDropFullFramework
 			return result;
 		}
 
-		private void CountryList_MouseDown(object sender, MouseEventArgs e)
-		{
-			var list = sender as ListView;
-
-			list.InitializeDragAndDrop()
-				.Move()
-				.OnMouseMove()
-				.If(() => list.SelectedItems.OfType<ListViewItem>().Any())
-				.WithData(() => list.SelectedItems.OfType<ListViewItem>().ToArray())
-				.WithPreview(_ => RenderPreview(list.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor()
-				.To(list.Equals(listLeft) ? listRight : listLeft, MoveItems);
-		}
-
-		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
-		{
-			var newItems = draggedItems.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
-			targetListView.Items.AddRange(newItems);
-
-			var sourceListView = draggedItems[0].ListView;
-
-			foreach (var item in draggedItems)
-				sourceListView.Items.Remove(item);
-		}
-
 		private Bitmap RenderPreview(ListViewItem[] items)
 		{
-			var itemHeight = 22;
+			var itemHeight = 23;
 			var image = new Bitmap(120, itemHeight * items.Length);
 			var borderBounds = new Rectangle(Point.Empty, image.Size);
 			borderBounds.Width--;
@@ -160,58 +230,6 @@ namespace FluentDragDropFullFramework
 			}
 
 			return image;
-		}
-
-		private void linkCompatibilityBrowser_MouseDown(object sender, MouseEventArgs e)
-		{
-			linkCompatibilityBrowser.InitializeDragAndDrop()
-				.Link()
-				.Immediately()
-				.WithData("https://twitter.com/waescher");
-		}
-
-		private void listCompatibilityFluent_MouseDown(object sender, MouseEventArgs e)
-		{
-			listCompatibilityFluent.InitializeDragAndDrop()
-				.Copy()
-				.OnMouseMove()
-				.If(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray().Any())
-				.WithData(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())
-				.WithPreview(_ => RenderPreview(listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor();
-				//.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
-		}
-
-		private void listCompatibilityTraditional_MouseDown(object sender, MouseEventArgs e)
-		{
-			if (listCompatibilityTraditional.SelectedItems.Count == 0)
-				return;
-
-			var newItems = listCompatibilityTraditional.SelectedItems.OfType<ListViewItem>().ToArray();
-			listCompatibilityTraditional.DoDragDrop(newItems, DragDropEffects.Copy | DragDropEffects.Move);
-		}
-
-		private void listCompatibilityTarget_DragEnter(object sender, DragEventArgs e)
-		{
-			e.Effect = DragDropEffects.Copy;
-		}
-
-		private void listCompatibilityTarget_DragDrop(object sender, DragEventArgs e)
-		{
-			var items = e.Data.GetData(typeof(ListViewItem[])) as ListViewItem[];
-			if (items != null)
-			{
-				var newItems = items.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
-				listCompatibilityTarget.Items.AddRange(newItems);
-			}
-		}
-
-		private void pic9_MouseDown(object sender, MouseEventArgs e)
-		{
-			pic9.InitializeDragAndDrop()
-				.Copy()
-				.Immediately()
-				.WithData(pic9.Image)
-				.To(pic10, (target, data) => target.Image = data);
 		}
 
 		private PictureBox[] PreviewBoxes => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
