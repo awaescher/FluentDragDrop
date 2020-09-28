@@ -46,11 +46,12 @@ namespace TestApp
 		{
 			var label = sender as Label;
 
-			label.StartDragAndDrop()
+			label.InitializeDragAndDrop()
+				.Copy()
+				.Immediately()
 				.WithData(label.Text)
 				.WithPreview().RelativeToCursor()
-				.To(Controls.OfType<Button>(), (target, data) => MessageBox.Show("Data dropped.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information))
-				.Copy();
+				.To(Controls.OfType<Button>(), (target, data) => MessageBox.Show("Data dropped.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information));
 		}
 	}
 }
