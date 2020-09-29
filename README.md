@@ -12,7 +12,7 @@ Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 ```cs
 private void pic1_MouseDown(object sender, MouseEventArgs e)
 {
-    var pic = sender as PictureBox;
+    var pic = (PictureBox) sender;
     pic.InitializeDragAndDrop()
         // Copy(), Move() or Link() to define allowed effects
         .Copy()
