@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
+    <PackageReference Include="System.Resources.Extensions" Version="4.7.1" />
+  </ItemGroup>
+</Project>
