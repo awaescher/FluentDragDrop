@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net45</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
@@ -10,4 +10,10 @@
     <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
   </ItemGroup>
 
+  <PropertyGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
+    <PackageReference Include="System.Resources.Extensions" Version="4.7.1" />
+  </ItemGroup>
 </Project>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDrop", "src\FluentDragDrop\FluentDragDrop.csproj", "{E1C8F65D-84CC-474E-A7FE-C0891C15456B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDrop", "FluentDragDrop\FluentDragDrop.csproj", "{E1C8F65D-84CC-474E-A7FE-C0891C15456B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDropExample", "src\FluentDragDropExample\FluentDragDropExample.csproj", "{05DAD2B7-D198-42AF-9B06-BB38D171CED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDropExample", "FluentDragDropExample\FluentDragDropExample.csproj", "{05DAD2B7-D198-42AF-9B06-BB38D171CED6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,6 +14,10 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
   <PropertyGroup Condition="!$(MSBuildProjectName.Contains('Tests')) And !$(MSBuildProjectName.Contains('Example'))">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
@@ -40,7 +44,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <DebugType>embedded</DebugType>
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
@@ -51,6 +55,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
-    <None Include="$(SolutionDir)\doc\FluentDragDrop.png" Pack="true" PackagePath="\"/>
+    <None Include="$(SolutionDir)..\doc\FluentDragDrop.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>

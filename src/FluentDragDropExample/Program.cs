@@ -11,6 +11,9 @@ namespace FluentDragDropExample
         [STAThread]
         private static void Main()
         {
+#if !NET471
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+#endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TestForm());

@@ -1,19 +1,4 @@
-﻿
-/* Unmerged change from project 'FluentDragDropExample (net45)'
-Before:
-using System;
-using System.Drawing;
-using System.Threading;
-using FluentDragDrop;
-using FluentDragDrop.Preview;
-After:
-using FluentDragDrop;
-using FluentDragDrop.Preview;
-using System;
-using System.Drawing;
-using System.Preview;
-*/
-using FluentDragDrop.Preview;
+﻿using FluentDragDrop.Preview;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -24,7 +9,7 @@ namespace FluentDragDropExample
     {
         public event EventHandler<Preview> Updated;
 
-        public Bitmap _originalImage;
+        private readonly Bitmap _originalImage;
         private Timer _timer;
         private Preview _preview;
         private readonly Point _mouseStartPosition;
@@ -60,18 +45,14 @@ namespace FluentDragDropExample
             var distance = Math.Round(Math.Sqrt(Math.Pow(distanceX, 2) + Math.Pow(distanceY, 2)));
 
             using (var graphics = Graphics.FromImage(previewImage))
+            using (var font = new Font("Tahoma", 11))
+            using (var format = new StringFormat())
             {
-                using (var font = new Font("Tahoma", 11))
-                {
-                    using (var format = new StringFormat())
-                    {
-                        format.Alignment = StringAlignment.Center;
-                        format.LineAlignment = StringAlignment.Far;
+                format.Alignment = StringAlignment.Center;
+                format.LineAlignment = StringAlignment.Far;
 
-                        var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height - 40);
-                        graphics.DrawString($"Distance: {distance}px", font, Brushes.White, bounds, format);
-                    }
-                }
+                var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height - 40);
+                graphics.DrawString($"Distance: {distance}px", font, Brushes.White, bounds, format);
             }
 
             // at 900 distance, we want it to be transparent
