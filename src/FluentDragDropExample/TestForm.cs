@@ -14,26 +14,27 @@ namespace FluentDragDropExample
         {
             InitializeComponent();
         }
-
+        #region Usage
         private void pic1_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = sender as PictureBox;
-
-            // Preview: -
-            // Drag style: -
-
+            var pic = (PictureBox) sender;
             pic.InitializeDragAndDrop()
+                // Copy(), Move() or Link() to define allowed effects
                 .Copy()
+                // or OnMouseMove() for deferred start on mouse move
                 .Immediately()
+                // pass any object you like
                 .WithData(pic.Image)
+                // define your preview and how it should behave
                 .WithoutPreview()
+                // use your data after it was dropped (with type safety)
                 .To(PreviewBoxes, (target, data) => target.Image = data);
-
         }
+        #endregion
 
         private void pic2_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = sender as PictureBox;
+            var pic = (PictureBox) sender;
 
             // Preview: From Control
             // Drag style: Behind Cursor
@@ -48,7 +49,7 @@ namespace FluentDragDropExample
 
         private void pic3_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = sender as PictureBox;
+            var pic = (PictureBox) sender;
 
             // Image: Custom
             // Drag style: Like Windows Explorer
@@ -63,7 +64,7 @@ namespace FluentDragDropExample
 
         private void pic4_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = sender as PictureBox;
+            var pic = (PictureBox) sender;
 
             // Image: From Control (Watermarked)
             // Drag style: Relative To Cursor
@@ -78,7 +79,7 @@ namespace FluentDragDropExample
 
         private void CountryList_MouseDown(object sender, MouseEventArgs e)
         {
-            var source = sender as ListView;
+            var source = (ListView)sender;
             var target = source.Equals(listLeft) ? listRight : listLeft;
 
             source.InitializeDragAndDrop()
