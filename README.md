@@ -18,11 +18,24 @@ private void pic1_MouseDown(object sender, MouseEventArgs e)
 }
 
 ```
-It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and more.
+It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
 
-![Screenshot](doc/4.gif)
+![Screenshot](doc/PreviewDragStyles.gif)
 
-### Bonus
- - FluentDragDrop will smoothly move the preview, even over controls which do not allow dropping (this is rare)
- - Previews can be updated while dragging
- - There are no events to handle or mouse coordinates to track
+> Did you notice in the 4th sample that you can even update preview images and their opacity at any time while dragging? 😉
+ 
+ ### Compatibility
+ 
+FluentDrag&Drop can easily be used with your current Drag&Drop implementations if you want. The following animation shows how it works in combination with traditional Drag&Drop implementations as we know with events like `DragEnter`, `DragOver` and `DragDrop`:
+
+![Screenshot](doc/Compatibility.gif)
+
+ ### Smoothness
+ 
+Most approaches I have used in the past get in trouble when moving the preview over controls that do not have the property `AllowDrop` set to `true`. Whenever a Drag&Drop implementation uses the `GiveFeedback` event to update its preview images, you'll get a behavior like this:
+
+![Screenshot](doc/AllowDropFalseWithoutFluent.gif)
+
+In contrast, FluentDrag&Drop will render preview images smoothly whereever you move them. 
+
+![Screenshot](doc/AllowDropFalse.gif)
