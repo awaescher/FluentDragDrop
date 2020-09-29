@@ -9,9 +9,6 @@ Passing data is kind of special and you don't get preview images while dragging 
 This package brings rich Drag and Drop experience to your app, just by adding a few simple lines of code.
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0. Thank you for your awesome work, mates!</Description>
-    <AssemblyName>FluentDragDrop</AssemblyName>
-    <AssemblyTitle>FluentDragDrop</AssemblyTitle>
-    <PackageId>FluentDragDrop</PackageId>
     <PackageTags>Fluent;Drag;Drop;Windows;Forms;UI</PackageTags>
   </PropertyGroup>
 </Project>
