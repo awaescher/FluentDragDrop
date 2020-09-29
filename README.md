@@ -2,8 +2,7 @@
 
 [![NuGet Status](https://img.shields.io/nuget/v/FluentDragDrop.svg)](https://www.nuget.org/packages/FluentDragDrop/)
 
-Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls.
-Passing data is kind of special and you don't get preview images while dragging things around.
+Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls. Passing data is kind of special and you don't get preview images while dragging things around.
 
 Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 
