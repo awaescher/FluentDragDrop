@@ -14,30 +14,22 @@ namespace FluentDragDropExample
         {
             InitializeComponent();
         }
-        #region Usage
-        private void pic1_MouseDown(object sender, MouseEventArgs e)
+
+        private void picNoPreview_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = (PictureBox) sender;
+            var pic = (PictureBox)sender;
             pic.InitializeDragAndDrop()
-                // Copy(), Move() or Link() to define allowed effects
                 .Copy()
-                // or OnMouseMove() for deferred start on mouse move
                 .Immediately()
-                // pass any object you like
                 .WithData(pic.Image)
-                // define your preview and how it should behave
                 .WithoutPreview()
-                // use your data after it was dropped (with type safety)
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
-        #endregion
 
-        private void pic2_MouseDown(object sender, MouseEventArgs e)
+        #region Usage
+        private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = (PictureBox) sender;
-
-            // Preview: From Control
-            // Drag style: Behind Cursor
+            var pic = (PictureBox)sender;
 
             pic.InitializeDragAndDrop()
                 .Copy()
@@ -45,11 +37,19 @@ namespace FluentDragDropExample
                 .WithData(pic.Image)
                 .WithPreview().BehindCursor()
                 .To(PreviewBoxes, (target, data) => target.Image = data);
-        }
 
-        private void pic3_MouseDown(object sender, MouseEventArgs e)
+            // Copy(), Move() or Link() to define allowed effects
+            // Immediately() or OnMouseMove() for deferred start on mouse move
+            // WithData() to pass any object you like
+            // WithPreview() to define your preview and how it should behave
+            //     BehindCursor() or RelativeToCursor() to define the preview placement
+            // To() to define target controls and how the dragged data should be used on drop
+        }
+        #endregion
+
+        private void picCustomPreviewWindowsExplorerStyle_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = (PictureBox) sender;
+            var pic = (PictureBox)sender;
 
             // Image: Custom
             // Drag style: Like Windows Explorer
@@ -62,12 +62,9 @@ namespace FluentDragDropExample
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 
-        private void pic4_MouseDown(object sender, MouseEventArgs e)
+        private void picUpdatingPreviewRelativeToCursor_MouseDown(object sender, MouseEventArgs e)
         {
-            var pic = (PictureBox) sender;
-
-            // Image: From Control (Watermarked)
-            // Drag style: Relative To Cursor
+            var pic = (PictureBox)sender;
 
             pic.InitializeDragAndDrop()
                 .Copy()
@@ -149,13 +146,13 @@ namespace FluentDragDropExample
             }
         }
 
-        private void pic9_MouseDown(object sender, MouseEventArgs e)
+        private void picDragOverAllowDropFalse_MouseDown(object sender, MouseEventArgs e)
         {
-            pic9.InitializeDragAndDrop()
+            picDragOverAllowDropFalse.InitializeDragAndDrop()
                 .Copy()
                 .OnMouseMove()
-                .WithData(() => pic9.Image)
-                .To(pic10, (target, data) => target.Image = data);
+                .WithData(() => picDragOverAllowDropFalse.Image)
+                .To(picEmpty5, (target, data) => target.Image = data);
         }
 
         private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
@@ -231,6 +228,6 @@ namespace FluentDragDropExample
             return image;
         }
 
-        private PictureBox[] PreviewBoxes => new[] { pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8 };
+        private PictureBox[] PreviewBoxes => new[] { picNoPreview, picControlPreviewBehindCursor, picCustomPreviewWindowsExplorerStyle, picUpdatingPreviewRelativeToCursor, picEmpty1, picEmpty2, picEmpty3, picEmpty4 };
     }
 }
