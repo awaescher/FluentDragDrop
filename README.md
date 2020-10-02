@@ -35,7 +35,7 @@ It's all in there: Putting data to the drag&drop operation, attaching a custom p
 
 ![Screenshot](doc/PreviewDragStyles.gif)
 
-> Did you notice in the 4th sample that you can even update preview images and their opacity at any time while dragging? 😉
+> Did you notice that you can even update preview images and their opacity at any time while dragging? 😉
 
 ### Compatibility
 
