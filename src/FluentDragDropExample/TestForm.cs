@@ -70,7 +70,7 @@ namespace FluentDragDropExample
                 .Copy()
                 .Immediately()
                 .WithData(pic.Image)
-                .WithPreview(img => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
+                .WithPreview((img, _) => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 
@@ -84,7 +84,7 @@ namespace FluentDragDropExample
                 .OnMouseMove()
                 .If(() => source.SelectedItems.OfType<ListViewItem>().ToArray().Any())
                 .WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
-                .WithPreview(_ => RenderPreview(source.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor()
+                .WithPreview((_, data) => RenderPreview(data)).BehindCursor()
                 .To(target, MoveItems);
         }
 
@@ -103,7 +103,7 @@ namespace FluentDragDropExample
                 .OnMouseMove()
                 .If(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray().Any())
                 .WithData(() => listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())
-                .WithPreview(_ => RenderPreview(listCompatibilityFluent.SelectedItems.OfType<ListViewItem>().ToArray())).BehindCursor();
+                .WithPreview((_ ,data) => RenderPreview(data)).BehindCursor();
             //.To(listCompatibilityTarget, CopyItems) -> doubles items if used, because listCompatibilityTarget handles the drop input already
         }
 
