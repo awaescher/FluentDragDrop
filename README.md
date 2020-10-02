@@ -9,30 +9,33 @@ Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 <!-- snippet: Usage -->
 <a id='snippet-usage'></a>
 ```cs
-private void pic1_MouseDown(object sender, MouseEventArgs e)
+private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
 {
-    var pic = (PictureBox) sender;
+    var pic = (PictureBox)sender;
+
     pic.InitializeDragAndDrop()
-        // Copy(), Move() or Link() to define allowed effects
         .Copy()
-        // or OnMouseMove() for deferred start on mouse move
         .Immediately()
-        // pass any object you like
         .WithData(pic.Image)
-        // define your preview and how it should behave
-        .WithoutPreview()
-        // use your data after it was dropped (with type safety)
+        .WithPreview().BehindCursor()
         .To(PreviewBoxes, (target, data) => target.Image = data);
+
+    // Copy(), Move() or Link() to define allowed effects
+    // Immediately() or OnMouseMove() for deferred start on mouse move
+    // WithData() to pass any object you like
+    // WithPreview() to define your preview and how it should behave
+    //     BehindCursor() or RelativeToCursor() to define the preview placement
+    // To() to define target controls and how the dragged data should be used on drop
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L17-L33' title='File snippet `usage` was extracted from'>snippet source</a> | <a href='#snippet-usage' title='Navigate to start of snippet `usage`'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `usage` was extracted from'>snippet source</a> | <a href='#snippet-usage' title='Navigate to start of snippet `usage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
 
 ![Screenshot](doc/PreviewDragStyles.gif)
 
-> Did you notice in the 4th sample that you can even update preview images and their opacity at any time while dragging? 😉
+> Did you notice that you can even update preview images and their opacity at any time while dragging? 😉
 
 ### Compatibility
 
