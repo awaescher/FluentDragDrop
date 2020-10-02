@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace FluentDragDrop
 {
-    public static class NativeMethods
+    internal static class NativeMethods
     {
         private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
 

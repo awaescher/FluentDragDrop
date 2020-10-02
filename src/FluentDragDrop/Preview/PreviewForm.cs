@@ -44,7 +44,7 @@ namespace FluentDragDrop.Preview
             FormBorderStyle = FormBorderStyle.None;
         }
 
-        public void Start(Point location, Preview preview)
+        public void Start(Point location, PreviewElement preview)
         {
             if (IsDisposed)
             {
@@ -64,7 +64,7 @@ namespace FluentDragDrop.Preview
             Show();
         }
 
-        public void Update(Preview preview)
+        public void Update(PreviewElement preview)
         {
             if (IsDisposed)
             {

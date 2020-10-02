@@ -16,7 +16,7 @@ namespace FluentDragDrop.Preview
             IsDragging = false;
         }
 
-        public void Start(Preview preview, Point cursorOffset)
+        public void Start(PreviewElement preview, Point cursorOffset)
         {
             if (preview is null)
                 return;
@@ -38,7 +38,7 @@ namespace FluentDragDrop.Preview
             PreviewForm.Start(previewPosition, preview);
         }
 
-        internal void Update(Preview preview)
+        internal void Update(PreviewElement preview)
         {
             if (preview is null)
             {
