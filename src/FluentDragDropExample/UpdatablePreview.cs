@@ -7,11 +7,11 @@ namespace FluentDragDropExample
 {
     internal class UpdatablePreview : IPreview
     {
-        public event EventHandler<Preview> Updated;
+        public event EventHandler<PreviewElement> Updated;
 
         private readonly Bitmap _originalImage;
         private Timer _timer;
-        private Preview _preview;
+        private PreviewElement _preview;
         private readonly Point _mouseStartPosition;
 
         public UpdatablePreview(Bitmap original, Point mouseStartPosition)
@@ -22,7 +22,7 @@ namespace FluentDragDropExample
             UpdatePreview(null);
         }
 
-        public Preview Get() => _preview;
+        public PreviewElement Get() => _preview;
 
         public void Start()
         {
@@ -57,7 +57,7 @@ namespace FluentDragDropExample
 
             // at 900 distance, we want it to be transparent
             var opacity = (900 - distance) / 900;
-            _preview = new Preview(previewImage, opacity);
+            _preview = new PreviewElement(previewImage, opacity);
 
             Updated?.Invoke(this, _preview);
         }
