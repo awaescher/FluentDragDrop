@@ -40,7 +40,11 @@ namespace FluentDragDrop
         public DragOperation<T> To<TControl>(TControl target, Action<TControl, T> dragDrop) where TControl : Control
         {
             var handler = DragHandler<T>.CreateDefault();
-            handler.DragDrop = (value, _) => dragDrop?.Invoke(target, value);
+            handler.DragDrop = (value, _) =>
+            {
+                _previewController?.Stop();
+                dragDrop?.Invoke(target, value);
+            };
 
             return To(target, handler);
         }
@@ -217,7 +221,10 @@ namespace FluentDragDrop
         private void Target_DragDrop(object sender, DragEventArgs e)
         {
             if (_targets.TryGetValue(sender, out var handler))
+            {
+                _previewController?.Stop();
                 handler.DragDrop?.Invoke(Data, e);
+            }
         }
 
         private void Target_DragLeave(object sender, EventArgs e)
