@@ -1,6 +1,7 @@
 ﻿using FluentDragDrop.Preview;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace FluentDragDrop
 
         private Point _cursorOffset = Point.Empty;
         private Point _initialPosition = Point.Empty;
+        private T _data;
 
         public DragOperation(DragDefinition definition, Func<T> dataEvaluator, Func<bool> conditionEvaluator)
         {
@@ -40,7 +42,11 @@ namespace FluentDragDrop
         public DragOperation<T> To<TControl>(TControl target, Action<TControl, T> dragDrop) where TControl : Control
         {
             var handler = DragHandler<T>.CreateDefault();
-            handler.DragDrop = (value, _) => dragDrop?.Invoke(target, value);
+            handler.DragDrop = (value, _) =>
+            {
+                _previewController?.Stop();
+                dragDrop?.Invoke(target, value);
+            };
 
             return To(target, handler);
         }
@@ -73,9 +79,9 @@ namespace FluentDragDrop
             return new DragOperationPreview<T>(this);
         }
 
-        public DragOperationPreview<T> WithPreview(Func<Bitmap, Bitmap> previewMutator)
+        public DragOperationPreview<T> WithPreview(Func<Bitmap, T, Bitmap> previewMutator)
         {
-            PreviewEvaluator = () => new BitmapPreview(previewMutator(GetControlPreviewBitmap()));
+            PreviewEvaluator = () => new BitmapPreview(previewMutator(GetControlPreviewBitmap(), Data));
 
             return new DragOperationPreview<T>(this);
         }
@@ -87,9 +93,9 @@ namespace FluentDragDrop
             return new DragOperationPreview<T>(this);
         }
 
-        public DragOperationPreview<T> WithPreview(Func<Bitmap, IPreview> previewMutator)
+        public DragOperationPreview<T> WithPreview(Func<Bitmap, T, IPreview> previewMutator)
         {
-            PreviewEvaluator = () => previewMutator(GetControlPreviewBitmap());
+            PreviewEvaluator = () => previewMutator(GetControlPreviewBitmap(), Data);
 
             return new DragOperationPreview<T>(this);
         }
@@ -144,8 +150,6 @@ namespace FluentDragDrop
             var canProceed = ConditionEvaluator.Invoke();
             if (!canProceed)
                 return;
-
-            Data = DataEvaluator.Invoke();
 
             _previewController = new PreviewFormController();
 
@@ -217,7 +221,10 @@ namespace FluentDragDrop
         private void Target_DragDrop(object sender, DragEventArgs e)
         {
             if (_targets.TryGetValue(sender, out var handler))
+            {
+                _previewController?.Stop();
                 handler.DragDrop?.Invoke(Data, e);
+            }
         }
 
         private void Target_DragLeave(object sender, EventArgs e)
@@ -258,7 +265,16 @@ namespace FluentDragDrop
 
         public Control SourceControl { get; }
 
-        public T Data { get; private set; }
+        public T Data
+        {
+            get
+            {
+                if (_data is null)
+                    _data = DataEvaluator.Invoke();
+
+                return _data;
+            }
+        }
 
         public DragDefinition Definition { get; }
 
