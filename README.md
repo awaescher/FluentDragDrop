@@ -6,8 +6,8 @@ Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events t
 
 Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 
-<!-- snippet: Usage -->
-<a id='snippet-usage'></a>
+<!-- snippet: ImmediateUsage -->
+<a id='snippet-immediateusage'></a>
 ```cs
 private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
 {
@@ -28,7 +28,7 @@ private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventAr
     // To() to define target controls and how the dragged data should be used on drop
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `usage` was extracted from'>snippet source</a> | <a href='#snippet-usage' title='Navigate to start of snippet `usage`'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `immediateusage` was extracted from'>snippet source</a> | <a href='#snippet-immediateusage' title='Navigate to start of snippet `immediateusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
@@ -42,6 +42,26 @@ It's all in there: Putting data to the drag&drop operation, attaching a custom p
 FluentDrag&Drop can easily be used with your current Drag&Drop implementations if you want. The following animation shows how it works in combination with traditional Drag&Drop implementations as we know with events like `DragEnter`, `DragOver` and `DragDrop`:
 
 ![Screenshot](doc/Compatibility.gif)
+
+<!-- snippet: DelayedUsage -->
+<a id='snippet-delayedusage'></a>
+```cs
+private void CountryList_MouseDown(object sender, MouseEventArgs e)
+{
+    var source = (ListView)sender;
+    var target = source.Equals(listLeft) ? listRight : listLeft;
+
+    source.InitializeDragAndDrop()
+        .Move()
+        .OnMouseMove()
+        .If(() => source.SelectedIndices.Count > 0)
+        .WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
+        .WithPreview((_, data) => RenderPreview(data)).BehindCursor()
+        .To(target, MoveItems);
+}
+```
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L77-L91' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
+<!-- endSnippet -->
 
 ### Smoothness
 
