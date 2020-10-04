@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDrop", "FluentDragDrop\FluentDragDrop.csproj", "{E1C8F65D-84CC-474E-A7FE-C0891C15456B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentDragDropExample", "FluentDragDropExample\FluentDragDropExample.csproj", "{05DAD2B7-D198-42AF-9B06-BB38D171CED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDropExample", "FluentDragDropExample\FluentDragDropExample.csproj", "{05DAD2B7-D198-42AF-9B06-BB38D171CED6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDropNuGetExample", "FluentDragDropNuGetExample\FluentDragDropNuGetExample.csproj", "{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{05DAD2B7-D198-42AF-9B06-BB38D171CED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05DAD2B7-D198-42AF-9B06-BB38D171CED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05DAD2B7-D198-42AF-9B06-BB38D171CED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
