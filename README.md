@@ -62,7 +62,7 @@ private void CountryList_MouseDown(object sender, MouseEventArgs e)
         .To(target, MoveItems);
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `usdelayedusageage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L77-L91' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 This (<sub><sup>and the 5 line method `MoveItems()`</sub></sup>) is everything we need to implement two-way Drag&Drop lists:
