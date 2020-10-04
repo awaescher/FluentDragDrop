@@ -26,7 +26,7 @@ namespace FluentDragDropExample
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 
-        #region Usage
+        #region ImmediateUsage
         private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
         {
             var pic = (PictureBox)sender;
@@ -74,6 +74,7 @@ namespace FluentDragDropExample
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 
+        #region DelayedUsage
         private void CountryList_MouseDown(object sender, MouseEventArgs e)
         {
             var source = (ListView)sender;
@@ -82,11 +83,12 @@ namespace FluentDragDropExample
             source.InitializeDragAndDrop()
                 .Move()
                 .OnMouseMove()
-                .If(() => source.SelectedItems.OfType<ListViewItem>().ToArray().Any())
+                .If(() => source.SelectedIndices.Count > 0)
                 .WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
                 .WithPreview((_, data) => RenderPreview(data)).BehindCursor()
                 .To(target, MoveItems);
         }
+        #endregion
 
         private void linkCompatibilityBrowser_MouseDown(object sender, MouseEventArgs e)
         {
