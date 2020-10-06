@@ -200,7 +200,7 @@ namespace FluentDragDrop
         /// <returns></returns>
         internal Size CalculatePreviewSize()
         {
-            return _previewEvaluator?.Invoke()?.Get()?.Bitmap?.Size ?? SourceControl?.Size ?? Size.Empty;
+            return _previewEvaluator?.Invoke()?.PreferredSize ?? SourceControl?.Size ?? Size.Empty;
         }
 
         /// <summary>
@@ -236,27 +236,27 @@ namespace FluentDragDrop
             _previewController = new PreviewFormController();
 
             var preview = _previewEvaluator?.Invoke();
+			var updatablePreview = preview as IUpdatablePreview;
+			updatablePreview?.Start();
 
-            preview?.Start();
-
-            void updatePreview(object _, Preview.PreviewElement updatedPreview)
+            void updatePreview(object sender, EventArgs eventArgs)
             {
                 if (SourceControl.InvokeRequired)
-                    SourceControl.BeginInvoke((Action)(() => _previewController.Update(updatedPreview)));
+                    SourceControl.BeginInvoke((Action)(() => _previewController.InvalidatePreview()));
                 else
-                    _previewController.Update(updatedPreview);
+                    _previewController.InvalidatePreview();
             }
 
             var hookId = IntPtr.Zero;
 
             try
             {
-                if (preview is object)
-                    preview.Updated += updatePreview;
+                if (updatablePreview is object)
+					updatablePreview.Updated += updatePreview;
 
                 hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
 
-                _previewController.Start(preview?.Get(), _cursorOffset);
+                _previewController.Start(preview, _cursorOffset);
 
                 var data = Data == null ? (object)new NullPlaceholder() : Data;
                 SourceControl.DoDragDrop(data, effect);
@@ -265,11 +265,11 @@ namespace FluentDragDrop
             {
                 NativeMethods.RemoveHook(hookId);
 
-                if (preview is object)
-                    preview.Updated -= updatePreview;
+                if (updatablePreview is object)
+					updatablePreview.Updated -= updatePreview;
 
                 _previewController.Stop();
-                preview?.Stop();
+				updatablePreview?.Stop();
 
                 CleanUp();
             }

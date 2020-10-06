@@ -5,27 +5,24 @@ namespace FluentDragDrop.Preview
 {
     internal class BitmapPreview : IPreview
     {
-        public event EventHandler<PreviewElement> Updated;
+		private Bitmap _bitmap;
 
-        private readonly PreviewElement _preview;
-
-        public BitmapPreview(Bitmap bitmap)
+		public BitmapPreview(Bitmap bitmap)
         {
-            if (bitmap == null)
-                throw new ArgumentNullException(nameof(bitmap));
-
-            _preview = new PreviewElement(bitmap);
+            _bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
         }
 
-        public PreviewElement Get() => _preview;
-
-
-        public void Start()
+        public void Render(Graphics graphics)
         {
+            if (_bitmap is object)
+                graphics.DrawImageUnscaled(_bitmap, new Rectangle(Point.Empty, _bitmap.Size));
         }
 
-        public void Stop()
-        {
-        }
-    }
+        public Size PreferredSize => _bitmap?.Size ?? Size.Empty;
+
+        /// <summary>
+        /// Gets or sets the opacity of the preview during the drag and drop operation
+        /// </summary>
+        public double Opacity { get; set; } = 0.8;
+	}
 }
