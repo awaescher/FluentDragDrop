@@ -16,20 +16,18 @@ namespace FluentDragDrop.Preview
             IsDragging = false;
         }
 
-        public void Start(IPreview preview, Point cursorOffset)
+		public void Start(IPreview preview, Point cursorOffset)
         {
             if (preview is null)
                 return;
 
-            CursorOffset = cursorOffset;
+			CursorOffset = cursorOffset;
 
             var mousePosition = Control.MousePosition;
             var previewPosition = new Point(mousePosition.X - cursorOffset.X, mousePosition.Y - cursorOffset.Y);
 
             if (_previewForm?.IsDisposed ?? false)
                 _previewForm = null;
-
-            Stop();
 
             IsDragging = true;
 
@@ -46,7 +44,7 @@ namespace FluentDragDrop.Preview
             if (!IsDragging)
                 return;
 
-            IsDragging = false;
+			IsDragging = false;
             PreviewForm.Stop();
         }
 

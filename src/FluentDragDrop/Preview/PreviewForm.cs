@@ -53,12 +53,36 @@ namespace FluentDragDrop.Preview
 				CreateHandle();
 
 			IsDragging = true;
+			Location = location;
 
 			Preview = preview;
-			Location = location;
+			UpdatablePreview = preview as IUpdatablePreview;
+
+			if (UpdatablePreview is object)
+			{
+				UpdatablePreview.Updated += OnUpdatablePreviewUpdated;
+				UpdatablePreview?.Start();
+			}
+
 			InvalidatePreview();
 
 			Show();
+		}
+
+		public void Stop()
+		{
+			if (!IsDragging)
+				return;
+
+			if (UpdatablePreview is object)
+			{
+				UpdatablePreview.Stop();
+				UpdatablePreview.Updated -= OnUpdatablePreviewUpdated;
+			}
+
+			Hide();
+			IsDragging = false;
+			Location = new Point(-9999, -9999);
 		}
 
 		public void InvalidatePreview()
@@ -85,16 +109,6 @@ namespace FluentDragDrop.Preview
 		{
 			if (IsDragging)
 				Location = location;
-		}
-
-		public void Stop()
-		{
-			if (!IsDragging)
-				return;
-
-			Hide();
-			IsDragging = false;
-			Location = new Point(-9999, -9999);
 		}
 
 		protected override CreateParams CreateParams
@@ -154,8 +168,18 @@ namespace FluentDragDrop.Preview
 			Preview?.Render(e.Graphics);
 		}
 
+		void OnUpdatablePreviewUpdated(object sender, EventArgs eventArgs)
+		{
+			if (InvokeRequired)
+				BeginInvoke((Action)InvalidatePreview);
+			else
+				InvalidatePreview();
+		}
+
 		private bool IsDragging { get; set; }
 
 		private IPreview Preview { get; set; }
+
+		public IUpdatablePreview UpdatablePreview { get; private set; }
 	}
 }

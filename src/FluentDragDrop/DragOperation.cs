@@ -15,7 +15,7 @@ namespace FluentDragDrop
     {
         private readonly Dictionary<object, DragHandler<T>> _targets = new Dictionary<object, DragHandler<T>>();
 
-        private PreviewFormController _previewController;
+        private PreviewFormController _previewFormController;
         private readonly DragDefinition _definition;
         private readonly Func<T> _dataEvaluator;
         private readonly Func<bool> _conditionEvaluator;
@@ -71,7 +71,7 @@ namespace FluentDragDrop
             var handler = DragHandler<T>.CreateDefault();
             handler.DragDrop = (value, _) =>
             {
-                _previewController?.Stop();
+                _previewFormController?.Stop();
                 dragDrop?.Invoke(target, value);
             };
 
@@ -233,30 +233,17 @@ namespace FluentDragDrop
             if (!canProceed)
                 return;
 
-            _previewController = new PreviewFormController();
+            _previewFormController = new PreviewFormController();
 
             var preview = _previewEvaluator?.Invoke();
-			var updatablePreview = preview as IUpdatablePreview;
-			updatablePreview?.Start();
-
-            void updatePreview(object sender, EventArgs eventArgs)
-            {
-                if (SourceControl.InvokeRequired)
-                    SourceControl.BeginInvoke((Action)(() => _previewController.InvalidatePreview()));
-                else
-                    _previewController.InvalidatePreview();
-            }
 
             var hookId = IntPtr.Zero;
 
             try
             {
-                if (updatablePreview is object)
-					updatablePreview.Updated += updatePreview;
+                hookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
 
-                hookId = NativeMethods.HookMouseMove(() => _previewController.Move());
-
-                _previewController.Start(preview, _cursorOffset);
+                _previewFormController.Start(preview, _cursorOffset);
 
                 var data = Data == null ? (object)new NullPlaceholder() : Data;
                 SourceControl.DoDragDrop(data, effect);
@@ -265,11 +252,7 @@ namespace FluentDragDrop
             {
                 NativeMethods.RemoveHook(hookId);
 
-                if (updatablePreview is object)
-					updatablePreview.Updated -= updatePreview;
-
-                _previewController.Stop();
-				updatablePreview?.Stop();
+                _previewFormController.Stop();
 
                 CleanUp();
             }
@@ -318,7 +301,7 @@ namespace FluentDragDrop
         {
             if (_targets.TryGetValue(sender, out var handler))
             {
-                _previewController?.Stop();
+                _previewFormController?.Stop();
                 handler.DragDrop?.Invoke(Data, e);
             }
         }
