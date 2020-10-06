@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Drawing;
 
 namespace FluentDragDrop.Preview
 {
@@ -7,28 +7,21 @@ namespace FluentDragDrop.Preview
     /// </summary>
     public interface IPreview
     {
-        /// <summary>
-        /// The event to notify the drag and drop operation that the preview was updated
-        /// and needs to be redrawn
-        /// </summary>
-        event EventHandler<PreviewElement> Updated;
+		/// <summary>
+		/// Renders the preview onto the graphics object of the preview element
+		/// </summary>
+		/// <param name="graphics">The graphics object of the preview element</param>
+        void Render(Graphics graphics);
 
-        /// <summary>
-        /// Starts the preview 
-        /// </summary>
-        /// <remarks>Can be used to start animated previews</remarks>
-        void Start();
+		/// <summary>
+		/// Gets the preferred size of the preview
+		/// </summary>
+		/// <returns></returns>
+        Size PreferredSize { get; }
 
-        /// <summary>
-        /// Stops the preview
-        /// </summary>
-        /// <remarks>Can be used to stop animated previews</remarks>
-        void Stop();
-
-        /// <summary>
-        /// Gets the current preview object to show during the drag and drop operation
-        /// </summary>
-        /// <returns></returns>
-        PreviewElement Get();
-    }
+		/// <summary>
+		/// Gets the opacity of the preview
+		/// </summary>
+        double Opacity { get; }
+	}
 }

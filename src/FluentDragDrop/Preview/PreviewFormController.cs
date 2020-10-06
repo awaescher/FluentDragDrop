@@ -16,46 +16,35 @@ namespace FluentDragDrop.Preview
             IsDragging = false;
         }
 
-        public void Start(PreviewElement preview, Point cursorOffset)
+		public void Start(IPreview preview, Point cursorOffset)
         {
             if (preview is null)
                 return;
 
-            CursorOffset = cursorOffset;
+			CursorOffset = cursorOffset;
 
             var mousePosition = Control.MousePosition;
             var previewPosition = new Point(mousePosition.X - cursorOffset.X, mousePosition.Y - cursorOffset.Y);
 
             if (_previewForm?.IsDisposed ?? false)
-            {
                 _previewForm = null;
-            }
-
-            Stop();
 
             IsDragging = true;
 
             PreviewForm.Start(previewPosition, preview);
         }
 
-        internal void Update(PreviewElement preview)
+        internal void InvalidatePreview()
         {
-            if (preview is null)
-            {
-                return;
-            }
-
-            PreviewForm.Update(preview);
+            PreviewForm.InvalidatePreview();
         }
 
         internal void Stop()
         {
             if (!IsDragging)
-            {
                 return;
-            }
 
-            IsDragging = false;
+			IsDragging = false;
             PreviewForm.Stop();
         }
 
@@ -65,9 +54,7 @@ namespace FluentDragDrop.Preview
             var position = new Point(mousePosition.X - CursorOffset.X, mousePosition.Y - CursorOffset.Y);
 
             if (!IsDragging)
-            {
                 return;
-            }
 
             PreviewForm.Move(position);
         }
