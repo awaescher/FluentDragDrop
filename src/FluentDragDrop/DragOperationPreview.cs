@@ -59,5 +59,14 @@ namespace FluentDragDrop
 
             return _operation.WithCursorOffset(offsetX, offsetY);
         }
-    }
+
+		/// <summary>
+		/// Attaches the preview to the bottom right of the cursor so that its upper left corner is next to the mouse cursor.
+		/// </summary>
+		/// <returns></returns>
+		public DragOperation<T> WithOffset(int x, int y)
+		{
+			return _operation.WithCursorOffset(x, y);
+		}
+	}
 }
