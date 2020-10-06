@@ -57,6 +57,7 @@ namespace FluentDragDrop.Preview
 
 			Preview = preview;
 			UpdatablePreview = preview as IUpdatablePreview;
+			PreviewOpacityController = preview as IPreviewOpacityController;
 
 			if (UpdatablePreview is object)
 			{
@@ -101,7 +102,8 @@ namespace FluentDragDrop.Preview
 					Size = preferredSize;
 			}
 
-			Opacity = Preview?.Opacity ?? 0.8;
+			Opacity = PreviewOpacityController?.Opacity ?? 0.8;
+			TransparencyKey = PreviewOpacityController?.TransparencyKey ?? Color.Empty;
 			Invalidate();
 		}
 
@@ -181,5 +183,7 @@ namespace FluentDragDrop.Preview
 		private IPreview Preview { get; set; }
 
 		public IUpdatablePreview UpdatablePreview { get; private set; }
+
+		public IPreviewOpacityController PreviewOpacityController { get; private set; }
 	}
 }

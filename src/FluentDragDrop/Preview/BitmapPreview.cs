@@ -19,10 +19,5 @@ namespace FluentDragDrop.Preview
         }
 
         public Size PreferredSize => _bitmap?.Size ?? Size.Empty;
-
-        /// <summary>
-        /// Gets or sets the opacity of the preview during the drag and drop operation
-        /// </summary>
-        public double Opacity { get; set; } = 0.8;
 	}
 }
