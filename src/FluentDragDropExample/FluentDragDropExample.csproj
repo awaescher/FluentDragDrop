@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
-    <PackageReference Include="dot-net-transitions" Version="1.2.1" />
+    <PackageReference Include="FluentTransitions" Version="1.0.3" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="21.0.7" />
   </ItemGroup>
 
