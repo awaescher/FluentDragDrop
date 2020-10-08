@@ -1,12 +1,12 @@
 ﻿using FluentDragDrop.Preview;
+using FluentTransitions;
 using System;
 using System.Drawing;
 using System.Threading;
-using Transitions;
 
 namespace FluentDragDropExample
 {
-	internal class MovementPreview : IUpdatablePreview, IPreviewOpacityController
+	internal class ExperimentalPhysis : IUpdatablePreview, IPreviewOpacityController
 	{
 		public event EventHandler Updated;
 
@@ -16,10 +16,9 @@ namespace FluentDragDropExample
 		private Point _distance;
 		private Font _font;
 		private StringFormat _format;
-		private Transition _transition;
 		private float _angle;
 
-		public MovementPreview(Bitmap original, Point mouseStartPosition)
+		public ExperimentalPhysis(Bitmap original, Point mouseStartPosition)
 		{
 			_originalImage = original ?? throw new ArgumentNullException(nameof(original));
 			_lastMousePosition = mouseStartPosition;
@@ -37,9 +36,9 @@ namespace FluentDragDropExample
 			};
 			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(20), TimeSpan.FromMilliseconds(20));
 
-			_transition = new Transition(new TransitionType_EaseInEaseOut(300));
-			_transition.add(this, nameof(Angle), 45f);
-			_transition.run();
+			Transition
+				.With(this, nameof(Angle), 45f)
+				.EaseInEaseOut(TimeSpan.FromMilliseconds(300));
 		}
 
 		public void Stop()

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDropExample", "Fl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDropNuGetExample", "FluentDragDropNuGetExample\FluentDragDropNuGetExample.csproj", "{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentDragDrop.Effects", "FluentDragDrop.Effects\FluentDragDrop.Effects.csproj", "{235526E7-9F8D-4EC7-8E5F-AE38D4753681}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAF1A53A-37D3-4F0F-8070-73C00FEEE3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235526E7-9F8D-4EC7-8E5F-AE38D4753681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235526E7-9F8D-4EC7-8E5F-AE38D4753681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235526E7-9F8D-4EC7-8E5F-AE38D4753681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235526E7-9F8D-4EC7-8E5F-AE38D4753681}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events t
 Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 
 <!-- snippet: ImmediateUsage -->
-<a id='a697b64e'></a>
+<a id='snippet-immediateusage'></a>
 ```cs
 private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
 {
@@ -28,7 +28,7 @@ private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventAr
     // To() to define target controls and how the dragged data should be used on drop
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='Snippet source file'>snippet source</a> | <a href='#a697b64e' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `immediateusage` was extracted from'>snippet source</a> | <a href='#snippet-immediateusage' title='Navigate to start of snippet `immediateusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
@@ -46,7 +46,7 @@ Careful developers won't track a flag whether the mouse button is still down or 
 FluentDrag&Drop does exactly that if defined with `OnMouseMove()`. However there is no flag or location to track. Methods like `WithData()` won't accept direct variables to be passed anymore, instead they require a function which gets called as soon as the mouse move is detected later on - if the user pressed and held the mouse button and if he moved a few pixels. Additionally, the developer has the possibility to validate the input like a valid control selection with `If()`. Of course, this gets called just like `WithData()` as soon as the user moves the mouse accordingly:
 
 <!-- snippet: DelayedUsage -->
-<a id='34db7d2d'></a>
+<a id='snippet-delayedusage'></a>
 ```cs
 private void CountryList_MouseDown(object sender, MouseEventArgs e)
 {
@@ -62,7 +62,7 @@ private void CountryList_MouseDown(object sender, MouseEventArgs e)
         .To(target, MoveItems);
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L77-L91' title='Snippet source file'>snippet source</a> | <a href='#34db7d2d' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L77-L91' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 This (<sub><sup>and the 5 line method `MoveItems()`</sub></sup>) is everything we need to implement two-way Drag&Drop lists:

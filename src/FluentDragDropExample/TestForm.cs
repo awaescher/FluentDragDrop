@@ -70,7 +70,7 @@ namespace FluentDragDropExample
                 .Copy()
                 .Immediately()
                 .WithData(pic.Image)
-                .WithPreview((img, _) => new MovementPreview(img, Control.MousePosition)).WithOffset(-pic.Image.Width, 0)
+                .WithPreview((img, _) => new ExperimentalPhysis(img, Control.MousePosition)).WithOffset(-pic.Image.Width, 0)
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 

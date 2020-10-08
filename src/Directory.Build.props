@@ -55,6 +55,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
-    <None Include="$(SolutionDir)..\doc\FluentDragDrop.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
