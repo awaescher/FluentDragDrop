@@ -1,1 +1,24 @@
-<svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="256" x2="256" y1="0" y2="512"><stop offset="0" stop-color="#2af598"/><stop offset="1" stop-color="#009efd"/></linearGradient><path d="m354 60c0-33.085938-26.914062-60-60-60h-234c-33.085938 0-60 26.914062-60 60v234c0 33.085938 26.914062 60 60 60h96v40h40v-40h98c33.085938 0 60-26.914062 60-60v-96h39v-40h-39zm-40 234c0 11.027344-8.972656 20-20 20h-234c-11.027344 0-20-8.972656-20-20v-234c0-11.027344 8.972656-20 20-20h234c11.027344 0 20 8.972656 20 20zm158 138h40v40c0 22.089844-17.910156 40-40 40h-39v-40h39zm-199 40h40v40h-40zm80 0h40v40h-40zm159-274v40h-40v-40h-39v-40h39c22.089844 0 40 17.910156 40 40zm-40 78h40v40h-40zm0 78h40v40h-40zm-276 118h39v40h-39c-22.089844 0-40-17.910156-40-40v-40h40zm37-318h40v120h-120v-40h51.714844l-71.359375-71.359375 28.285156-28.28125 71.359375 71.355469zm0 0" fill="url(#a)"/></svg>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512.916 512.916" style="enable-background:new 0 0 512.916 512.916;" xml:space="preserve" width="512" height="512">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="256.458" y1="-1.433364e-009" x2="256.458" y2="512.916">
+	<stop offset="0" style="stop-color:#2AF598"/>
+	<stop offset="1" style="stop-color:#009EFD"/>
+</linearGradient>
+<path style="fill:url(#SVGID_1_);" d="M164.52,392.852c-81.617-25.58-141-101.91-141-191.852c0-110.832,90.168-201,201-201  s201,90.168,201,201c0,23.402-4.034,45.876-11.419,66.781l-33.606-26.804c3.279-12.787,5.026-26.182,5.026-39.977  c0-88.776-72.224-161-161-161s-161,72.224-161,161c0,67.578,41.855,125.556,101,149.396V392.852z M314.371,379h175.025  L204.52,151.788v361.128L314.371,379z M375.096,339h-79.648l-50.928,62.084V234.855L375.096,339z"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</svg>
