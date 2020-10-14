@@ -171,35 +171,35 @@ namespace FluentDragDrop
         }
 
 		/// <summary>
-		/// Defines an effect to start when the drag and drop operation gets started.
+		/// Defines one or more effects to start when the drag and drop operation gets started.
 		/// </summary>
-		/// <param name="effect">The effect to start</param>
+		/// <param name="effects">The effects to start</param>
 		/// <returns></returns>
-		public DragOperation<T> WithStartEffect(IEffect effect)
+		public DragOperation<T> WithStartEffects(params IEffect[] effects)
 		{
-			_effects.StartEffect = effect;
+			_effects.StartEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
 			return this;
 		}
 
 		/// <summary>
-		/// Defines an effect to start when the drag and drop operation gets completed successfully.
+		/// Defines one or more effects to start when the drag and drop operation gets completed successfully.
 		/// </summary>
-		/// <param name="effect">The effect to start</param>
+		/// <param name="effects">The effects to start</param>
 		/// <returns></returns>
-		public DragOperation<T> WithDropEffect(IEffect effect)
+		public DragOperation<T> WithDropEffects(params IEffect[] effects)
 		{
-			_effects.DropEffect = effect;
+			_effects.DropEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
 			return this;
 		}
 
 		/// <summary>
-		/// Defines an effect to start when the draf and drop operation gets cancelled.
+		/// Defines one or more effects to start when the draf and drop operation gets cancelled.
 		/// </summary>
-		/// <param name="effect">The effect to start</param>
+		/// <param name="effects">The effects to start</param>
 		/// <returns></returns>
-		public DragOperation<T> WithCancelEffect(IEffect effect)
+		public DragOperation<T> WithCancelEffects(params IEffect[] effects)
 		{
-			_effects.CancelEffect = effect;
+			_effects.CancelEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
 			return this;
 		}
 

@@ -14,8 +14,8 @@
 			return new Effects
 			{
 				StartEffect = new DefaultStartEffect(),
-				DropEffect = new DefaultDropEffect(),
-				CancelEffect = new DefaultCancelEffect()
+				DropEffect = new DefaultEndEffect(),
+				CancelEffect = new DefaultEndEffect()
 			};
 		}
 
