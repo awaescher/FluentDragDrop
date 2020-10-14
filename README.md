@@ -28,7 +28,7 @@ private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventAr
     // To() to define target controls and how the dragged data should be used on drop
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L29-L48' title='File snippet `immediateusage` was extracted from'>snippet source</a> | <a href='#snippet-immediateusage' title='Navigate to start of snippet `immediateusage`'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L32-L51' title='File snippet `immediateusage` was extracted from'>snippet source</a> | <a href='#snippet-immediateusage' title='Navigate to start of snippet `immediateusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
@@ -62,7 +62,7 @@ private void CountryList_MouseDown(object sender, MouseEventArgs e)
         .To(target, MoveItems);
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L77-L91' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L80-L94' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 This (<sub><sup>and the 5 line method `MoveItems()`</sub></sup>) is everything we need to implement two-way Drag&Drop lists:

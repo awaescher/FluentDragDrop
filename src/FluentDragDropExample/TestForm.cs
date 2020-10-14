@@ -243,9 +243,9 @@ namespace FluentDragDropExample
 				.Immediately()
 				.WithData("")
 				.WithPreview().RelativeToCursor()
-				.WithStartEffect(new FadeInEffect())
-				.WithDropEffect(new CompositeEffect(new FadeOutEffect(), new FlashSourceControlEffect()))
-				.WithCancelEffect(new ReturnEffect())
+				.FadeInOnStart()
+				.ReturnToStartOnCancel()
+				.WithDropEffects(new FadeOutEffect(), new FlashSourceControlEffect())
 				.To(picEffectsTarget, null);
 		}
 

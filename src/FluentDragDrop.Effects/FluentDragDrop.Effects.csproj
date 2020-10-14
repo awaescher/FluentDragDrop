@@ -20,4 +20,10 @@ The app icon was made by Freepik from www.flaticon.com and is licensed by Creati
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentTransitions" Version="1.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
+  </ItemGroup>
 </Project>
