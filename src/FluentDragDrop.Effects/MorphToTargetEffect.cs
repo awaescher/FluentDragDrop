@@ -7,9 +7,9 @@ using System.Drawing;
 namespace FluentDragDrop.Effects
 {
 	/// <summary>
-	/// A combined effect moving the preview image back to its starting point while fading it out.
+	/// A combined effect moving the preview image to the target control while fading it out.
 	/// </summary>
-	public class ReturnToStartEffect : DefaultEndEffect
+	public class MorphToTargetEffect : DefaultEndEffect
 	{
 		/// <summary>
 		/// Starts the effect with the given arguments
@@ -17,14 +17,17 @@ namespace FluentDragDrop.Effects
 		/// <param name="arguments">The effect arguments containing information about the preview form and the affected controls</param>
 		public override void Start(IEffect.Arguments arguments)
 		{
-			var controlLocation = arguments.SourceControl.PointToScreen(Point.Empty);
+			if (arguments?.TargetControl is null)
+				throw new ArgumentNullException($"Target control cannot be null for this {nameof(MorphToTargetEffect)}");
+
+			var controlLocation = arguments.TargetControl.PointToScreen(Point.Empty);
 			var originalOpacity = arguments.PreviewForm.Opacity;
 
 			var transition = Transition
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Left), controlLocation.X)
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Top), controlLocation.Y)
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Opacity), 0d)
-				.Build(new Deceleration(500));
+				.Build(new Deceleration(750));
 
 			void selfRemovingHandler(object _, Transition.Args __)
 			{

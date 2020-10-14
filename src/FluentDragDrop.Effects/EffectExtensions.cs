@@ -39,7 +39,18 @@
 		}
 
 		/// <summary>
-		/// Adds a combined effect moving the preview image to its starting point while fading out as effect for a cancelled drag and drop operation.
+		/// Adds a combined effect moving the preview image to the target control while fading it out as effect for a completed drag and drop operation.
+		/// </summary>
+		/// <typeparam name="T">The type of the data to drop</typeparam>
+		/// <param name="dragOperation">The drag and drop operation to add the effect to</param>
+		/// <returns></returns>
+		public static DragOperation<T> MorphToTargetOnDrop<T>(this DragOperation<T> dragOperation)
+		{
+			return dragOperation.WithDropEffects(new MorphToTargetEffect());
+		}
+
+		/// <summary>
+		/// Adds a combined effect moving the preview image back to its starting point while fading it out as effect for a cancelled drag and drop operation.
 		/// </summary>
 		/// <typeparam name="T">The type of the data to drop</typeparam>
 		/// <param name="dragOperation">The drag and drop operation to add the effect to</param>
