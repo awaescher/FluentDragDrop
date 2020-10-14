@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Description>FluentDrag&amp;Drop is the sexiest Drag&amp;Drop implemtation for WinForms on this planet.
+
+This package extends FluentDrag&amp;Drop with rich effects. Powered by FluentTransitions.
+
+The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
+    <PackageTags>Fluent;Drag;Drop;Effects;Windows;Forms;WinForms;UI</PackageTags>
+    <Copyright>Andreas Wäscher 2020</Copyright>
+    <PackageIcon>FluentDragDrop.Effects.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="D:\Develop\GitHub\FluentDragDrop\src\..\doc\FluentDragDrop.png" />
+    <None Include="..\..\doc\FluentDragDrop.Effects.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentTransitions" Version="1.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
+  </ItemGroup>
+</Project>

@@ -18,10 +18,5 @@ namespace FluentDragDrop.Preview
 		/// </summary>
 		/// <returns></returns>
         Size PreferredSize { get; }
-
-		/// <summary>
-		/// Gets the opacity of the preview
-		/// </summary>
-        double Opacity { get; }
 	}
 }

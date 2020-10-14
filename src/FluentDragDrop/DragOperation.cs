@@ -1,4 +1,5 @@
-﻿using FluentDragDrop.Preview;
+﻿using FluentDragDrop.Effects;
+using FluentDragDrop.Preview;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,11 +8,11 @@ using System.Windows.Forms;
 
 namespace FluentDragDrop
 {
-    /// <summary>
-    /// Coordinates the drag and drop operation
-    /// </summary>
-    /// <typeparam name="T">The type of the data to drop</typeparam>
-    public class DragOperation<T>
+	/// <summary>
+	/// Coordinates the drag and drop operation
+	/// </summary>
+	/// <typeparam name="T">The type of the data to drop</typeparam>
+	public class DragOperation<T>
     {
         private readonly Dictionary<object, DragHandler<T>> _targets = new Dictionary<object, DragHandler<T>>();
 
@@ -21,6 +22,7 @@ namespace FluentDragDrop
         private readonly Func<bool> _conditionEvaluator;
         private Func<IPreview> _previewEvaluator;
         private T _data;
+		private Effects.Effects _effects = Effects.Effects.GetDefaults();
 
         private Point _cursorOffset = Point.Empty;
         private Point _initialPosition = Point.Empty;
@@ -71,7 +73,7 @@ namespace FluentDragDrop
             var handler = DragHandler<T>.CreateDefault();
             handler.DragDrop = (value, _) =>
             {
-                _previewFormController?.Stop();
+                _previewFormController?.Stop(target, wasCancelled: false);
                 dragDrop?.Invoke(target, value);
             };
 
@@ -168,13 +170,46 @@ namespace FluentDragDrop
             return new DragOperationPreview<T>(this);
         }
 
-        /// <summary>
-        /// Defines the cursor offset of the preview image
-        /// </summary>
-        /// <param name="x">The offset on the X axis in pixels</param>
-        /// <param name="y">The offset on the Y axis in pixels</param>
-        /// <returns></returns>
-        internal DragOperation<T> WithCursorOffset(int x, int y)
+		/// <summary>
+		/// Defines one or more effects to start when the drag and drop operation gets started.
+		/// </summary>
+		/// <param name="effects">The effects to start</param>
+		/// <returns></returns>
+		public DragOperation<T> WithStartEffects(params IEffect[] effects)
+		{
+			_effects.StartEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
+			return this;
+		}
+
+		/// <summary>
+		/// Defines one or more effects to start when the drag and drop operation gets completed successfully.
+		/// </summary>
+		/// <param name="effects">The effects to start</param>
+		/// <returns></returns>
+		public DragOperation<T> WithDropEffects(params IEffect[] effects)
+		{
+			_effects.DropEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
+			return this;
+		}
+
+		/// <summary>
+		/// Defines one or more effects to start when the draf and drop operation gets cancelled.
+		/// </summary>
+		/// <param name="effects">The effects to start</param>
+		/// <returns></returns>
+		public DragOperation<T> WithCancelEffects(params IEffect[] effects)
+		{
+			_effects.CancelEffect = effects.Length == 1 ? effects[0] : new CompositeEffect(effects);
+			return this;
+		}
+
+		/// <summary>
+		/// Defines the cursor offset of the preview image
+		/// </summary>
+		/// <param name="x">The offset on the X axis in pixels</param>
+		/// <param name="y">The offset on the Y axis in pixels</param>
+		/// <returns></returns>
+		internal DragOperation<T> WithCursorOffset(int x, int y)
         {
             _cursorOffset.X = -1 * x;
             _cursorOffset.Y = -1 * y;
@@ -239,20 +274,22 @@ namespace FluentDragDrop
 
             var hookId = IntPtr.Zero;
 
+			var resultEffect = DragDropEffects.None;
+
             try
             {
                 hookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
 
-                _previewFormController.Start(preview, _cursorOffset);
+                _previewFormController.Start(SourceControl, _effects, preview, _cursorOffset);
 
                 var data = Data == null ? (object)new NullPlaceholder() : Data;
-                SourceControl.DoDragDrop(data, effect);
+				resultEffect = SourceControl.DoDragDrop(data, effect);
             }
             finally
             {
                 NativeMethods.RemoveHook(hookId);
 
-                _previewFormController.Stop();
+                _previewFormController.Stop(null, wasCancelled: resultEffect == DragDropEffects.None);
 
                 CleanUp();
             }
@@ -301,7 +338,7 @@ namespace FluentDragDrop
         {
             if (_targets.TryGetValue(sender, out var handler))
             {
-                _previewFormController?.Stop();
+                _previewFormController?.Stop(sender as Control, wasCancelled: false);
                 handler.DragDrop?.Invoke(Data, e);
             }
         }

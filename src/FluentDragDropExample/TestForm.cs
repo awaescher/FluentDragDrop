@@ -1,4 +1,7 @@
 ﻿using FluentDragDrop;
+using FluentDragDrop.Effects;
+using FluentTransitions;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -231,5 +234,32 @@ namespace FluentDragDropExample
         }
 
         private PictureBox[] PreviewBoxes => new[] { picNoPreview, picControlPreviewBehindCursor, picCustomPreviewWindowsExplorerStyle, picUpdatingPreviewRelativeToCursor, picEmpty1, picEmpty2, picEmpty3, picEmpty4 };
-    }
+
+		private void picReturnOnCancel_MouseDown(object sender, MouseEventArgs e)
+		{
+			picReturnOnCancel
+				.InitializeDragAndDrop()
+				.Move()
+				.Immediately()
+				.WithData("")
+				.WithPreview().RelativeToCursor()
+				.FadeInOnStart()
+				.ReturnToStartOnCancel()
+				.WithDropEffects(new MorphToTargetEffect(), new FlashSourceControlEffect())
+				.To(picEffectsTarget, null);
+		}
+
+		internal class FlashSourceControlEffect : IEffect
+		{
+			public void Start(IEffect.Arguments arguments)
+			{
+				if (arguments?.TargetControl is null)
+					throw new ArgumentNullException($"Target control cannot be null for this {nameof(FlashSourceControlEffect)}");
+
+				Transition
+					.With(arguments.TargetControl, nameof(arguments.TargetControl.BackColor), Color.LightSeaGreen)
+					.Bounce(TimeSpan.FromSeconds(1.2));
+			}
+		}
+	}
 }

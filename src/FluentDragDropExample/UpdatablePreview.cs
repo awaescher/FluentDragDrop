@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace FluentDragDropExample
 {
-	internal class UpdatablePreview : IUpdatablePreview
+	internal class UpdatablePreview : IUpdatablePreview, IPreviewOpacityController
 	{
 		public event EventHandler Updated;
 
@@ -32,7 +32,7 @@ namespace FluentDragDropExample
 				Alignment = StringAlignment.Center,
 				LineAlignment = StringAlignment.Far
 			};
-			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(20), TimeSpan.FromMilliseconds(20));
+			_timer = new Timer(UpdatePreview, null, TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(10));
 		}
 
 		public void Stop()
@@ -66,5 +66,7 @@ namespace FluentDragDropExample
 		public Size PreferredSize => _originalImage?.Size ?? Size.Empty;
 
 		public double Opacity { get; set; } = 0.8;
+
+		public Color TransparencyKey => Color.Empty;
 	}
 }
