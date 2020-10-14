@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace FluentDragDropExample
 {
-	internal class ExperimentalPhysis : IUpdatablePreview, IPreviewOpacityController
+	internal class ExperimentalPhysics : IUpdatablePreview, IPreviewOpacityController
 	{
 		public event EventHandler Updated;
 
@@ -18,7 +18,7 @@ namespace FluentDragDropExample
 		private StringFormat _format;
 		private float _angle;
 
-		public ExperimentalPhysis(Bitmap original, Point mouseStartPosition)
+		public ExperimentalPhysics(Bitmap original, Point mouseStartPosition)
 		{
 			_originalImage = original ?? throw new ArgumentNullException(nameof(original));
 			_lastMousePosition = mouseStartPosition;

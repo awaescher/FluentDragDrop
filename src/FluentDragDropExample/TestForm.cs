@@ -1,7 +1,7 @@
 ﻿using FluentDragDrop;
 using FluentDragDrop.Effects;
 using FluentTransitions;
-using FluentTransitions.Methods;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -73,7 +73,7 @@ namespace FluentDragDropExample
                 .Copy()
                 .Immediately()
                 .WithData(pic.Image)
-                .WithPreview((img, _) => new ExperimentalPhysis(img, Control.MousePosition)).WithOffset(-pic.Image.Width, 0)
+                .WithPreview((img, _) => new UpdatablePreview(img, Control.MousePosition)).RelativeToCursor()
                 .To(PreviewBoxes, (target, data) => target.Image = data);
         }
 
@@ -245,7 +245,7 @@ namespace FluentDragDropExample
 				.WithPreview().RelativeToCursor()
 				.FadeInOnStart()
 				.ReturnToStartOnCancel()
-				.WithDropEffects(new FadeOutEffect(), new FlashSourceControlEffect())
+				.WithDropEffects(new MorphToTargetEffect(), new FlashSourceControlEffect())
 				.To(picEffectsTarget, null);
 		}
 
@@ -253,8 +253,12 @@ namespace FluentDragDropExample
 		{
 			public void Start(IEffect.Arguments arguments)
 			{
-				if (arguments.TargetControl is object)
-					Transition.Run(arguments.TargetControl, nameof(arguments.TargetControl.BackColor), Color.LightSeaGreen, new Flash(2, 450));
+				if (arguments?.TargetControl is null)
+					throw new ArgumentNullException($"Target control cannot be null for this {nameof(FlashSourceControlEffect)}");
+
+				Transition
+					.With(arguments.TargetControl, nameof(arguments.TargetControl.BackColor), Color.LightSeaGreen)
+					.Bounce(TimeSpan.FromSeconds(1.2));
 			}
 		}
 	}
