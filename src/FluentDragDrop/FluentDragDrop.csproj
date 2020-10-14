@@ -3,10 +3,10 @@
     <OutputType>Library</OutputType>
     <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
-    <Description>Drag and Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls.
+    <Description>Drag&amp;Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls.
 Passing data is kind of special and you don't get preview images while dragging things aroud.
 
-This package brings rich Drag and Drop experience to your app, just by adding a few simple lines of code.
+This package brings rich Drag&amp;Drop experience to your app, just by adding a few simple lines of code.
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
     <PackageTags>Fluent;Drag;Drop;Windows;Forms;WinForms;UI</PackageTags>
