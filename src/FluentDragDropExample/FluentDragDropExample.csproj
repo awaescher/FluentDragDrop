@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FluentDragDrop.Effects\FluentDragDrop.Effects.csproj" />
     <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
     <PackageReference Include="FluentTransitions" Version="1.0.3" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="21.0.7" />
@@ -17,5 +18,18 @@
   </PropertyGroup>
   <ItemGroup Condition="!$(TargetFramework.StartsWith('net4')) Or '$(MSBuildRuntimeType)'=='Core'">
     <PackageReference Include="System.Resources.Extensions" Version="4.7.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

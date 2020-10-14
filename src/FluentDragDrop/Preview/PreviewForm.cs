@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentDragDrop.Effects;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ namespace FluentDragDrop.Preview
 		private const int WS_EX_TOPMOST = 0x00000008;
 
 		private const int HTTRANSPARENT = -1;
+		private Effects.Effects _effects;
 
 		public PreviewForm()
 		{
@@ -44,13 +46,17 @@ namespace FluentDragDrop.Preview
 			FormBorderStyle = FormBorderStyle.None;
 		}
 
-		public void Start(Point location, IPreview preview)
+		public void Start(Control sourceControl, Effects.Effects effects, Point location, IPreview preview)
 		{
 			if (IsDisposed)
 				return;
 
 			if (!IsHandleCreated)
 				CreateHandle();
+
+			_effects = effects;
+
+			SourceControl = sourceControl ?? throw new ArgumentNullException(nameof(sourceControl));
 
 			IsDragging = true;
 			Location = location;
@@ -67,10 +73,10 @@ namespace FluentDragDrop.Preview
 
 			InvalidatePreview();
 
-			Show();
+			_effects.StartEffect.Start(new IEffect.Arguments(this, SourceControl, null));
 		}
 
-		public void Stop()
+		public void Stop(Control target, bool wasCancelled)
 		{
 			if (!IsDragging)
 				return;
@@ -81,14 +87,21 @@ namespace FluentDragDrop.Preview
 				UpdatablePreview.Updated -= OnUpdatablePreviewUpdated;
 			}
 
-			Hide();
+			if (wasCancelled)
+				_effects.CancelEffect.Start(new IEffect.Arguments(this, SourceControl, target));
+			else
+				_effects.DropEffect.Start(new IEffect.Arguments(this, SourceControl, target));
+
 			IsDragging = false;
-			Location = new Point(-9999, -9999);
+
 		}
 
 		public void InvalidatePreview()
 		{
 			if (IsDisposed)
+				return;
+
+			if (!AllowUpdates)
 				return;
 
 			if (Preview == null)
@@ -156,7 +169,7 @@ namespace FluentDragDrop.Preview
 
 		private void FormCaptureLost()
 		{
-			Stop();
+			Stop(null, wasCancelled: true);
 		}
 
 		protected override void OnPaintBackground(PaintEventArgs e)
@@ -167,10 +180,11 @@ namespace FluentDragDrop.Preview
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			Preview?.Render(e.Graphics);
+			if (AllowUpdates)
+				Preview?.Render(e.Graphics);
 		}
 
-		void OnUpdatablePreviewUpdated(object sender, EventArgs eventArgs)
+		private void OnUpdatablePreviewUpdated(object sender, EventArgs eventArgs)
 		{
 			if (InvokeRequired)
 				BeginInvoke((Action)InvalidatePreview);
@@ -180,10 +194,14 @@ namespace FluentDragDrop.Preview
 
 		private bool IsDragging { get; set; }
 
+		private Control SourceControl { get; set; }
+
 		private IPreview Preview { get; set; }
 
 		public IUpdatablePreview UpdatablePreview { get; private set; }
 
 		public IPreviewOpacityController PreviewOpacityController { get; private set; }
+
+		public bool AllowUpdates { get; set; } = true;
 	}
 }
