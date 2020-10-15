@@ -87,7 +87,7 @@ In contrast, FluentDrag&Drop will render preview images smoothly wherever you mo
 
 ## 🔆 Effects
 
-To make your drag and drop implementation even more impressive, this repository also contains a project called "FluentDragDrop.Effects". It is part of the FluentDragDrop solution but builds to a separate and optional package which extends FluentDragDrop with a set of default effects.
+To make your drag and drop implementation even more impressive, this repository also contains a project called "FluentDragDrop.Effects". It is part of the FluentDrag&Drop solution but builds to a separate and optional package which extends FluentDrag&Drop with a set of default effects.
 
 Some of these effects are: 
 - FadeIn
@@ -105,6 +105,6 @@ The sample above shows some of the effects in action:
 
 ### FluentTransitions
 
-FluentDragDrop.Effects are powered by another project called [FluentTransitions](https://github.com/awaescher/FluentTransitions). More information on how to smoothly render animations and transitions in .NET are available here:
-- GitHub: [FluentTransitions](https://github.com/awaescher/FluentTransitions)
-- NuGet: [FluentTransitions](https://www.nuget.org/packages/FluentTransitions)
+Those effects are powered by another project called [FluentTransitions](https://github.com/awaescher/FluentTransitions) allowing the animations and transitions to be rendered smoothly. I'd encourage you to check it out:
+- [GitHub](https://github.com/awaescher/FluentTransitions)
+- [NuGet](https://www.nuget.org/packages/FluentTransitions)
