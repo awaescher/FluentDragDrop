@@ -1,6 +1,6 @@
 # Fluent Drag&Drop
 
-[![NuGet Status](https://img.shields.io/nuget/v/FluentDragDrop.svg)](https://www.nuget.org/packages/FluentDragDrop/)
+[![NuGet Status](https://img.shields.io/nuget/v/FluentDragDrop.svg)](https://www.nuget.org/packages/FluentDragDrop/) <sup>[🔆 Now with effects](https://github.com/awaescher/FluentDragDrop#effects)</sup>
 
 Drag&Drop in WinForms is cumbersome and error-prone. There are multiple events to handle, members to track and properties to set on at least two controls. Passing data is kind of special and you don't get preview images while dragging things around.
 
@@ -85,10 +85,26 @@ In contrast, FluentDrag&Drop will render preview images smoothly wherever you mo
 
 ![Screenshot](doc/AllowDropFalse.gif)
 
-## Effects
+## 🔆 Effects
 
-This repository also contains a project called "FluentDragDrop.Effects". This builds to an own package to extend FluentDragDrop with a set of default effects.
+To make your drag and drop implementation even more impressive, this repository also contains a project called "FluentDragDrop.Effects". It is part of the FluentDragDrop solution but builds to a separate and optional package which extends FluentDragDrop with a set of default effects.
+
+Some of these effects are: 
+- FadeIn
+- FadeOut
+- ReturnOnCancel
+- MorphToTarget
 
 ![Effects](doc/Effects.gif)
 
- This package is powered by another repository of mine: [FluentTransitions](https://github.com/awaescher/FluentTransitions).
+The sample above shows some of the effects in action:
+- FadeIn on start
+- ReturnOnCancel when dropping next to the empty box
+- MorphToTarget when dropping into the emtpy box
+  - this effect is accompanied by an additional effect which causes the box to fade a color in and out
+
+### FluentTransitions
+
+These effects in FluentDragDrop.Effects are powered by another project called "FluentTransitions". More information on how to smoothly render animations and transitions are available here:
+- GitHub: [FluentTransitions](https://github.com/awaescher/FluentTransitions)
+- NuGet: [FluentTransitions](https://www.nuget.org/packages/FluentTransitions)
