@@ -101,10 +101,10 @@ The sample above shows some of the effects in action:
 - FadeIn on start
 - ReturnOnCancel when dropping next to the empty box
 - MorphToTarget when dropping into the emtpy box
-  - this effect is accompanied by an additional effect which causes the box to fade a color in and out
+  - this effect is accompanied by an additional effect implemented in the sample app causing the box to fade a color
 
 ### FluentTransitions
 
-These effects in FluentDragDrop.Effects are powered by another project called "FluentTransitions". More information on how to smoothly render animations and transitions are available here:
+FluentDragDrop.Effects are powered by another project called [FluentTransitions](https://github.com/awaescher/FluentTransitions). More information on how to smoothly render animations and transitions in .NET are available here:
 - GitHub: [FluentTransitions](https://github.com/awaescher/FluentTransitions)
 - NuGet: [FluentTransitions](https://www.nuget.org/packages/FluentTransitions)
