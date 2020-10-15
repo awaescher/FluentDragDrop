@@ -84,3 +84,11 @@ Most approaches I have used in the past get in trouble when moving the preview o
 In contrast, FluentDrag&Drop will render preview images smoothly wherever you move them.
 
 ![Screenshot](doc/AllowDropFalse.gif)
+
+## Effects
+
+This repository also contains a project called "FluentDragDrop.Effects". This builds to an own package to extend FluentDragDrop with a set of default effects.
+
+![Effects](doc/Effects.gif)
+
+ This package is powered by another repository of mine: [FluentTransitions](https://github.com/awaescher/FluentTransitions).
