@@ -100,7 +100,7 @@ Some of these effects are:
 The sample above shows some of the effects in action:
 - FadeIn on start
 - ReturnOnCancel when dropping next to the empty box
-- MorphToTarget when dropping into the emtpy box
+- MorphToTarget when dropping into the empty box
   - this effect is accompanied by an additional effect implemented in the sample app causing the box to fade a color
 
 ### FluentTransitions
