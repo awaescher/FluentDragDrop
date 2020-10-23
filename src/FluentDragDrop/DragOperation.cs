@@ -289,7 +289,9 @@ namespace FluentDragDrop
             {
                 NativeMethods.RemoveHook(hookId);
 
-                _previewFormController.Stop(null, wasCancelled: resultEffect == DragDropEffects.None);
+				// always send "canceled" here -> if the drag and drop operation was successful
+				// this call is too late and will not do anything
+                _previewFormController.Stop(null, wasCancelled: true);
 
                 CleanUp();
             }
