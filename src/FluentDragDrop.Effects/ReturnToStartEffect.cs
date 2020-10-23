@@ -17,12 +17,19 @@ namespace FluentDragDrop.Effects
 		/// <param name="arguments">The effect arguments containing information about the preview form and the affected controls</param>
 		public override void Start(IEffect.Arguments arguments)
 		{
-			var controlLocation = arguments.SourceControl.PointToScreen(Point.Empty);
-			var originalOpacity = arguments.PreviewForm.Opacity;
+			var screenLocationOfSourceControl = arguments.SourceControl.PointToScreen(Point.Empty);
+
+			var centerOfSourceControl = new Point(
+				screenLocationOfSourceControl.X + (arguments.SourceControl.Width / 2),
+				screenLocationOfSourceControl.Y + (arguments.SourceControl.Height / 2));
+
+			var previewTransitionLocation = new Point(
+				centerOfSourceControl.X - (arguments.PreviewForm.Width / 2),
+				centerOfSourceControl.Y - (arguments.PreviewForm.Height / 2));
 
 			var transition = Transition
-				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Left), controlLocation.X)
-				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Top), controlLocation.Y)
+				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Left), previewTransitionLocation.X)
+				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Top), previewTransitionLocation.Y)
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Opacity), 0d)
 				.Build(new Deceleration(500));
 

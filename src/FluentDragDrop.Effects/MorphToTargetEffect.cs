@@ -20,12 +20,19 @@ namespace FluentDragDrop.Effects
 			if (arguments?.TargetControl is null)
 				throw new ArgumentNullException($"Target control cannot be null for this {nameof(MorphToTargetEffect)}");
 
-			var controlLocation = arguments.TargetControl.PointToScreen(Point.Empty);
-			var originalOpacity = arguments.PreviewForm.Opacity;
+			var screenLocationOfSourceControl = arguments.TargetControl.PointToScreen(Point.Empty);
+
+			var centerOfTargetControl = new Point(
+				screenLocationOfSourceControl.X + (arguments.TargetControl.Width / 2),
+				screenLocationOfSourceControl.Y + (arguments.TargetControl.Height / 2));
+
+			var previewTransitionLocation = new Point(
+				centerOfTargetControl.X - (arguments.PreviewForm.Width / 2),
+				centerOfTargetControl.Y - (arguments.PreviewForm.Height / 2));
 
 			var transition = Transition
-				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Left), controlLocation.X)
-				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Top), controlLocation.Y)
+				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Left), previewTransitionLocation.X)
+				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Top), previewTransitionLocation.Y)
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Opacity), 0d)
 				.Build(new Deceleration(750));
 
