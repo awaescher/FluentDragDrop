@@ -24,6 +24,7 @@ namespace FluentDragDropNuGetExample
                 .Link()
                 .OnMouseMove()
                 .WithData(() => true)
+				.WithPreview().RelativeToCursor()
                 .To(pnlDrop, (_, __) => MessageBox.Show("Successfully dropped.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information));
         }
     }

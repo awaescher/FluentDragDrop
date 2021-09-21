@@ -58,7 +58,7 @@ namespace FluentDragDropExample
 
 		public void Render(Graphics graphics)
 		{
-			var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height - 40);
+			var bounds = new Rectangle(0, 20, _originalImage.Width, _originalImage.Height / 8);
 			graphics.DrawImageUnscaled(_originalImage, new Rectangle(Point.Empty, PreferredSize));
 			graphics.DrawString($"Distance: {_distance}px", _font, Brushes.White, bounds, _format);
 		}

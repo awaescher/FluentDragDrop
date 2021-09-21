@@ -23,8 +23,9 @@ namespace FluentDragDrop
         private Func<IPreview> _previewEvaluator;
         private T _data;
 		private Effects.Effects _effects = Effects.Effects.GetDefaults();
+		private bool _allowMouseHooks = true;
 
-        private Point _cursorOffset = Point.Empty;
+		private Point _cursorOffset = Point.Empty;
         private Point _initialPosition = Point.Empty;
 
         /// <summary>
@@ -217,11 +218,23 @@ namespace FluentDragDrop
             return this;
         }
 
-        /// <summary>
-        /// Gets a preview image from the source control
-        /// </summary>
-        /// <returns></returns>
-        private Bitmap GetControlPreviewBitmap()
+		/// <summary>
+		/// Prevents mouse hooks and instead uses the Control.GiveFeedback event to update the preview image.
+		/// This will have negative effects on the smoothness of the drag and drop operation.
+		/// </summary>
+		/// <returns></returns>
+		public DragOperation<T> WithoutMouseHooks()
+		{
+			_allowMouseHooks = false;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Gets a preview image from the source control
+		/// </summary>
+		/// <returns></returns>
+		private Bitmap GetControlPreviewBitmap()
         {
             var preview = new Bitmap(SourceControl.Width, SourceControl.Height);
             SourceControl.DrawToBitmap(preview, new Rectangle(Point.Empty, SourceControl.Size));
@@ -278,7 +291,10 @@ namespace FluentDragDrop
 
             try
             {
-                hookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
+				if (_allowMouseHooks)
+					hookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
+				else
+					SourceControl.GiveFeedback += SourceControl_GiveFeedback;
 
                 _previewFormController.Start(SourceControl, _effects, preview, _cursorOffset);
 
@@ -287,20 +303,29 @@ namespace FluentDragDrop
             }
             finally
             {
-                NativeMethods.RemoveHook(hookId);
+				if (_allowMouseHooks)
+					NativeMethods.RemoveHook(hookId);
+				else
+					SourceControl.GiveFeedback -= SourceControl_GiveFeedback;
 
 				// always send "canceled" here -> if the drag and drop operation was successful
 				// this call is too late and will not do anything
-                _previewFormController.Stop(null, wasCancelled: true);
+				_previewFormController.Stop(null, wasCancelled: true);
 
                 CleanUp();
             }
         }
 
-        /// <summary>
-        /// Removes the internally attached event handlers from all target controls
-        /// </summary>
-        private void CleanUp()
+		private void SourceControl_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine($"GiveFeedback {DateTime.Now.Millisecond}");
+			_previewFormController.Move();
+		}
+
+		/// <summary>
+		/// Removes the internally attached event handlers from all target controls
+		/// </summary>
+		private void CleanUp()
         {
             foreach (var target in _targets.Keys.OfType<Control>().ToArray())
             {

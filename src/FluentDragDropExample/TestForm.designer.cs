@@ -30,36 +30,36 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestForm));
-			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Germany", 9);
-			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Ireland", 10);
-			System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Scotland", 11);
-			System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Spain", 12);
-			System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
-			System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("United States of America", 14);
-			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Argentina", 0);
-			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Australia", 1);
-			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Austria", 2);
-			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Belgium", 3);
-			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Brazil", 4);
-			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Canada", 5);
-			System.Windows.Forms.ListViewItem listViewItem37 = new System.Windows.Forms.ListViewItem("Denmark", 6);
-			System.Windows.Forms.ListViewItem listViewItem38 = new System.Windows.Forms.ListViewItem("England", 7);
-			System.Windows.Forms.ListViewItem listViewItem39 = new System.Windows.Forms.ListViewItem("France", 8);
-			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Germany", 9);
-			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Ireland", 10);
-			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Scotland", 11);
-			System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Spain", 12);
-			System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
-			System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("United States of America", 14);
-			System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem("Argentina", 0);
-			System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem("Australia", 1);
-			System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem("Austria", 2);
-			System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem("Belgium", 3);
-			System.Windows.Forms.ListViewItem listViewItem29 = new System.Windows.Forms.ListViewItem("Brazil", 4);
-			System.Windows.Forms.ListViewItem listViewItem30 = new System.Windows.Forms.ListViewItem("Canada", 5);
-			System.Windows.Forms.ListViewItem listViewItem31 = new System.Windows.Forms.ListViewItem("Denmark", 6);
-			System.Windows.Forms.ListViewItem listViewItem32 = new System.Windows.Forms.ListViewItem("England", 7);
-			System.Windows.Forms.ListViewItem listViewItem33 = new System.Windows.Forms.ListViewItem("France", 8);
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Germany", 9);
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Ireland", 10);
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Scotland", 11);
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Spain", 12);
+			System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
+			System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("United States of America", 14);
+			System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Argentina", 0);
+			System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Australia", 1);
+			System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Austria", 2);
+			System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Belgium", 3);
+			System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Brazil", 4);
+			System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Canada", 5);
+			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Denmark", 6);
+			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("England", 7);
+			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("France", 8);
+			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Germany", 9);
+			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Ireland", 10);
+			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Scotland", 11);
+			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Spain", 12);
+			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("United Kingdom", 13);
+			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("United States of America", 14);
+			System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Argentina", 0);
+			System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("Australia", 1);
+			System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Austria", 2);
+			System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem("Belgium", 3);
+			System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem("Brazil", 4);
+			System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem("Canada", 5);
+			System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem("Denmark", 6);
+			System.Windows.Forms.ListViewItem listViewItem29 = new System.Windows.Forms.ListViewItem("England", 7);
+			System.Windows.Forms.ListViewItem listViewItem30 = new System.Windows.Forms.ListViewItem("France", 8);
 			this.picEmpty3 = new System.Windows.Forms.PictureBox();
 			this.picEmpty2 = new System.Windows.Forms.PictureBox();
 			this.picControlPreviewBehindCursor = new System.Windows.Forms.PictureBox();
@@ -79,6 +79,7 @@
 			this.tabPageEffects = new System.Windows.Forms.TabPage();
 			this.picEffectsTarget = new System.Windows.Forms.PictureBox();
 			this.picReturnOnCancel = new System.Windows.Forms.PictureBox();
+			this.label13 = new System.Windows.Forms.Label();
 			this.tabPageRealWorld = new System.Windows.Forms.TabPage();
 			this.listRight = new System.Windows.Forms.ListView();
 			this.imlSmall = new System.Windows.Forms.ImageList(this.components);
@@ -86,7 +87,8 @@
 			this.tabPageNoDropAreas = new System.Windows.Forms.TabPage();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
-			this.picDragOverAllowDropFalse = new System.Windows.Forms.PictureBox();
+			this.picDragOverHookGiveFeedback = new System.Windows.Forms.PictureBox();
+			this.picDragOverHook = new System.Windows.Forms.PictureBox();
 			this.picEmpty5 = new System.Windows.Forms.PictureBox();
 			this.tabPageCompatibility = new System.Windows.Forms.TabPage();
 			this.label15 = new System.Windows.Forms.Label();
@@ -100,7 +102,6 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.linkCompatibilityBrowser = new System.Windows.Forms.LinkLabel();
-			this.label13 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.picEmpty3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picEmpty2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picControlPreviewBehindCursor)).BeginInit();
@@ -117,7 +118,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.picReturnOnCancel)).BeginInit();
 			this.tabPageRealWorld.SuspendLayout();
 			this.tabPageNoDropAreas.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.picDragOverAllowDropFalse)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDragOverHookGiveFeedback)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDragOverHook)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picEmpty5)).BeginInit();
 			this.tabPageCompatibility.SuspendLayout();
 			this.SuspendLayout();
@@ -256,7 +258,7 @@
 			this.pnlNoDrop.Controls.Add(this.label5);
 			this.pnlNoDrop.Location = new System.Drawing.Point(332, 29);
 			this.pnlNoDrop.Name = "pnlNoDrop";
-			this.pnlNoDrop.Size = new System.Drawing.Size(218, 269);
+			this.pnlNoDrop.Size = new System.Drawing.Size(218, 591);
 			this.pnlNoDrop.TabIndex = 12;
 			// 
 			// label5
@@ -265,7 +267,7 @@
 			this.label5.ForeColor = System.Drawing.Color.LightSalmon;
 			this.label5.Location = new System.Drawing.Point(0, 0);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(218, 269);
+			this.label5.Size = new System.Drawing.Size(218, 591);
 			this.label5.TabIndex = 0;
 			this.label5.Text = "AllowDrop = false";
 			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -281,7 +283,7 @@
 			this.tabControl.Location = new System.Drawing.Point(0, 0);
 			this.tabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.tabControl.Name = "tabControl";
-			this.tabControl.SelectedIndex = 1;
+			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(904, 1203);
 			this.tabControl.TabIndex = 13;
 			// 
@@ -344,6 +346,14 @@
 			this.picReturnOnCancel.TabStop = false;
 			this.picReturnOnCancel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picReturnOnCancel_MouseDown);
 			// 
+			// label13
+			// 
+			this.label13.Location = new System.Drawing.Point(51, 45);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(806, 210);
+			this.label13.TabIndex = 18;
+			this.label13.Text = resources.GetString("label13.Text");
+			// 
 			// tabPageRealWorld
 			// 
 			this.tabPageRealWorld.Controls.Add(this.listRight);
@@ -362,12 +372,12 @@
 			this.listRight.Activation = System.Windows.Forms.ItemActivation.OneClick;
 			this.listRight.HideSelection = false;
 			this.listRight.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
 			this.listRight.Location = new System.Drawing.Point(534, 34);
 			this.listRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listRight.Name = "listRight";
@@ -404,15 +414,15 @@
 			this.listLeft.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.listLeft.HideSelection = false;
 			this.listLeft.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12,
             listViewItem13,
             listViewItem14,
-            listViewItem15,
-            listViewItem16,
-            listViewItem17,
-            listViewItem18,
-            listViewItem37,
-            listViewItem38,
-            listViewItem39});
+            listViewItem15});
 			this.listLeft.Location = new System.Drawing.Point(40, 34);
 			this.listLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listLeft.Name = "listLeft";
@@ -427,7 +437,8 @@
 			// 
 			this.tabPageNoDropAreas.Controls.Add(this.label11);
 			this.tabPageNoDropAreas.Controls.Add(this.label12);
-			this.tabPageNoDropAreas.Controls.Add(this.picDragOverAllowDropFalse);
+			this.tabPageNoDropAreas.Controls.Add(this.picDragOverHookGiveFeedback);
+			this.tabPageNoDropAreas.Controls.Add(this.picDragOverHook);
 			this.tabPageNoDropAreas.Controls.Add(this.picEmpty5);
 			this.tabPageNoDropAreas.Controls.Add(this.pnlNoDrop);
 			this.tabPageNoDropAreas.Location = new System.Drawing.Point(4, 29);
@@ -441,7 +452,7 @@
 			// 
 			// label11
 			// 
-			this.label11.Location = new System.Drawing.Point(24, 392);
+			this.label11.Location = new System.Drawing.Point(24, 718);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(830, 172);
 			this.label11.TabIndex = 16;
@@ -451,28 +462,40 @@
 			// 
 			this.label12.AutoSize = true;
 			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label12.Location = new System.Drawing.Point(22, 354);
+			this.label12.Location = new System.Drawing.Point(22, 680);
 			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(317, 20);
+			this.label12.Size = new System.Drawing.Size(486, 29);
 			this.label12.TabIndex = 15;
 			this.label12.Text = "Hovering over controls with AllowDrop=false";
 			// 
-			// picDragOverAllowDropFalse
+			// picDragOverHookGiveFeedback
 			// 
-			this.picDragOverAllowDropFalse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.picDragOverAllowDropFalse.Image = ((System.Drawing.Image)(resources.GetObject("picDragOverAllowDropFalse.Image")));
-			this.picDragOverAllowDropFalse.Location = new System.Drawing.Point(28, 29);
-			this.picDragOverAllowDropFalse.Name = "picDragOverAllowDropFalse";
-			this.picDragOverAllowDropFalse.Size = new System.Drawing.Size(270, 270);
-			this.picDragOverAllowDropFalse.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.picDragOverAllowDropFalse.TabIndex = 14;
-			this.picDragOverAllowDropFalse.TabStop = false;
-			this.picDragOverAllowDropFalse.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picDragOverAllowDropFalse_MouseDown);
+			this.picDragOverHookGiveFeedback.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.picDragOverHookGiveFeedback.Image = ((System.Drawing.Image)(resources.GetObject("picDragOverHookGiveFeedback.Image")));
+			this.picDragOverHookGiveFeedback.Location = new System.Drawing.Point(27, 29);
+			this.picDragOverHookGiveFeedback.Name = "picDragOverHookGiveFeedback";
+			this.picDragOverHookGiveFeedback.Size = new System.Drawing.Size(270, 270);
+			this.picDragOverHookGiveFeedback.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.picDragOverHookGiveFeedback.TabIndex = 14;
+			this.picDragOverHookGiveFeedback.TabStop = false;
+			this.picDragOverHookGiveFeedback.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picDragOverHookGiveFeedback_MouseDown);
+			// 
+			// picDragOverHook
+			// 
+			this.picDragOverHook.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.picDragOverHook.Image = ((System.Drawing.Image)(resources.GetObject("picDragOverHook.Image")));
+			this.picDragOverHook.Location = new System.Drawing.Point(27, 350);
+			this.picDragOverHook.Name = "picDragOverHook";
+			this.picDragOverHook.Size = new System.Drawing.Size(270, 270);
+			this.picDragOverHook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.picDragOverHook.TabIndex = 14;
+			this.picDragOverHook.TabStop = false;
+			this.picDragOverHook.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picDragOverHook_MouseDown);
 			// 
 			// picEmpty5
 			// 
 			this.picEmpty5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.picEmpty5.Location = new System.Drawing.Point(584, 29);
+			this.picEmpty5.Location = new System.Drawing.Point(584, 185);
 			this.picEmpty5.Name = "picEmpty5";
 			this.picEmpty5.Size = new System.Drawing.Size(270, 270);
 			this.picEmpty5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -531,12 +554,12 @@
 			this.listCompatibilityFluent.Activation = System.Windows.Forms.ItemActivation.OneClick;
 			this.listCompatibilityFluent.HideSelection = false;
 			this.listCompatibilityFluent.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem16,
+            listViewItem17,
+            listViewItem18,
             listViewItem19,
             listViewItem20,
-            listViewItem21,
-            listViewItem22,
-            listViewItem23,
-            listViewItem24});
+            listViewItem21});
 			this.listCompatibilityFluent.Location = new System.Drawing.Point(56, 488);
 			this.listCompatibilityFluent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityFluent.Name = "listCompatibilityFluent";
@@ -586,15 +609,15 @@
 			this.listCompatibilityTraditional.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.listCompatibilityTraditional.HideSelection = false;
 			this.listCompatibilityTraditional.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem22,
+            listViewItem23,
+            listViewItem24,
             listViewItem25,
             listViewItem26,
             listViewItem27,
             listViewItem28,
             listViewItem29,
-            listViewItem30,
-            listViewItem31,
-            listViewItem32,
-            listViewItem33});
+            listViewItem30});
 			this.listCompatibilityTraditional.Location = new System.Drawing.Point(56, 283);
 			this.listCompatibilityTraditional.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.listCompatibilityTraditional.Name = "listCompatibilityTraditional";
@@ -613,7 +636,7 @@
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label7.Location = new System.Drawing.Point(50, 757);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(177, 20);
+			this.label7.Size = new System.Drawing.Size(272, 29);
 			this.label7.TabIndex = 5;
 			this.label7.Text = "Application compatibility";
 			// 
@@ -623,7 +646,7 @@
 			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label6.Location = new System.Drawing.Point(50, 45);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(150, 20);
+			this.label6.Size = new System.Drawing.Size(231, 29);
 			this.label6.TabIndex = 4;
 			this.label6.Text = "Control compatibility";
 			// 
@@ -637,14 +660,6 @@
 			this.linkCompatibilityBrowser.TabStop = true;
 			this.linkCompatibilityBrowser.Text = "Drag me to the tabs of your browser.";
 			this.linkCompatibilityBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.linkCompatibilityBrowser_MouseDown);
-			// 
-			// label13
-			// 
-			this.label13.Location = new System.Drawing.Point(51, 45);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(806, 210);
-			this.label13.TabIndex = 18;
-			this.label13.Text = resources.GetString("label13.Text");
 			// 
 			// TestForm
 			// 
@@ -674,7 +689,8 @@
 			this.tabPageRealWorld.ResumeLayout(false);
 			this.tabPageNoDropAreas.ResumeLayout(false);
 			this.tabPageNoDropAreas.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.picDragOverAllowDropFalse)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDragOverHookGiveFeedback)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDragOverHook)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.picEmpty5)).EndInit();
 			this.tabPageCompatibility.ResumeLayout(false);
 			this.tabPageCompatibility.PerformLayout();
@@ -715,7 +731,7 @@
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.PictureBox picDragOverAllowDropFalse;
+		private System.Windows.Forms.PictureBox picDragOverHook;
 		private System.Windows.Forms.PictureBox picEmpty5;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
@@ -725,6 +741,7 @@
 		private System.Windows.Forms.PictureBox picReturnOnCancel;
 		private System.Windows.Forms.PictureBox picEffectsTarget;
 		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.PictureBox picDragOverHookGiveFeedback;
 	}
 }
 

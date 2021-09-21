@@ -151,16 +151,26 @@ namespace FluentDragDropExample
             }
         }
 
-        private void picDragOverAllowDropFalse_MouseDown(object sender, MouseEventArgs e)
+        private void picDragOverHook_MouseDown(object sender, MouseEventArgs e)
         {
-            picDragOverAllowDropFalse.InitializeDragAndDrop()
+            picDragOverHook.InitializeDragAndDrop()
                 .Copy()
                 .OnMouseMove()
-                .WithData(() => picDragOverAllowDropFalse.Image)
+                .WithData(() => picDragOverHook.Image)
                 .To(picEmpty5, (target, data) => target.Image = data);
         }
 
-        private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
+		private void picDragOverHookGiveFeedback_MouseDown(object sender, MouseEventArgs e)
+		{
+			picDragOverHookGiveFeedback.InitializeDragAndDrop()
+				.Copy()
+				.OnMouseMove()
+				.WithData(() => picDragOverHookGiveFeedback.Image)
+				.WithoutMouseHooks()
+				.To(picEmpty5, (target, data) => target.Image = data);
+		}
+
+		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)
         {
             var newItems = draggedItems.Select(i => new ListViewItem { Text = i.Text, ImageIndex = i.ImageIndex }).ToArray();
             targetListView.Items.AddRange(newItems);
@@ -261,5 +271,6 @@ namespace FluentDragDropExample
 					.Bounce(TimeSpan.FromSeconds(1.2));
 			}
 		}
+
 	}
 }
