@@ -77,13 +77,9 @@ FluentDrag&Drop can easily be used with your current Drag&Drop implementations i
 
 ## Smoothness
 
-Most approaches I have used in the past get in trouble when moving the preview over controls that do not have the property `AllowDrop` set to `true`. Whenever a Drag&Drop implementation uses the `GiveFeedback` event to update its preview images, you'll get a behavior like this:
+Most approaches I have used in the past get in trouble when moving the preview over controls that do not have the property `AllowDrop` set to `true`. Whenever a Drag&Drop implementation uses the `GiveFeedback` event to update its preview images, you might get laggy Drag&Drop experiences with stuttering preview image movements.
 
-![Screenshot](doc/AllowDropFalseWithoutFluent.gif)
-
-In contrast, FluentDrag&Drop will render preview images smoothly wherever you move them.
-
-![Screenshot](doc/AllowDropFalse.gif)
+In contrast, FluentDrag&Drop will render preview images smoothly wherever you move them, even over other applications.
 
 ## 🔆 Effects
 
@@ -108,3 +104,7 @@ The sample above shows some of the effects in action:
 Those effects are powered by another project called [FluentTransitions](https://github.com/awaescher/FluentTransitions) allowing the animations and transitions to be rendered smoothly. I'd encourage you to check it out:
 - [GitHub](https://github.com/awaescher/FluentTransitions)
 - [NuGet](https://www.nuget.org/packages/FluentTransitions)
+
+---
+
+Images taken from Unsplash, links to these are located at `/doc/Unsplash` <3 
