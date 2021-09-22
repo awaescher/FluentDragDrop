@@ -107,4 +107,4 @@ Those effects are powered by another project called [FluentTransitions](https://
 
 ---
 
-❤ Images taken from Unsplash, links to these are located at `/doc/Unsplash`
+Images taken from Unsplash, links to these are located at `/doc/Unsplash`
