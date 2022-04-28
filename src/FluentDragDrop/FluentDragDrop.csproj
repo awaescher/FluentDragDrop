@@ -10,7 +10,7 @@ This package brings rich Drag&amp;Drop experience to your app, just by adding a 
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
     <PackageTags>Fluent;Drag;Drop;Windows;Forms;WinForms;UI</PackageTags>
-    <Copyright>Andreas Wäscher 2020</Copyright>
+    <Copyright>Andreas Wäscher 2022</Copyright>
     <PackageIcon>FluentDragDrop.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
