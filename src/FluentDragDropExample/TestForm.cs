@@ -156,8 +156,7 @@ namespace FluentDragDropExample
             picDragOverHook.InitializeDragAndDrop()
                 .Copy()
                 .OnMouseMove()
-                .WithData(() => picDragOverHook.Image)
-                .To(picEmpty5, (target, data) => target.Image = data);
+                .WithData(() => picDragOverHook.Image);
         }
 
 		private void picDragOverHookGiveFeedback_MouseDown(object sender, MouseEventArgs e)
@@ -166,8 +165,7 @@ namespace FluentDragDropExample
 				.Copy()
 				.OnMouseMove()
 				.WithData(() => picDragOverHookGiveFeedback.Image)
-				.WithoutMouseHooks()
-				.To(picEmpty5, (target, data) => target.Image = data);
+				.WithoutMouseHooks();
 		}
 
 		private void MoveItems(ListView targetListView, ListViewItem[] draggedItems)

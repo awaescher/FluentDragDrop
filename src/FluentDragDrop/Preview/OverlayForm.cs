@@ -131,8 +131,8 @@ namespace FluentDragDrop.Preview
 			base.WndProc(ref m);
 
 			var from = (MINMAXINFO)Marshal.PtrToStructure(m.LParam, typeof(MINMAXINFO));
-			from.ptMinTrackSize = new POINT(1, 1);
-			Marshal.StructureToPtr<MINMAXINFO>(from, m.LParam, true);
+			from.ptMinTrackSize = new POINT { X = 1, Y = 1 };
+			Marshal.StructureToPtr(from, m.LParam, true);
 			m.Result = IntPtr.Zero;
 		}
 	}
@@ -149,21 +149,6 @@ internal struct MINMAXINFO
 
 internal struct POINT
 {
-	public POINT(int x, int y)
-	{
-		X = x;
-		Y = y;
-	}
-
-	public POINT(Point pt)
-	{
-		X = pt.X;
-		Y = pt.Y;
-	}
-
-	public Point ToPoint() => new Point(X, Y);
-
 	public int X;
 	public int Y;
 }
-
