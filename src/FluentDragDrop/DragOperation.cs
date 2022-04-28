@@ -318,7 +318,6 @@ namespace FluentDragDrop
 
 		private void SourceControl_GiveFeedback(object sender, GiveFeedbackEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine($"GiveFeedback {DateTime.Now.Millisecond}");
 			_previewFormController.Move();
 		}
 
