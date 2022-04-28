@@ -17,9 +17,6 @@ namespace FluentDragDrop.Preview
 			Enabled = false;
 		}
 
-
-
-
 		public void Start(Control sourceControl, Effects.Effects effects, Point location, IPreview preview)
 		{
 			if (IsDisposed)

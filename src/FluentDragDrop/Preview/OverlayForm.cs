@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace FluentDragDrop.Preview
 {
-	public class OverlayForm : Form
+	internal class OverlayForm : Form
 	{
 		[DllImport("USER32.dll")]
 		private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
@@ -31,6 +31,10 @@ namespace FluentDragDrop.Preview
 
 		public OverlayForm()
 		{
+			SetStyle(ControlStyles.ResizeRedraw, true);
+			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+			SetStyle(ControlStyles.SupportsTransparentBackColor | ControlStyles.OptimizedDoubleBuffer, true);
+
 			Parent = null;
 			TopLevel = true;
 			ControlBox = false;
@@ -39,13 +43,7 @@ namespace FluentDragDrop.Preview
 			ShowInTaskbar = false;
 			Visible = false;
 			TabStop = false;
-
-			SetStyle(ControlStyles.ResizeRedraw, true);
-			SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-			SetStyle(ControlStyles.SupportsTransparentBackColor | ControlStyles.OptimizedDoubleBuffer, true);
 			BackColor = Color.Transparent;
-
-
 		}
 
 		protected override CreateParams CreateParams
@@ -135,7 +133,7 @@ namespace FluentDragDrop.Preview
 	}
 }
 
-public struct MINMAXINFO
+internal struct MINMAXINFO
 {
 	public POINT ptReserved;
 	public POINT ptMaxSize;
@@ -144,7 +142,7 @@ public struct MINMAXINFO
 	public POINT ptMaxTrackSize;
 }
 
-public struct POINT
+internal struct POINT
 {
 	public POINT(int x, int y)
 	{
