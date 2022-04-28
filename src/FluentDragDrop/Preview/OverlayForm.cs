@@ -60,6 +60,11 @@ namespace FluentDragDrop.Preview
 
 		protected virtual IntPtr InsertAfterWindow => (IntPtr)(IsTopMost ? -1 : 0);
 
+		/// <summary>
+		/// Overrides the hidden base property to prevent the overlay form from getting
+		/// activated. This alone would not be enough but in combination with the message
+		/// handling in WndProc(), it prevents the activation and makes the preview as smooths as possible.
+		/// </summary>
 		protected override bool ShowWithoutActivation => true;
 
 		protected virtual bool AllowMouseActivate => false;
