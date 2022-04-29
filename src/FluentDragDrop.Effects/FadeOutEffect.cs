@@ -19,14 +19,14 @@ namespace FluentDragDrop.Effects
 				.With(arguments.PreviewForm, nameof(arguments.PreviewForm.Opacity), 0d)
 				.Build(new Deceleration(500));
 
-			void selfRemovingHandler(object _, Transition.Args __)
+			void selfRemovingHandler(object _, EventArgs __)
 			{
-				transition.TransitionCompletedEvent -= selfRemovingHandler;
+				transition.TransitionCompleted -= selfRemovingHandler;
 
 				arguments.PreviewForm.BeginInvoke((Action)(() => base.ClosePreview(arguments)));
 			}
 
-			transition.TransitionCompletedEvent += selfRemovingHandler;
+			transition.TransitionCompleted += selfRemovingHandler;
 
 			transition.Run();
 		}

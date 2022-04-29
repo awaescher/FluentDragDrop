@@ -9,7 +9,7 @@ This package extends FluentDrag&amp;Drop with rich effects. Powered by FluentTra
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
     <PackageTags>Fluent;Drag;Drop;Effects;Windows;Forms;WinForms;UI</PackageTags>
-    <Copyright>Andreas Wäscher 2020</Copyright>
+    <Copyright>Andreas Wäscher 2022</Copyright>
     <PackageIcon>FluentDragDrop.Effects.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -20,7 +20,7 @@ The app icon was made by Freepik from www.flaticon.com and is licensed by Creati
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentTransitions" Version="1.0.3" />
+    <PackageReference Include="FluentTransitions" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
