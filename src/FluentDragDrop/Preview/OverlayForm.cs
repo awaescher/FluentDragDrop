@@ -136,19 +136,25 @@ namespace FluentDragDrop.Preview
 			m.Result = IntPtr.Zero;
 		}
 	}
-}
 
-internal struct MINMAXINFO
-{
-	public POINT ptReserved;
-	public POINT ptMaxSize;
-	public POINT ptMaxPosition;
-	public POINT ptMinTrackSize;
-	public POINT ptMaxTrackSize;
-}
+#pragma warning disable S101 // Types should be named in PascalCase
+#pragma warning disable 0649 // Field is never assigned to, and will always have its default value
 
-internal struct POINT
-{
-	public int X;
-	public int Y;
+	internal struct MINMAXINFO
+	{
+		public POINT ptReserved;
+		public POINT ptMaxSize;
+		public POINT ptMaxPosition;
+		public POINT ptMinTrackSize;
+		public POINT ptMaxTrackSize;
+	}
+
+	internal struct POINT
+	{
+		public int X;
+		public int Y;
+	}
+#pragma warning restore 0649 // Field is never assigned to, and will always have its default value
+#pragma warning restore S101 // Types should be named in PascalCase
+
 }

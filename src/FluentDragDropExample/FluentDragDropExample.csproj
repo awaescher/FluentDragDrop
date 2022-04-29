@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FluentDragDrop.Effects\FluentDragDrop.Effects.csproj" />
     <ProjectReference Include="..\FluentDragDrop\FluentDragDrop.csproj" />
-    <PackageReference Include="FluentTransitions" Version="1.0.3" />
+    <PackageReference Include="FluentTransitions" Version="2.0.1" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="21.0.7" />
   </ItemGroup>
 
