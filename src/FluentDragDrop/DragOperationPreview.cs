@@ -37,14 +37,17 @@ namespace FluentDragDrop
         /// <returns></returns>
         public DragOperation<T> RelativeToCursor()
         {
-            var mousePositionOnScreen = Control.MousePosition;
-            var sourceControlPositionOnScreen = _operation.SourceControl.PointToScreen(Point.Empty);
+			Func<Size, Point> _offsetEvaluator = _ =>
+			{
+				var mousePositionOnScreen = Control.MousePosition;
+				var sourceControlPositionOnScreen = _operation.SourceControl.PointToScreen(Point.Empty);
+				var offsetX = -1 * (mousePositionOnScreen.X - sourceControlPositionOnScreen.X);
+				var offsetY = -1 * (mousePositionOnScreen.Y - sourceControlPositionOnScreen.Y);
+				return new Point(offsetX, offsetY);
+			};
 
-            var offsetX = -1 * (mousePositionOnScreen.X - sourceControlPositionOnScreen.X);
-            var offsetY = -1 * (mousePositionOnScreen.Y - sourceControlPositionOnScreen.Y);
-
-            return _operation.WithCursorOffset(offsetX, offsetY);
-        }
+			return _operation.WithCursorOffset(_offsetEvaluator);
+		}
 
         /// <summary>
         /// Attaches the preview above the cursor like the Windows Explorer shows previews while drag and drop operations of files and folders
@@ -52,12 +55,14 @@ namespace FluentDragDrop
         /// <returns></returns>
         public DragOperation<T> LikeWindowsExplorer()
         {
-            var previewSize = _operation.CalculatePreviewSize();
+			Func<Size, Point> _offsetEvaluator = previewSize =>
+			{
+				var offsetX = -1 * (previewSize.Width / 2);
+				var offsetY = -1 * (previewSize.Height - (Cursor.Current.Size.Height / 2));
+				return new Point(offsetX, offsetY);
+			};
 
-            var offsetX = -1 * (previewSize.Width / 2);
-            var offsetY = -1 * (previewSize.Height - (Cursor.Current.Size.Height / 2));
-
-            return _operation.WithCursorOffset(offsetX, offsetY);
+			return _operation.WithCursorOffset(_offsetEvaluator);
         }
 
 		/// <summary>

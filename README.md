@@ -11,24 +11,24 @@ Wouldn't it be great if you could use Drag&Drop with fluent code like this?
 ```cs
 private void picControlPreviewBehindCursor_MouseDown(object sender, MouseEventArgs e)
 {
-    var pic = (PictureBox)sender;
+	var pic = (PictureBox)sender;
 
-    pic.InitializeDragAndDrop()
-        .Copy()
-        .Immediately()
-        .WithData(pic.Image)
-        .WithPreview().BehindCursor()
-        .To(PreviewBoxes, (target, data) => target.Image = data);
+	pic.InitializeDragAndDrop()
+		.Copy()
+		.Immediately()
+		.WithData(pic.Image)
+		.WithPreview().BehindCursor()
+		.To(PreviewBoxes, (target, data) => target.Image = data);
 
-    // Copy(), Move() or Link() to define allowed effects
-    // Immediately() or OnMouseMove() for deferred start on mouse move
-    // WithData() to pass any object you like
-    // WithPreview() to define your preview and how it should behave
-    //     BehindCursor() or RelativeToCursor() to define the preview placement
-    // To() to define target controls and how the dragged data should be used on drop
+	// Copy(), Move() or Link() to define allowed effects
+	// Immediately() or OnMouseMove() for deferred start on mouse move
+	// WithData() to pass any object you like
+	// WithPreview() to define your preview and how it should behave
+	//     BehindCursor() or RelativeToCursor() to define the preview placement
+	// To() to define target controls and how the dragged data should be used on drop
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L32-L51' title='Snippet source file'>snippet source</a> | <a href='#snippet-immediateusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L32-L51' title='File snippet `immediateusage` was extracted from'>snippet source</a> | <a href='#snippet-immediateusage' title='Navigate to start of snippet `immediateusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 It's all in there: Putting data to the drag&drop operation, attaching a custom preview image to the mouse cursor, working with the dragged data once it's dropped and much more.
@@ -50,19 +50,19 @@ FluentDrag&Drop does exactly that if defined with `OnMouseMove()`. However there
 ```cs
 private void CountryList_MouseDown(object sender, MouseEventArgs e)
 {
-    var source = (ListView)sender;
-    var target = source.Equals(listLeft) ? listRight : listLeft;
+	var source = (ListView)sender;
+	var target = source.Equals(listLeft) ? listRight : listLeft;
 
-    source.InitializeDragAndDrop()
-        .Move()
-        .OnMouseMove()
-        .If(() => source.SelectedIndices.Count > 0)
-        .WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
-        .WithPreview((_, data) => RenderPreview(data)).BehindCursor()
-        .To(target, MoveItems);
+	source.InitializeDragAndDrop()
+		.Move()
+		.OnMouseMove()
+		.If(() => source.SelectedIndices.Count > 0)
+		.WithData(() => source.SelectedItems.OfType<ListViewItem>().ToArray())
+		.WithPreview((_, data) => RenderPreview(data)).BehindCursor()
+		.To(target, MoveItems);
 }
 ```
-<sup><a href='/src/FluentDragDropExample/TestForm.cs#L80-L94' title='Snippet source file'>snippet source</a> | <a href='#snippet-delayedusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/FluentDragDropExample/TestForm.cs#L80-L94' title='File snippet `delayedusage` was extracted from'>snippet source</a> | <a href='#snippet-delayedusage' title='Navigate to start of snippet `delayedusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 This (<sub><sup>and the 5 line method `MoveItems()`</sub></sup>) is everything we need to implement two-way Drag&Drop lists:

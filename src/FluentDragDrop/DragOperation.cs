@@ -22,10 +22,9 @@ namespace FluentDragDrop
         private readonly Func<bool> _conditionEvaluator;
         private Func<IPreview> _previewEvaluator;
         private T _data;
-		private Effects.Effects _effects = Effects.Effects.GetDefaults();
+		private readonly Effects.Effects _effects = Effects.Effects.GetDefaults();
 		private bool _allowMouseHooks = true;
 
-		private Point _cursorOffset = Point.Empty;
         private Point _initialPosition = Point.Empty;
 
         /// <summary>
@@ -112,64 +111,87 @@ namespace FluentDragDrop
             return this;
         }
 
-        /// <summary>
-        /// Defines the preview image for the drag and drop operation
-        /// </summary>
-        /// <param name="image">The preview image for the drag and drop operation</param>
-        /// <returns></returns>
-        public DragOperationPreview<T> WithPreview(Bitmap image)
+		/// <summary>
+		/// Defines the preview image to be taken from the control directly.
+		/// </summary>
+		public DragOperationPreview<T> WithPreview()
+		{
+			_previewEvaluator = () => new BitmapPreview(() => GetControlPreviewBitmap());
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		/// <summary>
+		/// Defines the preview image for the drag and drop operation.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewEvaluator">A function returning the preview image for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<Bitmap> previewEvaluator)
+		{
+			_previewEvaluator = () => new BitmapPreview(previewEvaluator);
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		/// <summary>
+		/// Defines the preview for the drag and drop operation.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewEvaluator">A function returning the preview for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<IPreview> previewEvaluator)
+		{
+			_previewEvaluator = previewEvaluator;
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		/// <summary>
+		/// Defines the preview image for the drag and drop operation by the data passed that is passed.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewEvaluator">A function returning the preview image for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<T, Bitmap> previewEvaluator)
+		{
+			_previewEvaluator = () => new BitmapPreview(() => previewEvaluator.Invoke(Data));
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		/// <summary>
+		/// Defines the preview for the drag and drop operation by the datathat is passed.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewEvaluator">A function returning the preview for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<T, IPreview> previewEvaluator)
+		{
+			_previewEvaluator = () => previewEvaluator.Invoke(Data);
+
+			return new DragOperationPreview<T>(this);
+		}
+
+		/// <summary>
+		/// Defines how the default preview image should be modified for the drag and drop operation.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewMutator">A mutator function to modify the preview image for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<Bitmap, T, Bitmap> previewMutator)
         {
-            _previewEvaluator = () => new BitmapPreview(image);
+            _previewEvaluator = () => new BitmapPreview(() => previewMutator(GetControlPreviewBitmap(), Data));
 
             return new DragOperationPreview<T>(this);
         }
 
-        /// <summary>
-        /// Defines how the default preview image should be modified for the drag and drop operation
-        /// </summary>
-        /// <param name="previewMutator">A mutator function to modify the preview image for the drag and drop operation</param>
-        /// <returns></returns>
-        public DragOperationPreview<T> WithPreview(Func<Bitmap, T, Bitmap> previewMutator)
-        {
-            _previewEvaluator = () => new BitmapPreview(previewMutator(GetControlPreviewBitmap(), Data));
+		/// <summary>
+		/// Defines how the default preview should be modified for the drag and drop operation.
+		/// This function will be invoked as soon as the drag and drop operation starts.
+		/// </summary>
+		/// <param name="previewMutator">A mutator function to modify the preview for the drag and drop operation</param>
+		public DragOperationPreview<T> WithPreview(Func<Bitmap, T, IPreview> previewMutator)
+		{
+			_previewEvaluator = () => previewMutator(GetControlPreviewBitmap(), Data);
 
-            return new DragOperationPreview<T>(this);
-        }
-
-        /// <summary>
-        /// Defines the preview for the drag and drop operation
-        /// </summary>
-        /// <param name="preview">The preview implementation to show during the drag and drop operation</param>
-        /// <returns></returns>
-        public DragOperationPreview<T> WithPreview(IPreview preview)
-        {
-            _previewEvaluator = () => preview;
-
-            return new DragOperationPreview<T>(this);
-        }
-
-        /// <summary>
-        /// Defines how the default preview image should be modified for the drag and drop operation
-        /// </summary>
-        /// <param name="previewMutator">A mutator function to modify the preview for the drag and drop operation</param>
-        /// <returns></returns>
-        public DragOperationPreview<T> WithPreview(Func<Bitmap, T, IPreview> previewMutator)
-        {
-            _previewEvaluator = () => previewMutator(GetControlPreviewBitmap(), Data);
-
-            return new DragOperationPreview<T>(this);
-        }
-
-        /// <summary>
-        /// Defines the preview image to be taken from the control directly.
-        /// </summary>
-        /// <returns></returns>
-        public DragOperationPreview<T> WithPreview()
-        {
-            _previewEvaluator = () => new BitmapPreview(GetControlPreviewBitmap());
-
-            return new DragOperationPreview<T>(this);
-        }
+			return new DragOperationPreview<T>(this);
+		}
 
 		/// <summary>
 		/// Defines one or more effects to start when the drag and drop operation gets started.
@@ -212,11 +234,25 @@ namespace FluentDragDrop
 		/// <returns></returns>
 		internal DragOperation<T> WithCursorOffset(int x, int y)
         {
-            _cursorOffset.X = -1 * x;
-            _cursorOffset.Y = -1 * y;
+			_offsetEvaluator = _ => new Point(x, y);
 
             return this;
         }
+
+		Func<Size, Point> _offsetEvaluator;
+
+		/// <summary>
+		/// Defines the cursor offset of the preview image
+		/// </summary>
+		/// <param name="x">The offset on the X axis in pixels</param>
+		/// <param name="y">The offset on the Y axis in pixels</param>
+		/// <returns></returns>
+		internal DragOperation<T> WithCursorOffset(Func<Size, Point> offsetEvaluator)
+		{
+			_offsetEvaluator = offsetEvaluator;
+
+			return this;
+		}
 
 		/// <summary>
 		/// Prevents mouse hooks and instead uses the Control.GiveFeedback event to update the preview image.
@@ -296,7 +332,8 @@ namespace FluentDragDrop
 				else
 					SourceControl.GiveFeedback += SourceControl_GiveFeedback;
 
-                _previewFormController.Start(SourceControl, _effects, preview, _cursorOffset);
+				var offset = _offsetEvaluator?.Invoke(CalculatePreviewSize()) ?? Point.Empty;
+                _previewFormController.Start(SourceControl, _effects, preview, offset);
 
                 var data = Data == null ? (object)new NullPlaceholder() : Data;
 				resultEffect = SourceControl.DoDragDrop(data, effect);
