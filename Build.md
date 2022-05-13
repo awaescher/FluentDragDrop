@@ -6,7 +6,7 @@ More info from [Nerdbank here](https://github.com/dotnet/Nerdbank.GitVersioning/
 To build the project for packaging, run the following command in the root directory:
 
 ```powershell
-dotnet build /src -c Release
+dotnet build src -c Release
 ```
 
 This will build and pack the assemblies to according output directories:
