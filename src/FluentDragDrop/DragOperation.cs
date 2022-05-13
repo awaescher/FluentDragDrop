@@ -23,17 +23,22 @@ namespace FluentDragDrop
         private Func<IPreview> _previewEvaluator;
         private T _data;
 		private readonly Effects.Effects _effects = Effects.Effects.GetDefaults();
+		private Action _startAction;
+		private Action _dropAction;
+		private Action _cancelAction;
 		private bool _allowMouseHooks = true;
+		Func<Size, Point> _offsetEvaluator;
+		private Point _initialPosition = Point.Empty;
+		private bool _dropped;
+		private bool _cancelled;
 
-        private Point _initialPosition = Point.Empty;
-
-        /// <summary>
-        /// Creates a new instance of the drag operation
-        /// </summary>
-        /// <param name="definition">The drag definition containing the source control and the drag and drop effect</param>
-        /// <param name="dataEvaluator">A function to retrieve the data to drop</param>
-        /// <param name="conditionEvaluator">A function to check whether the operation should be started or not</param>
-        public DragOperation(DragDefinition definition, Func<T> dataEvaluator, Func<bool> conditionEvaluator)
+		/// <summary>
+		/// Creates a new instance of the drag operation
+		/// </summary>
+		/// <param name="definition">The drag definition containing the source control and the drag and drop effect</param>
+		/// <param name="dataEvaluator">A function to retrieve the data to drop</param>
+		/// <param name="conditionEvaluator">A function to check whether the operation should be started or not</param>
+		public DragOperation(DragDefinition definition, Func<T> dataEvaluator, Func<bool> conditionEvaluator)
         {
             _definition = definition ?? throw new ArgumentNullException(nameof(definition));
             _dataEvaluator = dataEvaluator ?? throw new ArgumentNullException(nameof(dataEvaluator));
@@ -75,7 +80,8 @@ namespace FluentDragDrop
             {
                 _previewFormController?.Stop(target, wasCancelled: false);
                 dragDrop?.Invoke(target, value);
-            };
+				InvokeDroppedIfNotCancelled();
+			};
 
             return To(target, handler);
         }
@@ -194,6 +200,40 @@ namespace FluentDragDrop
 		}
 
 		/// <summary>
+		/// Defines an action that is executed as soon as the drag and drop operation is started.
+		/// It is 
+		/// </summary>
+		/// <param name="action">The action to execute when a drag and drop operation is started</param>
+		/// <remarks>It is ensured that this action is executed in the UI thread</remarks>
+		public DragOperation<T> OnStart(Action action)
+		{
+			_startAction = action;
+			return this;
+		}
+
+		/// <summary>
+		/// Defines an action that is executed after the drag and drop operation ended successfully.
+		/// </summary>
+		/// <param name="action">The action to execute after the drag and drop operation ended successfully.</param>
+		/// <remarks>It is ensured that this action is executed in the UI thread</remarks>
+		public DragOperation<T> OnDrop(Action action)
+		{
+			_dropAction = action;
+			return this;
+		}
+
+		/// <summary>
+		/// Defines an action that is executed after the drag and drop operation was cancelled.
+		/// </summary>
+		/// <param name="action">The action to execute after the drag and drop operation was cancelled.</param>
+		/// <remarks>It is ensured that this action is executed in the UI thread</remarks>
+		public DragOperation<T> OnCancel(Action action)
+		{
+			_cancelAction = action;
+			return this;
+		}
+
+		/// <summary>
 		/// Defines one or more effects to start when the drag and drop operation gets started.
 		/// </summary>
 		/// <param name="effects">The effects to start</param>
@@ -239,13 +279,10 @@ namespace FluentDragDrop
             return this;
         }
 
-		Func<Size, Point> _offsetEvaluator;
-
 		/// <summary>
 		/// Defines the cursor offset of the preview image
 		/// </summary>
-		/// <param name="x">The offset on the X axis in pixels</param>
-		/// <param name="y">The offset on the Y axis in pixels</param>
+		/// <param name="offsetEvaluator">A function calculating the offset of the curor in pixels</param>
 		/// <returns></returns>
 		internal DragOperation<T> WithCursorOffset(Func<Size, Point> offsetEvaluator)
 		{
@@ -301,7 +338,7 @@ namespace FluentDragDrop
             {
                 _initialPosition = Control.MousePosition;
                 SourceControl.MouseMove += SourceControl_MouseMove;
-                SourceControl.MouseUp += SourceControl_MouseUp; // TODO only mouse up might be too soft. Esc? MouseLeave?
+                SourceControl.MouseUp += SourceControl_MouseUp;
             }
         }
 
@@ -332,6 +369,8 @@ namespace FluentDragDrop
 				else
 					SourceControl.GiveFeedback += SourceControl_GiveFeedback;
 
+				OnSafeguardedStart();
+
 				var offset = _offsetEvaluator?.Invoke(CalculatePreviewSize()) ?? Point.Empty;
                 _previewFormController.Start(SourceControl, _effects, preview, offset);
 
@@ -349,9 +388,77 @@ namespace FluentDragDrop
 				// this call is too late and will not do anything
 				_previewFormController.Stop(null, wasCancelled: true);
 
+				InvokeCancelIfNotDroppedAction();
+
                 CleanUp();
             }
         }
+
+		/// <summary>
+		/// Invokes OnSafeguardedCancelled() if not canceled or dropped already
+		/// </summary>
+		private void InvokeCancelIfNotDroppedAction()
+		{
+			if (_dropped || _cancelled)
+				return;
+
+			_cancelled = true;
+			OnSafeguardedCancel();
+		}
+
+		/// <summary>
+		/// Invokes OnSafeguardedDrop() if not canceled or dropped already
+		/// </summary>
+		private void InvokeDroppedIfNotCancelled()
+		{
+			if (_dropped || _cancelled)
+				return;
+
+			_dropped = true;
+			OnSafeguardedDrop();
+		}
+
+		/// <summary>
+		/// Gets executed as soon as the drag and drop operation is started
+		/// </summary>
+		private void OnSafeguardedStart()
+		{
+			_cancelled = false;
+			_dropped = false;
+
+			RunActionOnUiThread(_startAction);
+		}
+
+		/// <summary>
+		/// Gets executed once after the drag and drop operation ended successfully
+		/// </summary>
+		private void OnSafeguardedDrop()
+		{
+			RunActionOnUiThread(_dropAction);
+		}
+
+		/// <summary>
+		/// Gets executed once after the drag and drop operation was cancelled
+		/// </summary>
+		private void OnSafeguardedCancel()
+		{
+			RunActionOnUiThread(_cancelAction);
+		}
+
+		/// <summary>
+		/// Runs a given action on the UI thread
+		/// </summary>
+		/// <param name="action">The action to run on the UI thread</param>
+		private void RunActionOnUiThread(Action action)
+		{
+			if (action == null)
+				return;
+
+			if (SourceControl.InvokeRequired)
+				SourceControl.Invoke(action);
+			else
+				action.Invoke();
+		}
 
 		private void SourceControl_GiveFeedback(object sender, GiveFeedbackEventArgs e)
 		{
@@ -403,6 +510,7 @@ namespace FluentDragDrop
             {
                 _previewFormController?.Stop(sender as Control, wasCancelled: false);
                 handler.DragDrop?.Invoke(Data, e);
+				InvokeDroppedIfNotCancelled();
             }
         }
 

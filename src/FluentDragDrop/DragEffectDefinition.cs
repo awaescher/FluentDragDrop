@@ -7,7 +7,7 @@ namespace FluentDragDrop
     /// </summary>
     public class DragEffectDefinition
     {
-        private DragDefinitionFactory _definitionFactory;
+        private readonly DragDefinitionFactory _definitionFactory;
 
         /// <summary>
         /// Creates a new drag effect definition instance
