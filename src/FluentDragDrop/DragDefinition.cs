@@ -14,7 +14,7 @@ namespace FluentDragDrop
         /// </summary>
         /// <param name="control">The control which starts the drag and drop operation</param>
         /// <param name="effect">The desired drag and drop effect like Copy, Move or Link</param>
-        public DragDefinition(Control control, DragDropEffects effect)
+        protected DragDefinition(Control control, DragDropEffects effect)
         {
             Control = control ?? throw new ArgumentNullException(nameof(control));
             Effect = effect;
