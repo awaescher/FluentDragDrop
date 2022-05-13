@@ -23,7 +23,8 @@ namespace FluentDragDrop
         private Func<IPreview> _previewEvaluator;
         private T _data;
 		private readonly Effects.Effects _effects = Effects.Effects.GetDefaults();
-		private Action _startAction;
+		private Action _beforeStartAction;
+		private Action _afterStartAction;
 		private Action _dropAction;
 		private Action _cancelAction;
 		private bool _allowMouseHooks = true;
@@ -200,14 +201,24 @@ namespace FluentDragDrop
 		}
 
 		/// <summary>
-		/// Defines an action that is executed as soon as the drag and drop operation is started.
-		/// It is 
+		/// Defines an action that is executed before the drag and drop operation is started.
 		/// </summary>
 		/// <param name="action">The action to execute when a drag and drop operation is started</param>
 		/// <remarks>It is ensured that this action is executed in the UI thread</remarks>
-		public DragOperation<T> OnStart(Action action)
+		public DragOperation<T> OnBeforeStart(Action action)
 		{
-			_startAction = action;
+			_beforeStartAction = action;
+			return this;
+		}
+
+		/// <summary>
+		/// Defines an action that is executed after the drag and drop operation was started.
+		/// </summary>
+		/// <param name="action">The action to execute when a drag and drop operation is started</param>
+		/// <remarks>It is ensured that this action is executed in the UI thread</remarks>
+		public DragOperation<T> OnAfterStart(Action action)
+		{
+			_afterStartAction = action;
 			return this;
 		}
 
@@ -332,7 +343,7 @@ namespace FluentDragDrop
             if (_definition is ImmediateDragDefinition)
             {
                 // enqueue in UI thread to make sure the whole fluent setup has been executed before.
-                SourceControl.BeginInvoke((Action)(() => Start(_definition.Effect)));
+                SourceControl.BeginInvoke(() => Start(_definition.Effect));
             }
             else
             {
@@ -354,7 +365,9 @@ namespace FluentDragDrop
             if (!canProceed)
                 return;
 
-            _previewFormController = new PreviewFormController();
+			OnSafeguardedBeforeStart();
+
+			_previewFormController = new PreviewFormController();
 
             var preview = _previewEvaluator?.Invoke();
 
@@ -369,12 +382,13 @@ namespace FluentDragDrop
 				else
 					SourceControl.GiveFeedback += SourceControl_GiveFeedback;
 
-				OnSafeguardedStart();
-
 				var offset = _offsetEvaluator?.Invoke(CalculatePreviewSize()) ?? Point.Empty;
                 _previewFormController.Start(SourceControl, _effects, preview, offset);
 
                 var data = Data == null ? (object)new NullPlaceholder() : Data;
+
+				OnSafeguardedAfterStart();
+
 				resultEffect = SourceControl.DoDragDrop(data, effect);
             }
             finally
@@ -419,14 +433,22 @@ namespace FluentDragDrop
 		}
 
 		/// <summary>
-		/// Gets executed as soon as the drag and drop operation is started
+		/// Gets executed before the drag and drop operation is started
 		/// </summary>
-		private void OnSafeguardedStart()
+		private void OnSafeguardedBeforeStart()
 		{
 			_cancelled = false;
 			_dropped = false;
 
-			RunActionOnUiThread(_startAction);
+			RunActionOnUiThread(_beforeStartAction);
+		}
+
+		/// <summary>
+		/// Gets executed after the drag and drop operation was started
+		/// </summary>
+		private void OnSafeguardedAfterStart()
+		{
+			RunActionOnUiThread(_afterStartAction);
 		}
 
 		/// <summary>
