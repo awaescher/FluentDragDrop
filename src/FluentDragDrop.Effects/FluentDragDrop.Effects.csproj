@@ -9,7 +9,7 @@ This package extends FluentDrag&amp;Drop with rich effects. Powered by FluentTra
 
 The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0.</Description>
     <PackageTags>Fluent;Drag;Drop;Effects;Windows;Forms;WinForms;UI</PackageTags>
-    <Copyright>Andreas Wäscher 2022</Copyright>
+    <Copyright>Andreas Wäscher 2024</Copyright>
     <PackageIcon>FluentDragDrop.Effects.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
