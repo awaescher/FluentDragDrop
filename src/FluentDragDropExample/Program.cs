@@ -11,7 +11,7 @@ namespace FluentDragDropExample
         [STAThread]
         private static void Main()
         {
-#if !NET48
+#if NETCOREAPP3_1_OR_GREATER
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
 #endif
             Application.EnableVisualStyles();
