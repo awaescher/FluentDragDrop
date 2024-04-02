@@ -245,6 +245,17 @@ namespace FluentDragDrop
 		}
 
 		/// <summary>
+		/// Canceles the current drag and drop operation and invokes the action defined in OnCancel()
+		/// </summary>
+		public void Cancel()
+		{
+			StopTrackingForDeferredStartOnMouseMove();
+			Detach();
+
+			OnSafeguardedCancel();
+		}
+
+		/// <summary>
 		/// Defines one or more effects to start when the drag and drop operation gets started.
 		/// </summary>
 		/// <param name="effects">The effects to start</param>
@@ -371,14 +382,14 @@ namespace FluentDragDrop
 
             var preview = _previewEvaluator?.Invoke();
 
-            var hookId = IntPtr.Zero;
+            var mouseMoveHookId = IntPtr.Zero;
 
 			var resultEffect = DragDropEffects.None;
 
             try
             {
 				if (_allowMouseHooks)
-					hookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
+					mouseMoveHookId = NativeMethods.HookMouseMove(() => _previewFormController.Move());
 				else
 					SourceControl.GiveFeedback += SourceControl_GiveFeedback;
 
@@ -394,7 +405,7 @@ namespace FluentDragDrop
             finally
             {
 				if (_allowMouseHooks)
-					NativeMethods.RemoveHook(hookId);
+					NativeMethods.RemoveHook(mouseMoveHookId);
 				else
 					SourceControl.GiveFeedback -= SourceControl_GiveFeedback;
 
@@ -404,7 +415,7 @@ namespace FluentDragDrop
 
 				InvokeCancelIfNotDroppedAction();
 
-                CleanUp();
+                Detach();
             }
         }
 
@@ -490,7 +501,7 @@ namespace FluentDragDrop
 		/// <summary>
 		/// Removes the internally attached event handlers from all target controls
 		/// </summary>
-		private void CleanUp()
+		private void Detach()
         {
             foreach (var target in _targets.Keys.OfType<Control>().ToArray())
             {
@@ -550,7 +561,7 @@ namespace FluentDragDrop
             // the events are still attached in To() to a given control. So even if we do 
             // not start the drag-drop operation (with a click for example), we have to clean
             // up the event handlers or otherwise we'll have multiple handlers with old data
-            CleanUp();
+            Detach();
         }
         
         private void SourceControl_MouseMove(object sender, MouseEventArgs e)
