@@ -3,6 +3,7 @@
     <OutputType>Library</OutputType>
     <TargetFrameworks>net472;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Description>FluentDrag&amp;Drop is the sexiest Drag&amp;Drop implemtation for WinForms on this planet.
 
 This package extends FluentDrag&amp;Drop with rich effects. Powered by FluentTransitions.
