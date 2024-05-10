@@ -2,9 +2,9 @@ name: .NET Build, Test, and Publish Nuget Package
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
 
@@ -32,19 +32,29 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: | 
+          6.0.x
+          8.0.x
+
     - name: Restore dependencies
-      run: dotnet restore ./src/FluentDragDrop.sln
+      run: dotnet restore src/FluentDragDrop.sln
       
     - name: Build
-      run: dotnet build --no-restore /p:Version=$VERSION
+      run: dotnet build --no-restore --configuration=Release /p:Version=${{steps.gitversion.outputs.semVer}}
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --configuration=Release --verbosity normal
       
     - name: pack nuget packages
-      run: dotnet pack --output nupkgs --no-restore --no-build /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
-      
+      run: dotnet pack --output nupkgs --configuration=Release --no-restore --no-build /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
+
+    - name: Create a GitHub release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{steps.gitversion.outputs.semVer}}
+        name: Release ${{steps.gitversion.outputs.semVer}}
+      if: github.event_name != 'pull_request'
+
     - name: upload nuget package
-      if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
-      run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      if: github.event_name != 'pull_request'
+      run: dotnet nuget push nupkgs/FluentDragDrop*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
