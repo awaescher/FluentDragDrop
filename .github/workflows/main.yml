@@ -2,29 +2,49 @@ name: .NET Build, Test, and Publish Nuget Package
 
 on:
   push:
-    
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Set Version Variable
-      if: ${{ github.ref_type == 'tag' }}
-      env:
-        TAG: ${{ github.ref_name }}
-      run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+    - uses: actions/checkout@v4
+
+    - name: Fetch all history for all tags and branches
+      run: |
+        git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        git fetch --prune --unshallow
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+          versionSpec: '5.x'
+    
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore ./src/FluentDragDrop.sln
+      
     - name: Build
       run: dotnet build --no-restore /p:Version=$VERSION
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
     - name: pack nuget packages
-      run: dotnet pack --output nupkgs --no-restore --no-build /p:PackageVersion=$VERSION
+      run: dotnet pack --output nupkgs --no-restore --no-build /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
+      
     - name: upload nuget package
       if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
       run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
