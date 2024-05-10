@@ -1,21 +1,30 @@
+name: .NET Build, Test, and Publish Nuget Package
+
 on:
   push:
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Set Version Variable
+      if: ${{ github.ref_type == 'tag' }}
+      env:
+        TAG: ${{ github.ref_name }}
+      run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
       with:
-        fetch-depth: 0
-    - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release /p:Version=${VERSION}
+      run: dotnet build --no-restore /p:Version=$VERSION
     - name: Test
-      run: dotnet test --configuration Release /p:Version=${VERSION} --no-build
-    - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
-    - name: Push
-      run: dotnet nuget push NuGet.Workflow.${VERSION}.nupkg --source https://nuget.pkg.github.com/acraven/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet test --no-build --verbosity normal
+    - name: pack nuget packages
+      run: dotnet pack --output nupkgs --no-restore --no-build /p:PackageVersion=$VERSION
+    - name: upload nuget package
+      if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
+      run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
