@@ -41,13 +41,13 @@ jobs:
       run: dotnet restore src/FluentDragDrop.sln
       
     - name: Build
-      run: dotnet build --no-restore --configuration=Release /p:Version=${{steps.gitversion.outputs.semVer}}
+      run: dotnet build src --no-restore --configuration=Release /p:Version=${{steps.gitversion.outputs.semVer}}
       
     - name: Test
-      run: dotnet test --no-build --configuration=Release --verbosity normal
+      run: dotnet test src --no-build --configuration=Release --verbosity normal
       
     - name: pack nuget packages
-      run: dotnet pack --output nupkgs --configuration=Release --no-restore --no-build /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
+      run: dotnet pack src --output nupkgs --configuration=Release --no-restore --no-build /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
 
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
