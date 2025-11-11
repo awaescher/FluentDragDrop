@@ -1,5 +1,6 @@
 ﻿using FluentDragDrop.Effects;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -133,6 +134,7 @@ namespace FluentDragDrop.Preview
 
 		public IPreviewOpacityController PreviewOpacityController { get; private set; }
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool AllowUpdates { get; set; } = true;
 	}
 }
