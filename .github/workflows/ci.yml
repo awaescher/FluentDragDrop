@@ -72,4 +72,4 @@ jobs:
 
     - name: upload nuget package
       if: github.event_name != 'pull_request'
-      run: dotnet nuget push nupkgs/FluentDragDrop*.nupkg -k ${{ steps.nuget-login.outputs.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push nupkgs/FluentDragDrop*.nupkg -k ${{ steps.nuget-login.outputs.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
